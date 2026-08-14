@@ -1,0 +1,32 @@
+<article class="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+  {% include "components/ui/card_media.html" with image=post.image alt=post.title %}
+
+  <div class="flex flex-1 flex-col p-6">
+    {% if post.business %}
+      <p class="text-sm font-medium text-slate-500">
+        {{ post.business.name }}
+      </p>
+    {% endif %}
+
+    <h3 class="mt-2 text-2xl font-semibold text-slate-900">
+      {{ post.title }}
+    </h3>
+
+    {% if post.excerpt %}
+      <p class="mt-4 text-base leading-7 text-slate-700">
+        {{ post.excerpt }}
+      </p>
+    {% endif %}
+
+    {% if post.published_at %}
+      <p class="mt-4 text-sm text-slate-500">
+        {{ post.published_at|date:"j \d\e F \d\e Y" }}
+      </p>
+    {% endif %}
+
+    <div class="mt-auto pt-6">
+      {% url 'blog:detail' post.slug as post_url %}
+      {% include "components/ui/button.html" with href=post_url label="Leer más" %}
+    </div>
+  </div>
+</article>

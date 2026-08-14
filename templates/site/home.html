@@ -1,0 +1,69 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+  {{ site_configuration.seo_title|default:site_configuration.site_name }}
+{% endblock %}
+
+{% block meta_description %}
+  {{ site_configuration.seo_description }}
+{% endblock %}
+
+{% block content %}
+  {% include "components/sections/hero.html" %}
+  <section class="bg-slate-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {% include "components/layout/section_title.html" with title="Líneas de negocio" subtitle="Conoce las áreas principales de Pámi." %}
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for business in businesses %}
+          {% include "components/cards/business_card.html" with business=business %}
+        {% empty %}
+          {% include "components/ui/empty_state.html" with title="No hay líneas de negocio publicadas" message="Cuando existan líneas de negocio disponibles, aparecerán aquí." %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {% include "components/layout/section_title.html" with title="Productos destacados" subtitle="Explora algunos productos disponibles en Pámi." %}
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for product in products %}
+          {% include "components/cards/product_card.html" with product=product %}
+        {% empty %}
+          {% include "components/ui/empty_state.html" with title="No hay productos publicados" message="Cuando existan productos destacados, aparecerán aquí." %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <section class="bg-slate-50 py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {% include "components/layout/section_title.html" with title="Proyectos recientes" subtitle="Conoce algunos trabajos realizados por Pámi." %}
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for project in projects %}
+          {% include "components/cards/project_card.html" with project=project %}
+        {% empty %}
+          {% include "components/ui/empty_state.html" with title="No hay proyectos publicados" message="Cuando existan proyectos recientes, aparecerán aquí." %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {% include "components/layout/section_title.html" with title="Últimos artículos" subtitle="Noticias, ideas y novedades de Pámi." %}
+
+      <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {% for post in posts %}
+          {% include "components/cards/post_card.html" with post=post %}
+        {% empty %}
+          {% include "components/ui/empty_state.html" with title="No hay publicaciones disponibles" message="Cuando existan artículos publicados, aparecerán aquí." %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  {% url 'contact:form' as contact_url %}
+  {% include "components/sections/call_to_action.html" with title="¿Quieres conocer más sobre Pámi?" subtitle="Contáctanos y descubre cómo podemos ayudarte." button_label="Ir a contacto" button_href=contact_url %}
+{% endblock %}

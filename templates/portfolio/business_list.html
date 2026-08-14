@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+  Portafolio - {{ business.name }}
+{% endblock %}
+
+{% block content %}
+<section class="bg-slate-50 py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {% include "components/layout/section_title.html" with title=business.name subtitle="Proyectos realizados en esta línea de negocio." %}
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for project in projects %}
+        {% include "components/cards/project_card.html" with project=project %}
+      {% empty %}
+        {% include "components/ui/empty_state.html" with title="No hay proyectos para esta línea" message="Esta línea de negocio todavía no tiene proyectos publicados." %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

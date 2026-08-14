@@ -1,0 +1,28 @@
+<footer class="border-t border-slate-200 bg-slate-50">
+  <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-3 text-sm text-slate-700 sm:flex-row sm:items-center sm:justify-between">
+      <p>
+        &copy; {% now "Y" %}
+        {% if site_configuration %}
+          {{ site_configuration.site_name }}
+        {% else %}
+          Pámi
+        {% endif %}
+      </p>
+
+      {% if site_configuration %}
+        <div class="flex flex-col gap-1 sm:items-end">
+          {% if site_configuration.email %}
+            <span>{{ site_configuration.email }}</span>
+          {% endif %}
+          {% if site_configuration.phone %}
+            <span>{{ site_configuration.phone }}</span>
+          {% endif %}
+          {% if site_configuration.address %}
+            <span>{{ site_configuration.address }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>

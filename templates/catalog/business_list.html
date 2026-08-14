@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+  Catálogo - {{ business.name }}
+{% endblock %}
+
+{% block content %}
+<section class="bg-slate-50 py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {% include "components/layout/section_title.html" with title=business.name subtitle="Productos y servicios de esta línea de negocio." %}
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {% for product in products %}
+        {% include "components/cards/product_card.html" with product=product %}
+      {% empty %}
+        {% include "components/ui/empty_state.html" with title="No hay productos para esta línea" message="Esta línea de negocio todavía no tiene productos publicados." %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

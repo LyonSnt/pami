@@ -1,0 +1,13 @@
+<nav aria-label="Navegación principal" class="flex text-sm font-semibold text-slate-700{% if mobile %} flex-col items-stretch gap-1{% else %} items-center gap-6{% endif %}">
+  {% for item in navigation_items %}
+    <a
+      href="{{ item.url }}"
+      class="rounded-lg transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if mobile %} px-3 py-2.5{% endif %}"
+      {% if item.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+    >
+      {{ item.label }}
+    </a>
+  {% empty %}
+    <a href="{% url 'site:home' %}" class="rounded-lg transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if mobile %} px-3 py-2.5{% endif %}">Inicio</a>
+  {% endfor %}
+</nav>

@@ -1,0 +1,18 @@
+<nav aria-label="Migas de pan" class="mb-8 text-sm text-slate-500">
+  <ol class="flex flex-wrap items-center gap-2">
+    <li>
+      <a href="{% url 'site:home' %}" class="rounded hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">Inicio</a>
+    </li>
+
+    {% for item in breadcrumbs %}
+      <li aria-hidden="true">/</li>
+      <li>
+        {% if item.url %}
+          <a href="{{ item.url }}" class="rounded hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">{{ item.label }}</a>
+        {% else %}
+          <span aria-current="page" class="font-medium text-slate-900">{{ item.label }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</nav>

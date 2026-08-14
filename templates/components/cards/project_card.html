@@ -1,0 +1,30 @@
+<article class="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+  {% include "components/ui/card_media.html" with image=project.image alt=project.title %}
+
+  <div class="flex flex-1 flex-col p-6">
+    <p class="text-sm font-medium text-slate-500">
+      {{ project.business.name }}
+    </p>
+
+    <h3 class="mt-2 text-2xl font-semibold text-slate-900">
+      {{ project.title }}
+    </h3>
+
+    {% if project.short_description %}
+      <p class="mt-4 text-base leading-7 text-slate-700">
+        {{ project.short_description }}
+      </p>
+    {% endif %}
+
+    {% if project.client_name %}
+      <p class="mt-4 text-sm text-slate-500">
+        Cliente: {{ project.client_name }}
+      </p>
+    {% endif %}
+
+    <div class="mt-auto pt-6">
+      {% url 'portfolio:detail' project.business.slug project.slug as project_url %}
+      {% include "components/ui/button.html" with href=project_url label="Ver proyecto" %}
+    </div>
+  </div>
+</article>

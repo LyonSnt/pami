@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="es">
+
+{% include "base/_head.html" %}
+
+<body class="font-sans bg-slate-50 text-slate-900">
+  <a
+    href="#main-content"
+    class="sr-only z-50 rounded-lg bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-lg focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:outline-none focus:ring-2 focus:ring-primary"
+  >
+    Saltar al contenido principal
+  </a>
+
+  {% include "base/_header.html" %}
+
+  {% include "base/_messages.html" %}
+
+  <main id="main-content" tabindex="-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "base/_footer.html" %}
+
+  {% include "base/_scripts.html" %}
+  {% block scripts %}{% endblock %}
+</body>
+</html>

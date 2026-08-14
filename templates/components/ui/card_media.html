@@ -1,0 +1,23 @@
+{% load static %}
+<div class="flex aspect-4/3 w-full items-center justify-center overflow-hidden bg-slate-100">
+  {% if image %}
+    <img
+      src="{{ image.url }}"
+      alt="{{ alt }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover"
+    >
+  {% else %}
+    <img
+      src="{% static 'assets/branding/icon.svg' %}"
+      alt=""
+      width="44"
+      height="44"
+      aria-hidden="true"
+      class="h-12 w-12"
+    >
+  {% endif %}
+</div>

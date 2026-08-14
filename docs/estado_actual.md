@@ -1,0 +1,158 @@
+# Estado actual Pámi
+
+## Resumen
+
+Pámi dispone de una base funcional de CMS y portal público construida con Django, PostgreSQL, Docker Compose y Tailwind CSS v4.
+
+La auditoría técnica y los nueve bloques de corrección fueron completados. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 30 pruebas correctas.
+
+## Infraestructura
+
+- Python 3.12-slim.
+- Django 5.1.
+- PostgreSQL 17-alpine.
+- Docker Compose como entorno oficial.
+- Servicios `web`, `db` y `tailwind` en desarrollo.
+- PostgreSQL con healthcheck.
+- `web` condicionado a una base saludable.
+- Puertos externos configurados desde `.env`.
+- Node.js y Tailwind aislados en Docker.
+- Tailwind CSS v4.3.2 validado.
+- `STATIC_URL` y `MEDIA_URL` configuradas como rutas absolutas.
+- Media servida por Django únicamente en desarrollo.
+- WSGI y ASGI utilizan settings de producción por defecto.
+
+## Backend
+
+Apps implementadas:
+
+- `common`;
+- `audit`;
+- `accounts`;
+- `site`;
+- `businesses`;
+- `catalog`;
+- `portfolio`;
+- `blog`;
+- `contact`.
+
+Estado funcional:
+
+- Usuario personalizado y perfil automático.
+- Singleton administrativo de `SiteConfiguration`.
+- Menú dinámico mediante `NavigationItem`.
+- Modelos, admins, selectors y services principales implementados.
+- Selectors públicos con filtros de actividad, publicación, fecha y línea relacionada.
+- Views públicas coordinadas mediante selectors.
+- Formulario de contacto creado mediante service.
+- Transiciones de mensajes de contacto controladas por services.
+- Auditoría activa para operaciones administrativas del CMS y envíos de contacto.
+- Registros de auditoría inmutables desde Django Admin.
+
+## Portal público
+
+Páginas disponibles:
+
+- Home;
+- negocios;
+- catálogo;
+- portafolio;
+- blog;
+- contacto.
+
+Características:
+
+- Template base global.
+- Header y footer reutilizables.
+- Navegación dinámica para escritorio y móvil.
+- Hero administrable desde `SiteConfiguration`.
+- Home modular.
+- Breadcrumb accesible.
+- Estados vacíos reutilizables.
+- CTA reutilizable.
+- Formulario de contacto accesible.
+- Skip link, foco visible y mensajes con región viva.
+- Acciones adaptadas a pantallas estrechas.
+
+## Componentes
+
+Organización oficial:
+
+```text
+templates/components/
+├── cards/
+├── layout/
+├── sections/
+└── ui/
+```
+
+Componentes relevantes:
+
+- `button.html`, con variantes `primary`, `secondary` e `inverse`;
+- `empty_state.html`;
+- `breadcrumb.html`;
+- `card_media.html`;
+- `section_title.html`;
+- `hero.html`;
+- `benefits.html`;
+- `call_to_action.html`;
+- cards de negocios, productos, proyectos y artículos.
+
+Las cards utilizan imágenes administrables y el icono oficial como fallback decorativo.
+
+## Design System
+
+Definido para:
+
+- marca;
+- colores;
+- tipografía;
+- espaciado;
+- componentes;
+- layout;
+- formularios;
+- iconos;
+- responsive;
+- accesibilidad.
+
+Tokens oficiales de Tailwind CSS v4:
+
+- `primary`: `#E31B23`;
+- `primary-hover`: `#C8161D`;
+- `font-sans`: Inter.
+
+La interfaz utiliza la paleta `slate` y no conserva usos de `gray-*` ni sustituciones `red-600/red-700` para la identidad institucional.
+
+## Branding
+
+Recursos disponibles en `static/assets/branding/`:
+
+- `logo.svg`;
+- `logo-white.svg`;
+- `icon.svg`;
+- `favicon.svg`.
+
+Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisionales.
+
+## Calidad
+
+- 30 pruebas ejecutadas correctamente.
+- `python manage.py check`: sin problemas.
+- `makemigrations --check --dry-run`: sin cambios detectados.
+- Los SVG de branding son XML válido.
+- Tailwind recompilado después de los cambios visuales.
+
+## Consideraciones de producción
+
+La configuración de producción incluye redirección HTTPS, cookies seguras y HSTS configurables.
+
+Antes de desplegar se debe:
+
+- definir una `SECRET_KEY` larga y aleatoria;
+- confirmar si todos los subdominios utilizarán HTTPS antes de activar `SECURE_HSTS_INCLUDE_SUBDOMAINS`;
+- confirmar la política de preload antes de activar `SECURE_HSTS_PRELOAD`;
+- configurar la entrega de static y media en la infraestructura de producción.
+
+## Estado de reanudación
+
+La siguiente fase es validar visualmente el portal contra el mockup aprobado usando contenido e imágenes representativas. Después corresponde iniciar la fase SEO del roadmap oficial.

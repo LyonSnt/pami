@@ -1,0 +1,15 @@
+{% if element == "button" %}
+  <button
+    type="{{ type|default:'button' }}"
+    class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2{% if variant == 'secondary' %} border border-primary bg-white text-primary hover:bg-slate-50{% elif variant == 'inverse' %} bg-white text-slate-900 hover:bg-slate-100{% else %} bg-primary text-white shadow-sm hover:bg-primary-hover{% endif %}"
+  >
+    {{ label|default:"Ver más" }}
+  </button>
+{% else %}
+  <a
+    href="{{ href|default:'#' }}"
+    class="inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2{% if variant == 'secondary' %} border border-primary bg-white text-primary hover:bg-slate-50{% elif variant == 'inverse' %} bg-white text-slate-900 hover:bg-slate-100{% else %} bg-primary text-white shadow-sm hover:bg-primary-hover{% endif %}"
+  >
+    {{ label|default:"Ver más" }}
+  </a>
+{% endif %}

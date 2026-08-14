@@ -1,0 +1,45 @@
+{% load static %}
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+
+    <a
+      href="{% url 'site:home' %}"
+      class="flex items-center rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+    >
+      <img
+        src="{% static 'assets/branding/logo.svg' %}"
+        alt="{% if site_configuration %}{{ site_configuration.site_name }}{% else %}Pámi{% endif %}"
+        width="150"
+        height="44"
+        class="h-10 w-auto"
+      >
+    </a>
+
+    <div class="hidden items-center gap-8 lg:flex">
+      {% include "base/_navigation.html" %}
+    </div>
+
+    <div class="hidden items-center gap-3 lg:flex">
+
+      {% url 'contact:form' as contact_url %}
+      {% include "components/ui/button.html" with href=contact_url label="Contáctanos" %}
+    </div>
+
+    <details class="group relative lg:hidden">
+      <summary class="flex cursor-pointer list-none items-center justify-center rounded-lg border border-slate-300 bg-white p-2.5 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+        <span class="sr-only group-open:hidden">Abrir navegación principal</span>
+        <span class="sr-only hidden group-open:inline">Cerrar navegación principal</span>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </summary>
+
+      <div class="absolute right-0 top-full mt-3 w-72 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg">
+        {% include "base/_navigation.html" with mobile=True %}
+        <div class="mt-4 border-t border-slate-200 pt-4">
+          {% include "components/ui/button.html" with href=contact_url label="Contáctanos" %}
+        </div>
+      </div>
+    </details>
+  </div>
+</header>
