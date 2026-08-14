@@ -81,6 +81,8 @@ hero.html
 
 Cabecera principal.
 
+Muestra como etiqueta contextual la línea seleccionada en `SiteConfiguration.featured_business`. El eslogan global pertenece al bloque de marca del header y no se utiliza como etiqueta promocional del Hero.
+
 ---
 
 benefits.html

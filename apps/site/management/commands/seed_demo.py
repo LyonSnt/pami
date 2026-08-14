@@ -14,8 +14,8 @@ class Command(BaseCommand):
     help = "Crea datos demo para Pámi."
 
     def handle(self, *args, **options):
-        self.create_site_configuration()
         businesses = self.create_businesses()
+        self.create_site_configuration(businesses["confecciones"])
         self.create_navigation()
         self.create_products(businesses)
         self.create_projects(businesses)
@@ -23,30 +23,44 @@ class Command(BaseCommand):
 
         self.stdout.write(self.style.SUCCESS("Datos demo creados correctamente."))
 
-    def create_site_configuration(self):
+    def create_site_configuration(self, featured_business):
         configuration = SiteConfiguration.objects.first()
+        data = {
+            "featured_business": featured_business,
+            "site_name": "Pámi",
+            "slogan": "Donde encuentras todo para ti",
+            "description": "Pámi crea prendas cómodas y versátiles para acompañarte todos los días.",
+            "email": "contacto@pami.test",
+            "phone": "099 999 9999",
+            "whatsapp": "099 999 9999",
+            "address": "Ecuador",
+            "seo_title": "Pámi | Chaquetas y buzos",
+            "seo_description": "Descubre chaquetas y buzos confeccionados por Pámi.",
+            "hero_title": "Chaquetas y buzos hechos para ti.",
+            "hero_description": "Conoce prendas cómodas, versátiles y pensadas para acompañar tu estilo.",
+            "hero_primary_button_text": "Ver confecciones",
+            "hero_primary_button_url": "/catalogo/confecciones/",
+        }
 
-        if not configuration:
-            SiteConfiguration.objects.create(
-                site_name="Pámi",
-                slogan="Soluciones para tu negocio en un solo lugar",
-                description="Pámi conecta diferentes líneas de negocio en un portal moderno, organizado y fácil de administrar.",
-                email="contacto@pami.test",
-                phone="099 999 9999",
-                whatsapp="099 999 9999",
-                address="Ecuador",
-                seo_title="Pámi | Soluciones para tu negocio",
-                seo_description="Portal de servicios, productos, proyectos y contenidos de Pámi.",
-            )
+        if configuration:
+            for field, value in data.items():
+                setattr(configuration, field, value)
+            configuration.save(update_fields=(*data.keys(), "updated_at"))
+            return
+
+        SiteConfiguration.objects.create(**data)
 
     def create_navigation(self):
+        NavigationItem.objects.filter(
+            label__in=("Negocios", "Catálogo"),
+        ).update(is_active=False)
+
         items = [
             ("Inicio", "/", 1),
-            ("Negocios", "/negocios/", 2),
-            ("Catálogo", "/catalogo/", 3),
-            ("Portafolio", "/portafolio/", 4),
-            ("Blog", "/blog/", 5),
-            ("Contacto", "/contacto/", 6),
+            ("Confecciones", "/catalogo/confecciones/", 2),
+            ("Portafolio", "/portafolio/", 3),
+            ("Blog", "/blog/", 4),
+            ("Contacto", "/contacto/", 5),
         ]
 
         for label, url, order in items:
@@ -60,27 +74,17 @@ class Command(BaseCommand):
             )
 
     def create_businesses(self):
+        Business.objects.filter(
+            slug__in=("papeleria", "tecnologia"),
+        ).update(is_published=False)
+
         data = [
             {
                 "name": "Confecciones",
                 "slug": "confecciones",
-                "short_description": "Uniformes, prendas personalizadas y soluciones textiles.",
-                "description": "Diseñamos y confeccionamos prendas para empresas, instituciones y emprendimientos.",
+                "short_description": "Chaquetas y buzos para acompañar tu estilo.",
+                "description": "Creamos prendas cómodas y versátiles para el público en general.",
                 "order": 1,
-            },
-            {
-                "name": "Papelería",
-                "slug": "papeleria",
-                "short_description": "Suministros, impresiones y materiales para oficina.",
-                "description": "Ofrecemos productos de papelería, impresión y soluciones para negocios y estudiantes.",
-                "order": 2,
-            },
-            {
-                "name": "Tecnología",
-                "slug": "tecnologia",
-                "short_description": "Soluciones digitales, soporte técnico y desarrollo web.",
-                "description": "Ayudamos a negocios a mejorar sus procesos mediante tecnología y herramientas digitales.",
-                "order": 3,
             },
         ]
 
@@ -102,15 +106,22 @@ class Command(BaseCommand):
 
     def create_products(self, businesses):
         data = [
-            ("confecciones", "Uniformes corporativos", "uniformes-corporativos", "Uniformes personalizados para empresas.", "45.00"),
-            ("confecciones", "Camisetas personalizadas", "camisetas-personalizadas", "Camisetas con diseño, logo o marca.", "18.00"),
-            ("papeleria", "Tarjetas de presentación", "tarjetas-presentacion", "Diseño e impresión de tarjetas profesionales.", "25.00"),
-            ("papeleria", "Material de oficina", "material-oficina", "Suministros básicos para empresas y estudiantes.", "12.00"),
-            ("tecnologia", "Página web corporativa", "pagina-web-corporativa", "Sitio web moderno para negocios.", "350.00"),
-            ("tecnologia", "Soporte técnico", "soporte-tecnico", "Asistencia técnica para equipos y sistemas.", "30.00"),
+            ("confecciones", "Chaquetas", "chaquetas", "Chaquetas cómodas y versátiles para diferentes estilos.", "45.00", 1),
+            ("confecciones", "Buzos", "buzos", "Buzos pensados para brindar comodidad todos los días.", "30.00", 2),
         ]
 
-        for business_slug, name, slug, description, price in data:
+        Product.objects.filter(
+            slug__in=(
+                "uniformes-corporativos",
+                "camisetas-personalizadas",
+                "tarjetas-presentacion",
+                "material-oficina",
+                "pagina-web-corporativa",
+                "soporte-tecnico",
+            ),
+        ).update(is_published=False)
+
+        for business_slug, name, slug, description, price, order in data:
             Product.objects.update_or_create(
                 business=businesses[business_slug],
                 slug=slug,
@@ -120,6 +131,7 @@ class Command(BaseCommand):
                     "description": description,
                     "price": Decimal(price),
                     "show_price": True,
+                    "order": order,
                     "is_published": True,
                     "seo_title": name,
                     "seo_description": description,
@@ -128,10 +140,17 @@ class Command(BaseCommand):
 
     def create_projects(self, businesses):
         data = [
-            ("confecciones", "Uniformes para equipo comercial", "uniformes-equipo-comercial", "Producción de uniformes personalizados.", "Empresa Demo"),
-            ("papeleria", "Imagen impresa para evento", "imagen-impresa-evento", "Material gráfico e impresión para evento corporativo.", "Evento Demo"),
-            ("tecnologia", "Portal web institucional", "portal-web-institucional", "Desarrollo de sitio web administrable.", "Cliente Demo"),
+            ("confecciones", "Colección inicial de chaquetas", "coleccion-inicial-chaquetas", "Confección de una colección demostrativa de chaquetas.", "Pámi"),
+            ("confecciones", "Colección inicial de buzos", "coleccion-inicial-buzos", "Confección de una colección demostrativa de buzos.", "Pámi"),
         ]
+
+        PortfolioProject.objects.filter(
+            slug__in=(
+                "uniformes-equipo-comercial",
+                "imagen-impresa-evento",
+                "portal-web-institucional",
+            ),
+        ).update(is_published=False)
 
         for business_slug, title, slug, description, client_name in data:
             PortfolioProject.objects.update_or_create(
@@ -151,10 +170,17 @@ class Command(BaseCommand):
 
     def create_posts(self, businesses):
         data = [
-            ("tecnologia", "Por qué tu negocio necesita una página web", "negocio-necesita-pagina-web"),
-            ("confecciones", "Ventajas de usar uniformes corporativos", "ventajas-uniformes-corporativos"),
-            ("papeleria", "Materiales básicos para una oficina organizada", "materiales-oficina-organizada"),
+            ("confecciones", "Cómo elegir una chaqueta para tu estilo", "elegir-chaqueta-para-tu-estilo"),
+            ("confecciones", "Ideas para combinar tus buzos", "ideas-combinar-buzos"),
         ]
+
+        BlogPost.objects.filter(
+            slug__in=(
+                "negocio-necesita-pagina-web",
+                "ventajas-uniformes-corporativos",
+                "materiales-oficina-organizada",
+            ),
+        ).update(is_published=False)
 
         for business_slug, title, slug in data:
             BlogPost.objects.update_or_create(

@@ -8,9 +8,11 @@ Pámi
 
 Donde encuentras todo para ti.
 
+El eslogan se obtiene desde `SiteConfiguration` y acompaña la marca en el header de tablet y escritorio. También se muestra en el footer para permanecer visible en todos los tamaños de pantalla.
+
 ## Propuesta de valor
 
-Todo lo que tu empresa necesita, en un solo lugar.
+Chaquetas y buzos hechos para ti.
 
 ## Colores oficiales
 

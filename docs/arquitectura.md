@@ -2,6 +2,8 @@
 
 Pámi es un portal web/CMS propio para administrar una marca principal con múltiples líneas de negocio.
 
+La arquitectura continúa preparada para múltiples líneas, aunque el enfoque editorial público actual se concentra en `Confecciones`. Esta prioridad no convierte Confecciones en una app independiente ni elimina la capacidad de publicar otras líneas en el futuro.
+
 ## Stack
 
 - Python 3.12-slim
@@ -78,6 +80,10 @@ Las líneas como Confecciones, Papelería y Tecnología no serán apps separadas
 Serán registros en el modelo `Business`.
 
 `Business` es el eje del CMS. Las apps `catalog`, `portfolio`, `blog` y `contact` pueden relacionar su contenido con una línea de negocio.
+
+En la etapa actual, `Chaquetas` y `Buzos` son productos asociados al registro `Confecciones`. No se introduce una taxonomía de categorías hasta que existan productos concretos que necesiten agruparse y filtrarse dentro de cada tipo de prenda.
+
+`SiteConfiguration.featured_business` define la línea promocionada en el Home. El Hero utiliza su nombre como etiqueta y el Home consulta productos y proyectos de esa misma línea. Esta relación se administra desde Django Admin y permite cambiar en el futuro de Confecciones a Papelería, Sistemas de agua u otra línea sin modificar templates ni views.
 
 ## Apps base del CMS
 

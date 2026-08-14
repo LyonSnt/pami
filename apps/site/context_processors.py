@@ -1,11 +1,3 @@
-from apps.site.selectors import get_public_site_configuration
-
-
-def site_configuration(request):
-    return {
-        "site_configuration": get_public_site_configuration()
-    }
-
 from apps.site.selectors import (
     get_active_navigation_items,
     get_public_site_configuration,

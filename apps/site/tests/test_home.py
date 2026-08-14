@@ -1,10 +1,6 @@
-from datetime import timedelta
-
 from django.test import TestCase
 from django.urls import reverse
-from django.utils import timezone
 
-from apps.blog.models import BlogPost
 from apps.businesses.models import Business
 from apps.catalog.models import Product
 from apps.portfolio.models import PortfolioProject
@@ -13,32 +9,51 @@ from apps.site.models import SiteConfiguration
 
 class HomeViewTests(TestCase):
     def setUp(self):
-        SiteConfiguration.objects.create()
         self.public_business = Business.objects.create(
-            name="Negocio público",
-            slug="negocio-publico",
+            name="Confecciones",
+            slug="confecciones",
             is_active=True,
             is_published=True,
         )
+        SiteConfiguration.objects.create(
+            featured_business=self.public_business,
+        )
         self.hidden_business = Business.objects.create(
-            name="Negocio oculto",
-            slug="negocio-oculto",
-            is_active=False,
+            name="Tecnología",
+            slug="tecnologia",
+            is_active=True,
             is_published=True,
         )
 
-    def test_home_only_contains_public_content(self):
-        public_product = Product.objects.create(
+    def test_home_only_contains_published_confections_content(self):
+        jacket = Product.objects.create(
             business=self.public_business,
-            name="Producto público",
-            slug="producto-publico",
+            name="Chaquetas",
+            slug="chaquetas",
+            order=1,
+            is_active=True,
+            is_published=True,
+        )
+        sweatshirt = Product.objects.create(
+            business=self.public_business,
+            name="Buzos",
+            slug="buzos",
+            order=2,
+            is_active=True,
+            is_published=True,
+        )
+        Product.objects.create(
+            business=self.public_business,
+            name="Producto adicional",
+            slug="producto-adicional",
+            order=3,
             is_active=True,
             is_published=True,
         )
         Product.objects.create(
             business=self.hidden_business,
-            name="Producto oculto",
-            slug="producto-oculto",
+            name="Producto de otra línea",
+            slug="producto-otra-linea",
             is_active=True,
             is_published=True,
         )
@@ -50,39 +65,25 @@ class HomeViewTests(TestCase):
             is_published=True,
         )
         PortfolioProject.objects.create(
-            business=self.public_business,
-            title="Proyecto oculto",
-            slug="proyecto-oculto",
-            is_active=False,
-            is_published=True,
-        )
-        public_post = BlogPost.objects.create(
-            title="Artículo público",
-            slug="articulo-publico",
-            content="Contenido",
+            business=self.hidden_business,
+            title="Proyecto de otra línea",
+            slug="proyecto-otra-linea",
             is_active=True,
             is_published=True,
-            published_at=timezone.now(),
-        )
-        BlogPost.objects.create(
-            title="Artículo futuro",
-            slug="articulo-futuro",
-            content="Contenido",
-            is_active=True,
-            is_published=True,
-            published_at=timezone.now() + timedelta(days=1),
         )
 
         response = self.client.get(reverse("site:home"))
 
         self.assertEqual(response.status_code, 200)
-        self.assertQuerySetEqual(
-            response.context["businesses"],
-            [self.public_business],
-        )
-        self.assertQuerySetEqual(response.context["products"], [public_product])
+        self.assertEqual(response.context["business"], self.public_business)
+        self.assertQuerySetEqual(response.context["products"], [jacket, sweatshirt])
         self.assertQuerySetEqual(response.context["projects"], [public_project])
-        self.assertQuerySetEqual(response.context["posts"], [public_post])
+        self.assertNotIn("businesses", response.context)
+        self.assertNotIn("posts", response.context)
+        self.assertContains(response, "Nuestras confecciones")
+        self.assertNotContains(response, "Producto de otra línea")
+        self.assertContains(response, "Donde encuentras todo para ti")
+        self.assertContains(response, "Confecciones")
 
     def test_home_contains_global_accessibility_navigation(self):
         response = self.client.get(reverse("site:home"))

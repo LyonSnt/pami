@@ -237,8 +237,7 @@ Donde encuentras todo para ti.
 
 Propuesta de valor
 
-Todo lo que tu empresa necesita,
-en un solo lugar.
+Chaquetas y buzos hechos para ti.
 
 Tipografía
 
@@ -320,6 +319,12 @@ Incluye:
 
 El Home basado en componentes se encuentra implementado y debe validarse visualmente contra el mockup aprobado utilizando imágenes y contenido representativos.
 
+El enfoque editorial actual del Home es `Confecciones` para público general. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
+
+La línea protagonista se selecciona mediante `SiteConfiguration.featured_business`. No se debe fijar un slug de negocio en el Home. El eslogan global se muestra junto al logo y el Hero utiliza el nombre de la línea destacada como etiqueta contextual.
+
+`Chaquetas` y `Buzos` son registros de `Product`, no categorías ni líneas de negocio. No existe todavía un modelo `ProductCategory` porque el catálogo actual no requiere esa complejidad.
+
 El bloque de beneficios del Hero fue extraído a:
 
 ```text
@@ -332,9 +337,10 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 30 pruebas.
+- La suite actual contiene 33 pruebas.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.
+- El demo de desarrollo publica Confecciones con Chaquetas y Buzos; los registros demo anteriores conocidos permanecen conservados pero despublicados.
 
 ---
 

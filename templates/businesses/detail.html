@@ -32,7 +32,7 @@
     {% endif %}
 
     <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-      {% url 'catalog:list' as catalog_url %}
+      {% url 'catalog:business_list' business.slug as catalog_url %}
       {% url 'contact:form' as contact_url %}
       {% include "components/ui/button.html" with href=catalog_url label="Ver catálogo" %}
       {% include "components/ui/button.html" with href=contact_url label="Contactar" variant="secondary" %}

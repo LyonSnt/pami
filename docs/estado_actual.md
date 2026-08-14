@@ -4,7 +4,9 @@
 
 Pámi dispone de una base funcional de CMS y portal público construida con Django, PostgreSQL, Docker Compose y Tailwind CSS v4.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 30 pruebas correctas.
+La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
+
+La auditoría técnica y los nueve bloques de corrección fueron completados. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 33 pruebas correctas.
 
 ## Infraestructura
 
@@ -66,7 +68,9 @@ Características:
 - Header y footer reutilizables.
 - Navegación dinámica para escritorio y móvil.
 - Hero administrable desde `SiteConfiguration`.
+- Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
+- Home enfocado en productos y trabajos publicados de Confecciones.
 - Breadcrumb accesible.
 - Estados vacíos reutilizables.
 - CTA reutilizable.
@@ -99,6 +103,12 @@ Componentes relevantes:
 - cards de negocios, productos, proyectos y artículos.
 
 Las cards utilizan imágenes administrables y el icono oficial como fallback decorativo.
+
+El catálogo inicial de Confecciones utiliza `Product` para administrar `Chaquetas` y `Buzos`. No se añadió un modelo de categorías ni se realizaron cambios arquitectónicos o de migraciones para este enfoque.
+
+El Home ya no depende del slug fijo `confecciones`: utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
+
+El comando `seed_demo` es idempotente para este contenido: actualiza la configuración demostrativa, publica Chaquetas y Buzos con orden explícito y despublica únicamente los registros demo anteriores conocidos sin eliminarlos. La base de desarrollo fue cargada con este estado.
 
 ## Design System
 
@@ -136,7 +146,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 30 pruebas ejecutadas correctamente.
+- 33 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.

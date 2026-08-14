@@ -1,24 +1,31 @@
 from django.shortcuts import render
 
-from apps.blog.selectors import get_published_blog_posts
 from apps.businesses.selectors import get_published_businesses
-from apps.catalog.selectors import get_published_products
-from apps.portfolio.selectors import get_published_portfolio_projects
+from apps.catalog.selectors import get_published_products_by_business
+from apps.portfolio.selectors import get_published_portfolio_projects_by_business
 from apps.site.selectors import get_public_site_configuration
 
 
 def home(request):
-    businesses = get_published_businesses()[:3]
-    products = get_published_products()[:3]
-    projects = get_published_portfolio_projects()[:3]
-    posts = get_published_blog_posts()[:3]
+    site_configuration = get_public_site_configuration()
+    featured_business_id = (
+        site_configuration.featured_business_id
+        if site_configuration
+        else None
+    )
+    business = (
+        get_published_businesses().filter(pk=featured_business_id).first()
+        if featured_business_id
+        else None
+    )
+    products = get_published_products_by_business(business)[:2] if business else []
+    projects = get_published_portfolio_projects_by_business(business)[:3] if business else []
 
     context = {
-        "site_configuration": get_public_site_configuration(),
-        "businesses": businesses,
+        "site_configuration": site_configuration,
+        "business": business,
         "products": products,
         "projects": projects,
-        "posts": posts,
     }
 
     return render(request, "site/home.html", context)

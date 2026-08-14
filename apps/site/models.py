@@ -4,6 +4,14 @@ from apps.common.models import BaseModel
 
 
 class SiteConfiguration(BaseModel):
+    featured_business = models.ForeignKey(
+        "businesses.Business",
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="featured_site_configurations",
+        verbose_name="Línea destacada del Home",
+    )
     site_name = models.CharField(max_length=120, default="Pámi", verbose_name="Nombre del sitio")
     slogan = models.CharField(max_length=180, default="Donde encuentras todo para ti", verbose_name="Eslogan")
     description = models.TextField(blank=True, verbose_name="Descripción")

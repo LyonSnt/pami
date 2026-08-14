@@ -9,6 +9,7 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
     list_display = ("site_name", "email", "phone", "whatsapp", "maintenance_mode", "created_at")
     search_fields = ("site_name", "email", "phone", "whatsapp")
     list_filter = ("maintenance_mode",)
+    autocomplete_fields = ("featured_business",)
 
     fieldsets = (
         ("Información general", {
@@ -18,6 +19,7 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             "Hero principal",
             {
                 "fields": (
+                    "featured_business",
                     "hero_title",
                     "hero_description",
                     "hero_primary_button_text",

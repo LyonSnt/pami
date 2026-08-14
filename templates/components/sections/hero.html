@@ -2,11 +2,13 @@
 <section class="bg-white">
   <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:px-8">
     <div>
-      <p class="text-sm font-bold uppercase tracking-wide text-primary">
-        {{ site_configuration.slogan }}
-      </p>
+      {% if business %}
+        <p class="text-sm font-bold uppercase tracking-wide text-primary">
+          {{ business.name }}
+        </p>
+      {% endif %}
 
-      <h1 class="mt-5 max-w-2xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
+      <h1 class="{% if business %}mt-5 {% endif %}max-w-2xl text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
         {{ site_configuration.hero_title }}
       </h1>
 

@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 30 pruebas correctas;
+- 33 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -24,12 +24,14 @@ Validación vigente:
 
 ## Próximo paso
 
-Realizar validación visual final contra el mockup aprobado utilizando contenido e imágenes representativas.
+Realizar validación visual final del enfoque de Confecciones contra el mockup aprobado utilizando contenido e imágenes representativas para Chaquetas y Buzos.
 
 ### Alcance
 
-1. Cargar o seleccionar imágenes reales para Hero, negocios, productos, proyectos y artículos.
+1. Cargar o seleccionar imágenes reales para el Hero, Chaquetas, Buzos y trabajos de Confecciones.
 2. Revisar Home en móvil, tablet y escritorio.
+   - Confirmar la legibilidad del eslogan bajo el logo en tablet y escritorio.
+   - Confirmar que la etiqueta del Hero corresponda a la línea destacada configurada.
 3. Revisar páginas internas en los mismos tamaños.
 4. Comparar jerarquía, espaciado, proporciones y densidad visual con el mockup.
 5. Corregir únicamente diferencias verificadas, reutilizando los componentes y tokens existentes.
