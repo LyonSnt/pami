@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse
 
 from apps.businesses.selectors import get_published_businesses
 from apps.portfolio.selectors import (
@@ -45,6 +46,14 @@ def portfolio_project_detail(request, business_slug, project_slug):
     context = {
         "business": business,
         "project": project,
+        "breadcrumbs": [
+            {"label": "Portafolio", "url": reverse("portfolio:list")},
+            {
+                "label": business.name,
+                "url": reverse("portfolio:business_list", args=[business.slug]),
+            },
+            {"label": project.title, "url": None},
+        ],
     }
 
     return render(request, "portfolio/detail.html", context)

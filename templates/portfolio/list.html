@@ -1,11 +1,16 @@
 {% extends "base/base.html" %}
 
-{% block title %}Portafolio{% endblock %}
+{% block title %}Portafolio | Pámi{% endblock %}
+{% block meta_description %}Conoce trabajos y proyectos de confección realizados por Pámi.{% endblock %}
+{% block og_title %}Portafolio | Pámi{% endblock %}
+{% block og_description %}Conoce trabajos y proyectos de confección realizados por Pámi.{% endblock %}
+{% block twitter_title %}Portafolio | Pámi{% endblock %}
+{% block twitter_description %}Conoce trabajos y proyectos de confección realizados por Pámi.{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title="Portafolio" subtitle="Conoce algunos trabajos y proyectos realizados por Pámi." %}
+    {% include "components/layout/section_title.html" with title="Portafolio" subtitle="Conoce algunos trabajos y proyectos realizados por Pámi." level=1 %}
 
       <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
       {% for project in projects %}

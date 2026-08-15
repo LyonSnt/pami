@@ -1,12 +1,17 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-  {{ business.seo_title|default:business.name }}
+  {{ business.seo_title|default:business.name }} | Pámi
 {% endblock %}
 
 {% block meta_description %}
-  {{ business.seo_description }}
+  {{ business.seo_description|default:business.short_description }}
 {% endblock %}
+{% block og_title %}{{ business.seo_title|default:business.name }} | Pámi{% endblock %}
+{% block og_description %}{{ business.seo_description|default:business.short_description }}{% endblock %}
+{% block twitter_title %}{{ business.seo_title|default:business.name }} | Pámi{% endblock %}
+{% block twitter_description %}{{ business.seo_description|default:business.short_description }}{% endblock %}
+{% block og_image %}{% if business.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ business.image.url }}">{% elif social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
 
 {% block content %}
 <section class="bg-white py-16">

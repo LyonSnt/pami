@@ -7,6 +7,10 @@
 {% block meta_description %}
   {{ site_configuration.seo_description }}
 {% endblock %}
+{% block og_title %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% endblock %}
+{% block og_description %}{{ site_configuration.seo_description }}{% endblock %}
+{% block twitter_title %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% endblock %}
+{% block twitter_description %}{{ site_configuration.seo_description }}{% endblock %}
 
 {% block content %}
   {% include "components/sections/hero.html" %}

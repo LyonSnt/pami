@@ -1,5 +1,6 @@
 from django.http import Http404
 from django.shortcuts import render
+from django.urls import reverse
 
 from apps.blog.selectors import (
     get_published_blog_post_by_slug,
@@ -24,6 +25,10 @@ def blog_post_detail(request, slug):
 
     context = {
         "post": post,
+        "breadcrumbs": [
+            {"label": "Blog", "url": reverse("blog:list")},
+            {"label": post.title, "url": None},
+        ],
     }
 
     return render(request, "blog/detail.html", context)

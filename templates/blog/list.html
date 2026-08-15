@@ -1,11 +1,16 @@
 {% extends "base/base.html" %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}Blog | Pámi{% endblock %}
+{% block meta_description %}Noticias, ideas y novedades sobre confecciones, chaquetas y buzos de Pámi.{% endblock %}
+{% block og_title %}Blog | Pámi{% endblock %}
+{% block og_description %}Noticias, ideas y novedades sobre confecciones, chaquetas y buzos de Pámi.{% endblock %}
+{% block twitter_title %}Blog | Pámi{% endblock %}
+{% block twitter_description %}Noticias, ideas y novedades sobre confecciones, chaquetas y buzos de Pámi.{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title="Blog" subtitle="Noticias, ideas y novedades de Pámi." %}
+    {% include "components/layout/section_title.html" with title="Blog" subtitle="Noticias, ideas y novedades de Pámi." level=1 %}
 
       <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
       {% for post in posts %}

@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 33 pruebas correctas;
+- 38 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -38,29 +38,30 @@ Validación final:
 - Tailwind CSS recompilado;
 - contenido demo e imágenes cargados de forma idempotente.
 
+## SEO completado
+
+La fase de SEO técnico y contenido SEO esencial quedó implementada:
+
+1. Títulos y metadescripciones específicos en las páginas públicas.
+2. Canonical, Open Graph y Twitter Cards.
+3. `robots.txt` y sitemap con contenido público vigente.
+4. Confirmación de contacto con `noindex, follow`.
+5. Un único `h1` en los listados principales y jerarquía preservada en el Home.
+6. Breadcrumbs completos en detalles de Blog y Portafolio.
+7. Pruebas de metadatos, robots y exclusión de contenido no publicado.
+
 ## Próximo paso
 
-Iniciar la fase de SEO técnico y contenido SEO.
-
-### Alcance
-
-1. Revisar títulos, descripciones y metadatos de todas las páginas públicas.
-2. Incorporar canonical, Open Graph y metadatos sociales cuando corresponda.
-3. Definir `robots.txt` y sitemap.
-4. Revisar estructura de encabezados, enlaces internos y contenido indexable.
-5. Validar el resultado con Django check y la suite completa.
-
-Esta fase no debe introducir nuevos componentes si los existentes pueden resolver el ajuste.
+Diseñar e implementar el buscador real del portal, definiendo primero el alcance de contenido indexable y la experiencia responsive.
 
 ## Después
 
 Continuar con el roadmap oficial:
 
-1. SEO técnico y contenido SEO.
-2. Buscador real.
-3. Filtros de catálogo, portafolio y blog.
-4. Optimización de rendimiento y assets.
-5. Preparación de despliegue.
+1. Buscador real.
+2. Filtros de catálogo, portafolio y blog.
+3. Optimización de rendimiento y assets.
+4. Preparación de despliegue.
 
 ## Preparación de producción pendiente
 
@@ -73,4 +74,4 @@ Antes del despliegue:
 
 ## Regla de reanudación
 
-No comenzar SEO ni buscador hasta completar y aprobar la validación visual final.
+No comenzar el buscador hasta definir y aprobar su alcance funcional y visual.

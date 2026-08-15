@@ -1,13 +1,18 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-  Catálogo - {{ business.name }}
+  {{ business.name }} | Catálogo Pámi
 {% endblock %}
+{% block meta_description %}Conoce los productos y servicios de {{ business.name }} disponibles en Pámi.{% endblock %}
+{% block og_title %}{{ business.name }} | Catálogo Pámi{% endblock %}
+{% block og_description %}Conoce los productos y servicios de {{ business.name }} disponibles en Pámi.{% endblock %}
+{% block twitter_title %}{{ business.name }} | Catálogo Pámi{% endblock %}
+{% block twitter_description %}Conoce los productos y servicios de {{ business.name }} disponibles en Pámi.{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title=business.name subtitle="Productos y servicios de esta línea de negocio." %}
+    {% include "components/layout/section_title.html" with title=business.name subtitle="Productos y servicios de esta línea de negocio." level=1 %}
 
       <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
       {% for product in products %}

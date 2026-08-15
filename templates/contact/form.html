@@ -1,11 +1,16 @@
 {% extends "base/base.html" %}
 
-{% block title %}Contacto{% endblock %}
+{% block title %}Contacto | Pámi{% endblock %}
+{% block meta_description %}Contacta a Pámi para solicitar información sobre confecciones, chaquetas y buzos.{% endblock %}
+{% block og_title %}Contacto | Pámi{% endblock %}
+{% block og_description %}Contacta a Pámi para solicitar información sobre confecciones, chaquetas y buzos.{% endblock %}
+{% block twitter_title %}Contacto | Pámi{% endblock %}
+{% block twitter_description %}Contacta a Pámi para solicitar información sobre confecciones, chaquetas y buzos.{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title="Contacto" subtitle="Envíanos un mensaje y te responderemos lo antes posible." %}
+    {% include "components/layout/section_title.html" with title="Contacto" subtitle="Envíanos un mensaje y te responderemos lo antes posible." level=1 %}
 
     <form method="post" class="mt-10 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm" novalidate>
       {% csrf_token %}

@@ -1,7 +1,37 @@
+{% load static %}
 <!doctype html>
 <html lang="es">
 
-{% include "base/_head.html" %}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}Pámi{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Pámi: donde encuentras todo para ti.{% endblock %}">
+  <meta name="robots" content="{% block robots %}index, follow{% endblock %}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <meta property="og:locale" content="es_EC">
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:site_name" content="Pámi">
+  <meta property="og:title" content="{% block og_title %}Pámi{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}Donde encuentras todo para ti.{% endblock %}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  {% block og_image %}{% if social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
+
+  <meta name="twitter:card" content="{% if social_image_url %}summary_large_image{% else %}summary{% endif %}">
+  <meta name="twitter:title" content="{% block twitter_title %}Pámi{% endblock %}">
+  <meta name="twitter:description" content="{% block twitter_description %}Donde encuentras todo para ti.{% endblock %}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="{% static 'assets/branding/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+
+  {% block styles %}{% endblock %}
+</head>
 
 <body class="flex min-h-screen flex-col bg-white font-sans text-slate-900">
   <a

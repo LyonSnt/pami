@@ -1,13 +1,18 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-  Portafolio - {{ business.name }}
+  {{ business.name }} | Portafolio Pámi
 {% endblock %}
+{% block meta_description %}Conoce los proyectos realizados por Pámi para la línea {{ business.name }}.{% endblock %}
+{% block og_title %}{{ business.name }} | Portafolio Pámi{% endblock %}
+{% block og_description %}Conoce los proyectos realizados por Pámi para la línea {{ business.name }}.{% endblock %}
+{% block twitter_title %}{{ business.name }} | Portafolio Pámi{% endblock %}
+{% block twitter_description %}Conoce los proyectos realizados por Pámi para la línea {{ business.name }}.{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title=business.name subtitle="Proyectos realizados en esta línea de negocio." %}
+    {% include "components/layout/section_title.html" with title=business.name subtitle="Proyectos realizados en esta línea de negocio." level=1 %}
 
     <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {% for project in projects %}

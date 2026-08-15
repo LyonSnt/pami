@@ -7,6 +7,11 @@
 {% block meta_description %}
   {{ product.seo_description|default:product.short_description }}
 {% endblock %}
+{% block og_title %}{{ product.seo_title|default:product.name }} | Pámi{% endblock %}
+{% block og_description %}{{ product.seo_description|default:product.short_description }}{% endblock %}
+{% block twitter_title %}{{ product.seo_title|default:product.name }} | Pámi{% endblock %}
+{% block twitter_description %}{{ product.seo_description|default:product.short_description }}{% endblock %}
+{% block og_image %}{% if product.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ product.image.url }}">{% elif social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
 
 {% block content %}
   <section class="bg-white py-16">
