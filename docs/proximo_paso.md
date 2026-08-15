@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 38 pruebas correctas;
+- 44 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 33 pruebas correctas;
+- 44 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -50,18 +50,44 @@ La fase de SEO técnico y contenido SEO esencial quedó implementada:
 6. Breadcrumbs completos en detalles de Blog y Portafolio.
 7. Pruebas de metadatos, robots y exclusión de contenido no publicado.
 
+## Buscador implementado
+
+El portal dispone de una búsqueda real mediante `/buscar/`:
+
+- consulta productos, proyectos, artículos y líneas de negocio;
+- conserva las reglas existentes de actividad, publicación y fecha;
+- agrupa los resultados por tipo reutilizando las tarjetas oficiales;
+- incluye estados inicial y sin resultados;
+- ofrece acceso desde el encabezado de escritorio y el menú móvil;
+- utiliza canonical estable y `noindex, follow`;
+- limita cada grupo a seis coincidencias en esta primera versión.
+
+## Validación del buscador completada
+
+La presentación inicial del buscador fue aprobada. El campo y su acción utilizan una variante grande, los estados informativos conservan el mismo ancho de lectura y el acceso mediante lupa se integra con el encabezado.
+
 ## Próximo paso
 
-Diseñar e implementar el buscador real del portal, definiendo primero el alcance de contenido indexable y la experiencia responsive.
+Preparar el primer despliegue en un VPS Hetzner CX23. La dirección IP del servidor y cualquier credencial deben mantenerse fuera del repositorio.
+
+El despliegue debe definir y validar:
+
+1. variables de entorno y `SECRET_KEY` de producción;
+2. dominio, DNS y `ALLOWED_HOSTS`;
+3. proxy inverso y certificados TLS;
+4. entrega persistente de static y media;
+5. persistencia y copias de seguridad de PostgreSQL;
+6. ejecución de migraciones y recolección de static;
+7. firewall con exposición exclusiva de los servicios necesarios;
+8. `check --deploy`, prueba funcional y verificación de restauración.
 
 ## Después
 
 Continuar con el roadmap oficial:
 
-1. Buscador real.
+1. Preparación y ejecución del primer despliegue.
 2. Filtros de catálogo, portafolio y blog.
 3. Optimización de rendimiento y assets.
-4. Preparación de despliegue.
 
 ## Preparación de producción pendiente
 
@@ -74,4 +100,4 @@ Antes del despliegue:
 
 ## Regla de reanudación
 
-No comenzar el buscador hasta definir y aprobar su alcance funcional y visual.
+No exponer el portal a Internet hasta completar la configuración de producción, TLS, firewall, persistencia y copias de seguridad.

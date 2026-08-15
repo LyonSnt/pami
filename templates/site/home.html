@@ -1,15 +1,15 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-  {{ site_configuration.seo_title|default:site_configuration.site_name }}
+  {% if site_configuration %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% else %}Pámi{% endif %}
 {% endblock %}
 
 {% block meta_description %}
   {{ site_configuration.seo_description }}
 {% endblock %}
-{% block og_title %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% endblock %}
+{% block og_title %}{% if site_configuration %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% else %}Pámi{% endif %}{% endblock %}
 {% block og_description %}{{ site_configuration.seo_description }}{% endblock %}
-{% block twitter_title %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% endblock %}
+{% block twitter_title %}{% if site_configuration %}{{ site_configuration.seo_title|default:site_configuration.site_name }}{% else %}Pámi{% endif %}{% endblock %}
 {% block twitter_description %}{{ site_configuration.seo_description }}{% endblock %}
 
 {% block content %}

@@ -1,4 +1,5 @@
 from apps.catalog.models import Product
+from django.db.models import Q
 
 
 def get_products():
@@ -37,6 +38,15 @@ def get_published_products_by_business(business):
             business__is_active=True,
             business__is_published=True,
         )
+    )
+
+
+def search_published_products(query):
+    return get_published_products().filter(
+        Q(name__icontains=query)
+        | Q(short_description__icontains=query)
+        | Q(description__icontains=query)
+        | Q(business__name__icontains=query)
     )
 
 

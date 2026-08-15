@@ -1,4 +1,5 @@
 from apps.portfolio.models import PortfolioProject
+from django.db.models import Q
 
 
 def get_portfolio_projects():
@@ -37,6 +38,16 @@ def get_published_portfolio_projects_by_business(business):
             business__is_active=True,
             business__is_published=True,
         )
+    )
+
+
+def search_published_portfolio_projects(query):
+    return get_published_portfolio_projects().filter(
+        Q(title__icontains=query)
+        | Q(short_description__icontains=query)
+        | Q(description__icontains=query)
+        | Q(client_name__icontains=query)
+        | Q(business__name__icontains=query)
     )
 
 

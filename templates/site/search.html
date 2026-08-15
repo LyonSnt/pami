@@ -1,0 +1,77 @@
+{% extends "base/base.html" %}
+
+{% block title %}Buscar | Pámi{% endblock %}
+{% block meta_description %}Busca productos, proyectos, artículos y líneas de negocio en Pámi.{% endblock %}
+{% block robots %}noindex, follow{% endblock %}
+
+{% block content %}
+<section class="bg-slate-50 py-16">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    {% include "components/layout/section_title.html" with title="Buscar en Pámi" subtitle="Encuentra productos, proyectos, artículos y líneas de negocio." level=1 %}
+
+    <form method="get" action="{% url 'site:search' %}" role="search" class="mx-auto mt-10 max-w-3xl">
+      <label for="{{ form.q.id_for_label }}" class="sr-only">Buscar en Pámi</label>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <div class="flex-1">
+          {{ form.q }}
+        </div>
+        {% include "components/ui/button.html" with element="button" type="submit" label="Buscar" size="large" %}
+      </div>
+    </form>
+
+    {% if query %}
+      <p class="mt-8 text-center text-base text-slate-700" role="status" aria-live="polite">
+        {{ result_count }} resultado{{ result_count|pluralize }} para <strong class="text-slate-900">“{{ query }}”</strong>
+      </p>
+
+      {% if result_count %}
+        <div class="mt-10 space-y-14">
+          {% if products %}
+            <section aria-labelledby="search-products">
+              <h2 id="search-products" class="text-2xl font-bold text-slate-900">Productos</h2>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for product in products %}{% include "components/cards/product_card.html" with product=product %}{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+
+          {% if projects %}
+            <section aria-labelledby="search-projects">
+              <h2 id="search-projects" class="text-2xl font-bold text-slate-900">Proyectos</h2>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for project in projects %}{% include "components/cards/project_card.html" with project=project %}{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+
+          {% if posts %}
+            <section aria-labelledby="search-posts">
+              <h2 id="search-posts" class="text-2xl font-bold text-slate-900">Artículos</h2>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for post in posts %}{% include "components/cards/post_card.html" with post=post %}{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+
+          {% if businesses %}
+            <section aria-labelledby="search-businesses">
+              <h2 id="search-businesses" class="text-2xl font-bold text-slate-900">Líneas de negocio</h2>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {% for business in businesses %}{% include "components/cards/business_card.html" with business=business %}{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+        </div>
+      {% else %}
+        <div class="mx-auto mt-10 max-w-3xl">
+          {% include "components/ui/empty_state.html" with title="No encontramos resultados" message="Prueba con otra palabra o una descripción más general." %}
+        </div>
+      {% endif %}
+    {% else %}
+      <div class="mx-auto mt-10 max-w-3xl">
+        {% include "components/ui/empty_state.html" with title="Escribe lo que deseas encontrar" message="Puedes buscar, por ejemplo, chaquetas, buzos, confecciones o ideas." %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

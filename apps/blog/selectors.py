@@ -68,3 +68,12 @@ def get_published_blog_post_by_slug(slug):
         )
         .first()
     )
+
+
+def search_published_blog_posts(query):
+    return get_published_blog_posts().filter(
+        Q(title__icontains=query)
+        | Q(excerpt__icontains=query)
+        | Q(content__icontains=query)
+        | Q(business__name__icontains=query)
+    )
