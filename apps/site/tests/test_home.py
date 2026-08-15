@@ -102,3 +102,24 @@ class HomeViewTests(TestCase):
         self.assertContains(response, "Soporte cercano")
         self.assertNotContains(response, ">✓<")
         self.assertNotContains(response, ">◉<")
+
+    def test_home_keeps_its_query_budget(self):
+        Product.objects.create(
+            business=self.public_business,
+            name="Chaquetas",
+            slug="chaquetas",
+            is_active=True,
+            is_published=True,
+        )
+        PortfolioProject.objects.create(
+            business=self.public_business,
+            title="Colección inicial",
+            slug="coleccion-inicial",
+            is_active=True,
+            is_published=True,
+        )
+
+        with self.assertNumQueries(5):
+            response = self.client.get(reverse("site:home"))
+
+        self.assertEqual(response.status_code, 200)

@@ -107,3 +107,12 @@ class SearchViewTests(TestCase):
 
         self.assertContains(response, reverse("site:search"), count=2)
         self.assertContains(response, 'aria-label="Buscar en Pámi"')
+
+    def test_search_keeps_its_query_budget(self):
+        with self.assertNumQueries(6):
+            response = self.client.get(
+                reverse("site:search"),
+                {"q": "confecciones"},
+            )
+
+        self.assertEqual(response.status_code, 200)

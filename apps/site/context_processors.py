@@ -5,7 +5,11 @@ from apps.site.selectors import (
 
 
 def site_configuration(request):
-    configuration = get_public_site_configuration()
+    if hasattr(request, "_site_configuration"):
+        configuration = request._site_configuration
+    else:
+        configuration = get_public_site_configuration()
+        request._site_configuration = configuration
     social_image_url = ""
     if configuration and configuration.hero_image:
         social_image_url = request.build_absolute_uri(configuration.hero_image.url)

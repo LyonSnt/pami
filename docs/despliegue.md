@@ -61,7 +61,7 @@ Construir e iniciar la aplicación:
 docker compose --env-file .env -f docker-compose.prod.yml up -d --build
 ```
 
-El contenedor web ejecuta las migraciones y `collectstatic` antes de iniciar Gunicorn. Gunicorn se publica exclusivamente en `127.0.0.1:8026`; PostgreSQL no se expone al host ni a Internet.
+El contenedor web ejecuta las migraciones y `collectstatic` antes de iniciar Gunicorn. La recolección excluye `css/input.css`, que es la fuente de Tailwind, y publica su `output.css` compilado y versionado. Gunicorn se publica exclusivamente en `127.0.0.1:8026`; PostgreSQL no se expone al host ni a Internet.
 
 ## Configuración temporal de Nginx por IP
 
@@ -75,7 +75,7 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-La configuración publica Pámi en el puerto `8025`, sirve `/static/` y `/media/` desde `/opt/pami-data/`, y reenvía la aplicación a Gunicorn en `127.0.0.1:8026`.
+La configuración publica Pámi en el puerto `8025`, sirve `/static/` y `/media/` desde `/opt/pami-data/`, y reenvía la aplicación a Gunicorn en `127.0.0.1:8026`. También comprime las respuestas de texto y SVG y conserva los archivos estáticos durante 30 días en el navegador. En producción, Django versiona sus nombres según el contenido durante `collectstatic`, por lo que una nueva versión no reutiliza CSS o recursos anteriores.
 
 La URL temporal será:
 

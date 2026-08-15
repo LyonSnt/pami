@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 44 pruebas correctas;
+- 46 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 44 pruebas correctas;
+- 46 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -105,7 +105,19 @@ Continuar con el roadmap oficial:
 
 1. Dominio, HTTPS y cierre de la preparación productiva.
 2. Filtros de catálogo, portafolio y blog.
-3. Optimización de rendimiento y assets.
+3. Generación de variantes responsive para nuevas imágenes editoriales, cuando el volumen de contenido lo justifique.
+
+## Rendimiento y assets
+
+La primera optimización de rendimiento quedó completada:
+
+- el Home reutiliza la configuración global dentro de la misma petición;
+- existen pruebas de regresión para los presupuestos de consultas del Home y el buscador;
+- la plantilla de Nginx comprime respuestas de texto y SVG;
+- los archivos estáticos usan nombres versionados por contenido y se almacenan en el navegador durante 30 días;
+- las imágenes demo continúan en WebP y su conjunto permanece por debajo de 450 KB.
+
+Los filtros y la paginación se posponen hasta que el volumen real supere la presentación actual. La generación automática de imágenes responsive también queda diferida para evitar complejidad sin beneficio visible en esta etapa.
 
 ## Regla de reanudación
 

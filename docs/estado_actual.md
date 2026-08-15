@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 44 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 46 pruebas correctas.
 
 ## Infraestructura
 
@@ -88,6 +88,9 @@ Características:
 - Búsqueda limitada a contenido activo, publicado y vigente.
 - Acceso al buscador desde la navegación de escritorio y móvil.
 - Página de resultados excluida de indexación mediante `noindex, follow`.
+- Configuración global reutilizada dentro de la petición del Home para evitar una consulta duplicada.
+- Presupuestos de consultas cubiertos por pruebas para Home y buscador.
+- Archivos estáticos versionados por contenido en producción para permitir caché prolongada segura.
 
 ## Componentes
 
@@ -175,7 +178,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 44 pruebas ejecutadas correctamente.
+- 46 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.

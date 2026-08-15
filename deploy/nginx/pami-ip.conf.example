@@ -4,10 +4,15 @@ server {
 
     client_max_body_size 20M;
 
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+
     location /static/ {
         alias /opt/pami-data/static/;
         access_log off;
-        expires 7d;
+        expires 30d;
     }
 
     location /media/ {
