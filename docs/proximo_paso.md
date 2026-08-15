@@ -162,6 +162,10 @@ La notificación por correo se activa únicamente cuando existe `CONTACT_NOTIFIC
 
 Se retiraron los módulos vacíos heredados del scaffolding inicial y los imports de signals sin implementación. Se conservaron todos los `__init__.py`, paquetes de migraciones, signals funcionales y APIs internas con código. La estructura documentada refleja ahora los templates y componentes reales del portal.
 
+## Próxima reanudación
+
+Corregir el logotipo SVG del encabezado para mantener unido el texto `Pámi` en navegadores móviles. Actualmente `Pá` y `mi` usan posiciones horizontales independientes; el ajuste pendiente debe convertirlos en un flujo continuo sin cambiar las dimensiones ni la identidad visual aprobada.
+
 ## Regla de reanudación
 
 No activar `SECURE_SSL_REDIRECT`, cookies seguras ni HSTS mientras el acceso continúe exclusivamente por IP y HTTP. No usar datos personales o credenciales reutilizadas antes de disponer de HTTPS.
