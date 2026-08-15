@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 from apps.common.models import BaseModel
+from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class Business(BaseModel):
@@ -10,7 +11,13 @@ class Business(BaseModel):
     short_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción corta")
     description = models.TextField(blank=True, verbose_name="Descripción")
 
-    image = models.ImageField(upload_to="businesses/", blank=True, null=True, verbose_name="Imagen")
+    image = models.ImageField(
+        upload_to="businesses/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Imagen",
+    )
     icon = models.CharField(max_length=80, blank=True, verbose_name="Ícono")
 
     order = models.PositiveIntegerField(default=0, verbose_name="Orden")

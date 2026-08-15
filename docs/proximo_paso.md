@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 46 pruebas correctas;
+- 55 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 46 pruebas correctas;
+- 55 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -118,6 +118,16 @@ La primera optimización de rendimiento quedó completada:
 - las imágenes demo continúan en WebP y su conjunto permanece por debajo de 450 KB.
 
 Los filtros y la paginación se posponen hasta que el volumen real supere la presentación actual. La generación automática de imágenes responsive también queda diferida para evitar complejidad sin beneficio visible en esta etapa.
+
+## Administración editorial
+
+La revisión funcional del panel administrativo quedó completada:
+
+- los editores pueden gestionar de forma explícita los estados `Activo` y `Publicado`;
+- la configuración única del sitio no puede eliminarse desde el administrador;
+- las imágenes admiten JPG, PNG y WebP hasta 5 MB;
+- los enlaces editoriales aceptan rutas internas, anclas y URLs HTTP/HTTPS;
+- las reglas están cubiertas por pruebas y migraciones declarativas sin transformación de datos.
 
 ## Regla de reanudación
 

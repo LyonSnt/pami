@@ -6,8 +6,8 @@ from apps.businesses.models import Business
 
 @admin.register(Business)
 class BusinessAdmin(AuditModelAdminMixin, admin.ModelAdmin):
-    list_display = ("name", "slug", "order", "is_published", "created_at")
-    list_filter = ("is_published",)
+    list_display = ("name", "slug", "order", "is_active", "is_published", "created_at")
+    list_filter = ("is_active", "is_published")
     search_fields = ("name", "slug", "short_description")
     prepopulated_fields = {"slug": ("name",)}
 
@@ -19,7 +19,7 @@ class BusinessAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             "fields": ("image", "icon")
         }),
         ("Publicación", {
-            "fields": ("order", "is_published")
+            "fields": ("order", "is_active", "is_published")
         }),
         ("SEO", {
             "fields": ("seo_title", "seo_description")

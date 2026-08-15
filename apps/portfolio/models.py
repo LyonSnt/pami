@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 from apps.businesses.models import Business
 from apps.common.models import BaseModel
+from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class PortfolioProject(BaseModel):
@@ -16,7 +17,13 @@ class PortfolioProject(BaseModel):
     slug = models.SlugField(max_length=170, verbose_name="Slug")
     short_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción corta")
     description = models.TextField(blank=True, verbose_name="Descripción")
-    image = models.ImageField(upload_to="portfolio/projects/", blank=True, null=True, verbose_name="Imagen")
+    image = models.ImageField(
+        upload_to="portfolio/projects/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Imagen",
+    )
 
     client_name = models.CharField(max_length=120, blank=True, verbose_name="Cliente")
     project_date = models.DateField(blank=True, null=True, verbose_name="Fecha del proyecto")

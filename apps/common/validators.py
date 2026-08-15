@@ -1,3 +1,5 @@
+from urllib.parse import urlsplit
+
 from django.core.exceptions import ValidationError
 
 
@@ -15,3 +17,19 @@ def validate_image_extension(file):
 
     if not any(file_name.endswith(ext) for ext in allowed_extensions):
         raise ValidationError("Solo se permiten imágenes JPG, PNG o WEBP.")
+
+
+def validate_safe_link(value):
+    if value.startswith("#"):
+        return
+
+    if value.startswith("/") and not value.startswith("//"):
+        return
+
+    parsed_url = urlsplit(value)
+    if parsed_url.scheme in {"http", "https"} and parsed_url.netloc:
+        return
+
+    raise ValidationError(
+        "Ingresa una ruta interna o una URL completa que use HTTP o HTTPS."
+    )

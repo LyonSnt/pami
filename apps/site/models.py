@@ -1,6 +1,11 @@
 from django.db import models
 
 from apps.common.models import BaseModel
+from apps.common.validators import (
+    validate_file_size,
+    validate_image_extension,
+    validate_safe_link,
+)
 
 
 class SiteConfiguration(BaseModel):
@@ -21,8 +26,20 @@ class SiteConfiguration(BaseModel):
     whatsapp = models.CharField(max_length=30, blank=True, verbose_name="WhatsApp")
     address = models.CharField(max_length=255, blank=True, verbose_name="Dirección")
 
-    logo = models.ImageField(upload_to="site/", blank=True, null=True, verbose_name="Logo")
-    favicon = models.ImageField(upload_to="site/", blank=True, null=True, verbose_name="Favicon")
+    logo = models.ImageField(
+        upload_to="site/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Logo",
+    )
+    favicon = models.ImageField(
+        upload_to="site/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Favicon",
+    )
 
     facebook_url = models.URLField(blank=True, verbose_name="Facebook")
     instagram_url = models.URLField(blank=True, verbose_name="Instagram")
@@ -56,6 +73,7 @@ class SiteConfiguration(BaseModel):
     hero_primary_button_url = models.CharField(
         max_length=255,
         default="/catalogo/",
+        validators=(validate_safe_link,),
         verbose_name="URL botón principal",
     )
 
@@ -68,6 +86,7 @@ class SiteConfiguration(BaseModel):
     hero_secondary_button_url = models.CharField(
         max_length=255,
         default="/contacto/",
+        validators=(validate_safe_link,),
         verbose_name="URL botón secundario",
     )
 
@@ -75,6 +94,7 @@ class SiteConfiguration(BaseModel):
         upload_to="site/hero/",
         blank=True,
         null=True,
+        validators=(validate_file_size, validate_image_extension),
         verbose_name="Imagen del Hero",
     )
 
@@ -88,7 +108,11 @@ class SiteConfiguration(BaseModel):
 
 class NavigationItem(BaseModel):
     label = models.CharField(max_length=80, verbose_name="Etiqueta")
-    url = models.CharField(max_length=255, verbose_name="URL")
+    url = models.CharField(
+        max_length=255,
+        validators=(validate_safe_link,),
+        verbose_name="URL",
+    )
     order = models.PositiveIntegerField(default=0, verbose_name="Orden")
     is_active = models.BooleanField(default=True, verbose_name="Activo")
     open_in_new_tab = models.BooleanField(default=False, verbose_name="Abrir en nueva pestaña")

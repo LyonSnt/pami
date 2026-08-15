@@ -3,6 +3,7 @@ from django.utils.text import slugify
 
 from apps.businesses.models import Business
 from apps.common.models import BaseModel
+from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class Product(BaseModel):
@@ -16,7 +17,13 @@ class Product(BaseModel):
     slug = models.SlugField(max_length=140, verbose_name="Slug")
     short_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción corta")
     description = models.TextField(blank=True, verbose_name="Descripción")
-    image = models.ImageField(upload_to="catalog/products/", blank=True, null=True, verbose_name="Imagen")
+    image = models.ImageField(
+        upload_to="catalog/products/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Imagen",
+    )
 
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Precio")
     show_price = models.BooleanField(default=False, verbose_name="Mostrar precio")

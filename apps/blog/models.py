@@ -4,6 +4,7 @@ from django.utils.text import slugify
 
 from apps.businesses.models import Business
 from apps.common.models import BaseModel
+from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class BlogPost(BaseModel):
@@ -19,7 +20,13 @@ class BlogPost(BaseModel):
     slug = models.SlugField(max_length=180, unique=True, verbose_name="Slug")
     excerpt = models.CharField(max_length=255, blank=True, verbose_name="Resumen")
     content = models.TextField(verbose_name="Contenido")
-    image = models.ImageField(upload_to="blog/posts/", blank=True, null=True, verbose_name="Imagen")
+    image = models.ImageField(
+        upload_to="blog/posts/",
+        blank=True,
+        null=True,
+        validators=(validate_file_size, validate_image_extension),
+        verbose_name="Imagen",
+    )
 
     published_at = models.DateTimeField(blank=True, null=True, verbose_name="Fecha de publicación")
     is_published = models.BooleanField(default=False, verbose_name="Publicado")

@@ -58,6 +58,9 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             return False
         return super().has_add_permission(request)
 
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(NavigationItem)
 class NavigationItemAdmin(AuditModelAdminMixin, admin.ModelAdmin):

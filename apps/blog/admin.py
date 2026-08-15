@@ -6,8 +6,8 @@ from apps.blog.models import BlogPost
 
 @admin.register(BlogPost)
 class BlogPostAdmin(AuditModelAdminMixin, admin.ModelAdmin):
-    list_display = ("title", "business", "is_published", "published_at", "created_at")
-    list_filter = ("business", "is_published", "published_at")
+    list_display = ("title", "business", "is_active", "is_published", "published_at", "created_at")
+    list_filter = ("business", "is_active", "is_published", "published_at")
     search_fields = ("title", "slug", "excerpt")
     prepopulated_fields = {"slug": ("title",)}
     autocomplete_fields = ("business",)
@@ -21,7 +21,7 @@ class BlogPostAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             "fields": ("image",)
         }),
         ("Publicación", {
-            "fields": ("is_published", "published_at")
+            "fields": ("is_active", "is_published", "published_at")
         }),
         ("SEO", {
             "fields": ("seo_title", "seo_description")
