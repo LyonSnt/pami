@@ -109,6 +109,25 @@ docker compose --env-file .env -f docker-compose.prod.yml exec web python manage
 
 El superusuario asigna desde Django Admin el grupo `Editor de contenido` o `Gestor de contacto` a cada usuario staff. No se deben conceder permisos de usuarios o auditoría fuera de cuentas superusuario.
 
+## Notificaciones de contacto
+
+Las notificaciones permanecen desactivadas mientras `CONTACT_NOTIFICATION_EMAIL` esté vacío. Cuando exista un proveedor SMTP, configurar en `.env`:
+
+```env
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+DEFAULT_FROM_EMAIL=Pámi <no-reply@dominio.example>
+CONTACT_NOTIFICATION_EMAIL=equipo@dominio.example
+EMAIL_HOST=smtp.proveedor.example
+EMAIL_PORT=587
+EMAIL_HOST_USER=usuario-smtp
+EMAIL_HOST_PASSWORD=secreto-smtp
+EMAIL_USE_TLS=True
+EMAIL_USE_SSL=False
+EMAIL_TIMEOUT=10
+```
+
+No se deben versionar las credenciales SMTP. Después de configurarlas, realizar un envío real y confirmar tanto el registro en Django Admin como la recepción del correo. Si SMTP falla, el mensaje permanece almacenado y el error aparece en los registros de la aplicación.
+
 Si se desea cargar el contenido inicial aprobado de Confecciones:
 
 ```bash

@@ -5,6 +5,18 @@ from apps.contact.models import ContactMessage
 
 
 class ContactMessageForm(forms.ModelForm):
+    honeypot = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.HiddenInput(
+            attrs={
+                "autocomplete": "off",
+                "tabindex": "-1",
+                "aria-hidden": "true",
+            }
+        ),
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["business"].queryset = get_published_businesses()

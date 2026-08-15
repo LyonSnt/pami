@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 72 pruebas correctas;
+- 78 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 72 pruebas correctas;
+- 78 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -151,6 +151,12 @@ Los productos solo pueden mostrar un precio cuando existe un valor positivo. La 
 ## Manejo de errores públicos
 
 Las respuestas 404 y 500 utilizan páginas responsive con identidad Pámi, acciones para recuperar la navegación y `noindex, nofollow`. Conservan sus códigos HTTP correctos. La respuesta 500 no usa configuración, navegación ni consultas a base de datos, por lo que puede mostrarse incluso durante un fallo de infraestructura o persistencia.
+
+## Protección del contacto
+
+El formulario de contacto incluye un honeypot invisible y descarta silenciosamente envíos automatizados. También evita guardar dos veces el mismo contenido dentro de una ventana configurable de 60 segundos por sesión, sin impedir un nuevo contacto posterior.
+
+La notificación por correo se activa únicamente cuando existe `CONTACT_NOTIFICATION_EMAIL`. El mensaje se almacena y audita antes de intentar la entrega; un fallo SMTP se registra, pero no pierde el contacto ni muestra un error al visitante.
 
 ## Regla de reanudación
 
