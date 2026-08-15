@@ -17,7 +17,8 @@ def create_audit_log(
     metadata=None,
 ):
     if request is not None:
-        user = getattr(request, "user", None)
+        if user is None:
+            user = getattr(request, "user", None)
         ip_address = get_client_ip(request)
         user_agent = get_user_agent(request)
 

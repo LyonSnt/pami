@@ -126,3 +126,17 @@ class ContactMessageAdminTests(TestCase):
                 metadata={"transition": ContactMessage.Status.RESPONDED},
             ).exists()
         )
+
+    def test_messages_cannot_be_created_deleted_or_reassigned_in_admin(self):
+        user = User.objects.create_superuser(
+            username="admin-contact-protection",
+            email="admin-contact-protection@example.com",
+            password="test-password",
+        )
+        request = RequestFactory().get("/admin/contact/contactmessage/")
+        request.user = user
+        model_admin = ContactMessageAdmin(ContactMessage, AdminSite())
+
+        self.assertIn("business", model_admin.readonly_fields)
+        self.assertFalse(model_admin.has_add_permission(request))
+        self.assertFalse(model_admin.has_delete_permission(request))

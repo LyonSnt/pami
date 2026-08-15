@@ -40,3 +40,17 @@ class AuditAdminTests(TestCase):
         self.assertFalse(model_admin.has_add_permission(self.request))
         self.assertFalse(model_admin.has_change_permission(self.request))
         self.assertFalse(model_admin.has_delete_permission(self.request))
+
+    def test_audit_log_is_visible_only_to_superusers(self):
+        model_admin = AuditLogAdmin(AuditLog, AdminSite())
+        staff_user = User.objects.create_user(
+            username="staff-sin-auditoria",
+            email="staff@example.com",
+            password="test-password",
+            is_staff=True,
+        )
+        staff_request = RequestFactory().get("/admin/audit/auditlog/")
+        staff_request.user = staff_user
+
+        self.assertTrue(model_admin.has_view_permission(self.request))
+        self.assertFalse(model_admin.has_view_permission(staff_request))

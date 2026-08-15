@@ -101,6 +101,14 @@ Crear el usuario administrador:
 docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py createsuperuser
 ```
 
+Crear o sincronizar los roles administrativos oficiales:
+
+```bash
+docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py setup_admin_roles
+```
+
+El superusuario asigna desde Django Admin el grupo `Editor de contenido` o `Gestor de contacto` a cada usuario staff. No se deben conceder permisos de usuarios o auditoría fuera de cuentas superusuario.
+
 Si se desea cargar el contenido inicial aprobado de Confecciones:
 
 ```bash

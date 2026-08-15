@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 55 pruebas correctas;
+- 62 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 55 pruebas correctas;
+- 62 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -128,6 +128,15 @@ La revisión funcional del panel administrativo quedó completada:
 - las imágenes admiten JPG, PNG y WebP hasta 5 MB;
 - los enlaces editoriales aceptan rutas internas, anclas y URLs HTTP/HTTPS;
 - las reglas están cubiertas por pruebas y migraciones declarativas sin transformación de datos.
+
+## Seguridad del administrador
+
+El comando idempotente `setup_admin_roles` mantiene dos grupos oficiales:
+
+- `Editor de contenido`: puede consultar, crear y modificar configuración, navegación, líneas, productos, proyectos y publicaciones;
+- `Gestor de contacto`: puede consultar mensajes y ejecutar sus transiciones de estado.
+
+Ninguno puede eliminar contenido, administrar usuarios ni consultar registros de auditoría. Estas operaciones permanecen reservadas al superusuario. Los mensajes tampoco pueden crearse, eliminarse o reasignarse manualmente desde el administrador. Los inicios y cierres de sesión quedan auditados.
 
 ## Regla de reanudación
 

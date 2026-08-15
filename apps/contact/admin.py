@@ -18,6 +18,7 @@ class ContactMessageAdmin(AuditModelAdminMixin, admin.ModelAdmin):
     search_fields = ("name", "email", "phone", "subject", "message")
     autocomplete_fields = ("business",)
     readonly_fields = (
+        "business",
         "name",
         "email",
         "phone",
@@ -44,6 +45,12 @@ class ContactMessageAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             "fields": ("created_at",)
         }),
     )
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
     def _apply_transition(self, request, queryset, transition, transition_name):
         updated = 0
