@@ -11,6 +11,10 @@ venv/
 env/
 media/
 staticfiles/
+node_modules/
+.visual-review/
+docs/
+tests/
 *.sqlite3
 .vscode/
 .idea/

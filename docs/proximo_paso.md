@@ -68,7 +68,16 @@ La presentación inicial del buscador fue aprobada. El campo y su acción utiliz
 
 ## Próximo paso
 
-Preparar el primer despliegue en un VPS Hetzner CX23. La dirección IP del servidor y cualquier credencial deben mantenerse fuera del repositorio.
+Validar el primer despliegue en un VPS Hetzner CX23 mediante la dirección IP y HTTP temporal. La dirección IP del servidor y cualquier credencial deben mantenerse fuera del repositorio.
+
+El repositorio ya incluye:
+
+- `docker-compose.prod.yml` sin exposición pública de PostgreSQL y con Gunicorn limitado a `127.0.0.1:8026`;
+- imagen multietapa con dependencias de producción y compilación de Tailwind;
+- arranque con migraciones, `collectstatic` y Gunicorn;
+- plantilla Nginx para static, media y proxy HTTP temporal en el puerto `8025`;
+- `.env.production.example` sin secretos;
+- procedimiento completo en `docs/despliegue.md`.
 
 El despliegue debe definir y validar:
 

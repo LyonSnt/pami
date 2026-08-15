@@ -194,4 +194,4 @@ Antes de desplegar se debe:
 
 ## Estado de reanudación
 
-El buscador real está implementado, validado técnicamente y aprobado visualmente. El siguiente paso inmediato es preparar el primer despliegue en el VPS de Hetzner antes de continuar con los filtros.
+El buscador real está implementado, validado técnicamente y aprobado visualmente. El paquete del primer despliegue está preparado con una imagen multietapa, Gunicorn, integración con el Nginx existente, PostgreSQL persistente y compilación de Tailwind. La imagen productiva construye correctamente. El siguiente paso inmediato es validar el despliegue temporal por IP y puerto `8025` en el VPS de Hetzner.

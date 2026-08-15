@@ -1,0 +1,56 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ${PAMI_STATIC_PATH:-./deploy-data/static}:/app/staticfiles
+      - ${PAMI_MEDIA_PATH:-./deploy-data/media}:/app/media
+    ports:
+      - "127.0.0.1:${PAMI_APP_PORT:-8026}:8000"
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - python -c "import socket; connection = socket.create_connection(('localhost', 8000), 5); connection.close()"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    networks:
+      - pami_network
+
+  db:
+    image: postgres:${POSTGRES_VERSION}
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pami_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    expose:
+      - "5432"
+    networks:
+      - pami_network
+
+volumes:
+  pami_postgres_data:
+
+networks:
+  pami_network:
+    driver: bridge
