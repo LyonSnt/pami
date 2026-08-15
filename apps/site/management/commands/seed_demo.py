@@ -1,5 +1,8 @@
 from decimal import Decimal
+from pathlib import Path
 
+from django.conf import settings
+from django.core.files import File
 from django.core.management.base import BaseCommand
 from django.utils import timezone
 
@@ -15,13 +18,35 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         businesses = self.create_businesses()
-        self.create_site_configuration(businesses["confecciones"])
+        configuration = self.create_site_configuration(businesses["confecciones"])
+        self.set_demo_image(
+            configuration,
+            "hero_image",
+            "pami-confecciones-hero.webp",
+            "hero.webp",
+        )
         self.create_navigation()
         self.create_products(businesses)
         self.create_projects(businesses)
         self.create_posts(businesses)
 
         self.stdout.write(self.style.SUCCESS("Datos demo creados correctamente."))
+
+    def set_demo_image(self, instance, field_name, storage_name, asset_name):
+        image_field = getattr(instance, field_name)
+        if image_field:
+            return
+
+        asset_path = (
+            Path(settings.BASE_DIR)
+            / "static"
+            / "assets"
+            / "demo"
+            / "confecciones"
+            / asset_name
+        )
+        with asset_path.open("rb") as asset_file:
+            image_field.save(storage_name, File(asset_file), save=True)
 
     def create_site_configuration(self, featured_business):
         configuration = SiteConfiguration.objects.first()
@@ -46,9 +71,9 @@ class Command(BaseCommand):
             for field, value in data.items():
                 setattr(configuration, field, value)
             configuration.save(update_fields=(*data.keys(), "updated_at"))
-            return
+            return configuration
 
-        SiteConfiguration.objects.create(**data)
+        return SiteConfiguration.objects.create(**data)
 
     def create_navigation(self):
         NavigationItem.objects.filter(
@@ -106,8 +131,8 @@ class Command(BaseCommand):
 
     def create_products(self, businesses):
         data = [
-            ("confecciones", "Chaquetas", "chaquetas", "Chaquetas cómodas y versátiles para diferentes estilos.", "45.00", 1),
-            ("confecciones", "Buzos", "buzos", "Buzos pensados para brindar comodidad todos los días.", "30.00", 2),
+            ("confecciones", "Chaquetas", "chaquetas", "Chaquetas cómodas y versátiles para diferentes estilos.", "45.00", 1, "chaquetas.webp"),
+            ("confecciones", "Buzos", "buzos", "Buzos pensados para brindar comodidad todos los días.", "30.00", 2, "buzos.webp"),
         ]
 
         Product.objects.filter(
@@ -121,8 +146,8 @@ class Command(BaseCommand):
             ),
         ).update(is_published=False)
 
-        for business_slug, name, slug, description, price, order in data:
-            Product.objects.update_or_create(
+        for business_slug, name, slug, description, price, order, asset_name in data:
+            product, _ = Product.objects.update_or_create(
                 business=businesses[business_slug],
                 slug=slug,
                 defaults={
@@ -137,11 +162,17 @@ class Command(BaseCommand):
                     "seo_description": description,
                 },
             )
+            self.set_demo_image(
+                product,
+                "image",
+                f"pami-{slug}.webp",
+                asset_name,
+            )
 
     def create_projects(self, businesses):
         data = [
-            ("confecciones", "Colección inicial de chaquetas", "coleccion-inicial-chaquetas", "Confección de una colección demostrativa de chaquetas.", "Pámi"),
-            ("confecciones", "Colección inicial de buzos", "coleccion-inicial-buzos", "Confección de una colección demostrativa de buzos.", "Pámi"),
+            ("confecciones", "Colección inicial de chaquetas", "coleccion-inicial-chaquetas", "Confección de una colección demostrativa de chaquetas.", "Pámi", "proyecto-chaquetas.webp"),
+            ("confecciones", "Colección inicial de buzos", "coleccion-inicial-buzos", "Confección de una colección demostrativa de buzos.", "Pámi", "proyecto-buzos.webp"),
         ]
 
         PortfolioProject.objects.filter(
@@ -152,8 +183,8 @@ class Command(BaseCommand):
             ),
         ).update(is_published=False)
 
-        for business_slug, title, slug, description, client_name in data:
-            PortfolioProject.objects.update_or_create(
+        for business_slug, title, slug, description, client_name, asset_name in data:
+            project, _ = PortfolioProject.objects.update_or_create(
                 business=businesses[business_slug],
                 slug=slug,
                 defaults={
@@ -167,11 +198,31 @@ class Command(BaseCommand):
                     "seo_description": description,
                 },
             )
+            self.set_demo_image(
+                project,
+                "image",
+                f"pami-{slug}.webp",
+                asset_name,
+            )
 
     def create_posts(self, businesses):
         data = [
-            ("confecciones", "Cómo elegir una chaqueta para tu estilo", "elegir-chaqueta-para-tu-estilo"),
-            ("confecciones", "Ideas para combinar tus buzos", "ideas-combinar-buzos"),
+            (
+                "confecciones",
+                "Cómo elegir una chaqueta para tu estilo",
+                "elegir-chaqueta-para-tu-estilo",
+                "Encuentra una chaqueta cómoda y versátil que se adapte a tu forma de vestir.",
+                "Una buena chaqueta debe acompañar tu rutina y combinar con las prendas que ya utilizas. Los tonos neutros son fáciles de integrar y funcionan en diferentes momentos del día.\n\nTambién conviene revisar el ajuste, la movilidad de los brazos y el tipo de tejido. Una prenda cómoda permite añadir capas sin perder libertad de movimiento.\n\nEn Pámi confeccionamos chaquetas pensadas para equilibrar estilo, comodidad y uso cotidiano.",
+                "proyecto-chaquetas.webp",
+            ),
+            (
+                "confecciones",
+                "Ideas para combinar tus buzos",
+                "ideas-combinar-buzos",
+                "Descubre formas sencillas de incorporar un buzo cómodo a tus looks diarios.",
+                "Los buzos en colores neutros combinan fácilmente con jeans, pantalones deportivos y prendas ligeras. Puedes utilizarlos como pieza principal o añadir una chaqueta cuando necesites una capa adicional.\n\nPara un estilo equilibrado, combina prendas amplias con piezas de corte más definido. Los accesorios sencillos y el calzado adecuado permiten adaptar el mismo buzo a diferentes ocasiones.\n\nLos buzos Pámi están pensados para brindar comodidad sin dejar de lado un estilo versátil y actual.",
+                "proyecto-buzos.webp",
+            ),
         ]
 
         BlogPost.objects.filter(
@@ -182,17 +233,23 @@ class Command(BaseCommand):
             ),
         ).update(is_published=False)
 
-        for business_slug, title, slug in data:
-            BlogPost.objects.update_or_create(
+        for business_slug, title, slug, excerpt, content, asset_name in data:
+            post, _ = BlogPost.objects.update_or_create(
                 slug=slug,
                 defaults={
                     "business": businesses[business_slug],
                     "title": title,
-                    "excerpt": "Artículo demo para validar el diseño del blog.",
-                    "content": "Este es un contenido de demostración para revisar cómo se visualiza una publicación dentro del portal Pámi.",
+                    "excerpt": excerpt,
+                    "content": content,
                     "is_published": True,
                     "published_at": timezone.now(),
                     "seo_title": title,
-                    "seo_description": "Contenido demo de Pámi.",
+                    "seo_description": excerpt,
                 },
+            )
+            self.set_demo_image(
+                post,
+                "image",
+                f"pami-{slug}.webp",
+                asset_name,
             )

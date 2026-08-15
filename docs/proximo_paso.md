@@ -22,20 +22,33 @@ Validación vigente:
 - Tailwind CSS v4 compilado;
 - branding SVG completo.
 
+## Validación visual completada
+
+El portal público fue validado en móvil, tablet y escritorio con imágenes WebP y contenido representativo de Confecciones.
+
+La validación incluyó Home, catálogo, detalles de producto, portafolio, detalles de proyecto, blog, detalles de artículo, formulario de contacto y confirmación de envío.
+
+Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, contenido editorial, formulario y footer. El eslogan, la etiqueta Confecciones, las acciones, las tarjetas y los estados accesibles conservan la jerarquía y las reglas del Design System.
+
+Validación final:
+
+- 33 pruebas correctas;
+- Django check sin problemas;
+- sin cambios de migración pendientes;
+- Tailwind CSS recompilado;
+- contenido demo e imágenes cargados de forma idempotente.
+
 ## Próximo paso
 
-Realizar validación visual final del enfoque de Confecciones contra el mockup aprobado utilizando contenido e imágenes representativas para Chaquetas y Buzos.
+Iniciar la fase de SEO técnico y contenido SEO.
 
 ### Alcance
 
-1. Cargar o seleccionar imágenes reales para el Hero, Chaquetas, Buzos y trabajos de Confecciones.
-2. Revisar Home en móvil, tablet y escritorio.
-   - Confirmar la legibilidad del eslogan bajo el logo en tablet y escritorio.
-   - Confirmar que la etiqueta del Hero corresponda a la línea destacada configurada.
-3. Revisar páginas internas en los mismos tamaños.
-4. Comparar jerarquía, espaciado, proporciones y densidad visual con el mockup.
-5. Corregir únicamente diferencias verificadas, reutilizando los componentes y tokens existentes.
-6. Ejecutar nuevamente Tailwind, Django check y la suite completa.
+1. Revisar títulos, descripciones y metadatos de todas las páginas públicas.
+2. Incorporar canonical, Open Graph y metadatos sociales cuando corresponda.
+3. Definir `robots.txt` y sitemap.
+4. Revisar estructura de encabezados, enlaces internos y contenido indexable.
+5. Validar el resultado con Django check y la suite completa.
 
 Esta fase no debe introducir nuevos componentes si los existentes pueden resolver el ajuste.
 

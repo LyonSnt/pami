@@ -18,6 +18,7 @@ COPY . /app/
 
 RUN addgroup --system appgroup \
     && adduser --system --ingroup appgroup appuser \
+    && mkdir -p /app/media /app/staticfiles \
     && chown -R appuser:appgroup /app
 
 USER appuser

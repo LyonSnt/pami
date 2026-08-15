@@ -8,6 +8,7 @@ class ContactMessageForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["business"].queryset = get_published_businesses()
+        self.fields["business"].empty_label = "Selecciona una línea de negocio"
 
         control_classes = (
             "w-full rounded-lg border border-slate-300 bg-white px-4 py-2.5 "

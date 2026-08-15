@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 33 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 33 pruebas correctas.
 
 ## Infraestructura
 
@@ -71,6 +71,8 @@ Características:
 - Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
 - Home enfocado en productos y trabajos publicados de Confecciones.
+- Imágenes WebP representativas para el Hero, Chaquetas, Buzos y los trabajos destacados.
+- Imágenes y contenido representativos para los artículos de Confecciones.
 - Breadcrumb accesible.
 - Estados vacíos reutilizables.
 - CTA reutilizable.
@@ -109,6 +111,24 @@ El catálogo inicial de Confecciones utiliza `Product` para administrar `Chaquet
 El Home ya no depende del slug fijo `confecciones`: utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
 
 El comando `seed_demo` es idempotente para este contenido: actualiza la configuración demostrativa, publica Chaquetas y Buzos con orden explícito y despublica únicamente los registros demo anteriores conocidos sin eliminarlos. La base de desarrollo fue cargada con este estado.
+
+El mismo comando completa las imágenes demo aprobadas cuando los campos correspondientes están vacíos. Las imágenes reemplazadas posteriormente desde Django Admin se conservan. Los originales optimizados viven en `static/assets/demo/confecciones/` y el conjunto WebP ocupa menos de 450 KB.
+
+La validación responsive del Home confirmó:
+
+- Hero en proporción panorámica para móvil y tablet, con proporción `4:3` en escritorio;
+- eslogan legible en tablet y escritorio y disponible en el footer para móvil;
+- productos y proyectos en una cuadrícula equilibrada de dos columnas desde `sm`;
+- ausencia de desbordamientos visibles y correcta legibilidad de acciones y tarjetas.
+
+La validación de páginas internas confirmó:
+
+- listados de catálogo, portafolio y blog centrados en cuadrículas de dos columnas;
+- detalles de productos y proyectos con imagen e información en una composición responsive;
+- detalle editorial del blog con imagen panorámica y ancho de lectura controlado;
+- descripciones demo duplicadas eliminadas y contenido representativo cargado mediante `seed_demo`;
+- formulario de contacto accesible, selector descriptivo y confirmación anunciada mediante una región de estado;
+- footer compacto y ubicado al final de páginas con poco contenido.
 
 ## Design System
 
@@ -165,4 +185,4 @@ Antes de desplegar se debe:
 
 ## Estado de reanudación
 
-La siguiente fase es validar visualmente el portal contra el mockup aprobado usando contenido e imágenes representativas. Después corresponde iniciar la fase SEO del roadmap oficial.
+La validación visual final del portal público está completada y aprobada. La siguiente fase es iniciar SEO técnico y contenido SEO según el roadmap oficial.

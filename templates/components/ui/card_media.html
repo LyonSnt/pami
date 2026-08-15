@@ -1,12 +1,12 @@
 {% load static %}
-<div class="flex aspect-4/3 w-full items-center justify-center overflow-hidden bg-slate-100">
+<div class="flex w-full items-center justify-center overflow-hidden bg-slate-100{% if wide %} aspect-video{% else %} aspect-4/3{% endif %}">
   {% if image %}
     <img
       src="{{ image.url }}"
       alt="{{ alt }}"
       width="{{ image.width }}"
       height="{{ image.height }}"
-      loading="lazy"
+      {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
       decoding="async"
       class="h-full w-full object-cover"
     >
