@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 62 pruebas correctas;
+- 70 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 62 pruebas correctas;
+- 70 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -137,6 +137,16 @@ El comando idempotente `setup_admin_roles` mantiene dos grupos oficiales:
 - `Gestor de contacto`: puede consultar mensajes y ejecutar sus transiciones de estado.
 
 Ninguno puede eliminar contenido, administrar usuarios ni consultar registros de auditoría. Estas operaciones permanecen reservadas al superusuario. Los mensajes tampoco pueden crearse, eliminarse o reasignarse manualmente desde el administrador. Los inicios y cierres de sesión quedan auditados.
+
+## Integridad editorial
+
+La configuración `Modo mantenimiento` ya es funcional:
+
+- el portal responde con HTTP 503 y una página responsive excluida de indexación;
+- Django Admin, static y media permanecen accesibles;
+- los usuarios staff autenticados pueden revisar el portal antes de reabrirlo.
+
+Los productos solo pueden mostrar un precio cuando existe un valor positivo. La regla se aplica tanto en formularios y modelos como mediante restricciones de PostgreSQL. La publicación programada del Blog y la exclusión de contenido perteneciente a líneas inactivas ya eran correctas y se conservaron sin cambios.
 
 ## Regla de reanudación
 

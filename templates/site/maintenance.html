@@ -1,0 +1,31 @@
+{% load static %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sitio en mantenimiento | {{ site_configuration.site_name|default:"Pámi" }}</title>
+  <link rel="icon" href="{% static 'assets/branding/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body class="min-h-screen bg-slate-50 font-sans text-slate-900">
+  <main class="mx-auto flex min-h-screen max-w-3xl items-center px-4 py-12 sm:px-6 lg:px-8">
+    <section class="w-full rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm sm:p-12" aria-labelledby="maintenance-title">
+      <img
+        src="{% static 'assets/branding/logo.svg' %}"
+        alt="{{ site_configuration.site_name|default:'Pámi' }}"
+        width="160"
+        height="52"
+        class="mx-auto h-auto w-40"
+      >
+      <h1 id="maintenance-title" class="mt-8 text-3xl font-bold tracking-tight sm:text-4xl">
+        Estamos realizando mejoras
+      </h1>
+      <p class="mx-auto mt-4 max-w-xl text-base leading-7 text-slate-600 sm:text-lg">
+        Volveremos a estar disponibles muy pronto. Gracias por tu paciencia.
+      </p>
+    </section>
+  </main>
+</body>
+</html>

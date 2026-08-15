@@ -1,4 +1,9 @@
+from decimal import Decimal
+
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.models import Q
 from django.utils.text import slugify
 
 from apps.businesses.models import Business
@@ -25,7 +30,14 @@ class Product(BaseModel):
         verbose_name="Imagen",
     )
 
-    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name="Precio")
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        validators=(MinValueValidator(Decimal("0.01")),),
+        verbose_name="Precio",
+    )
     show_price = models.BooleanField(default=False, verbose_name="Mostrar precio")
 
     order = models.PositiveIntegerField(default=0, verbose_name="Orden")
@@ -42,8 +54,23 @@ class Product(BaseModel):
             models.UniqueConstraint(
                 fields=["business", "slug"],
                 name="unique_product_slug_per_business",
-            )
+            ),
+            models.CheckConstraint(
+                condition=Q(price__isnull=True) | Q(price__gt=0),
+                name="product_price_is_null_or_positive",
+            ),
+            models.CheckConstraint(
+                condition=Q(show_price=False) | Q(price__isnull=False),
+                name="product_visible_price_has_value",
+            ),
         ]
+
+    def clean(self):
+        super().clean()
+        if self.show_price and self.price is None:
+            raise ValidationError(
+                {"price": "Ingresa un precio para poder mostrarlo."}
+            )
 
     def save(self, *args, **kwargs):
         if not self.slug:

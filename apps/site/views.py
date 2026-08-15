@@ -18,8 +18,11 @@ from apps.site.selectors import get_public_site_configuration
 
 
 def home(request):
-    site_configuration = get_public_site_configuration()
-    request._site_configuration = site_configuration
+    if hasattr(request, "_site_configuration"):
+        site_configuration = request._site_configuration
+    else:
+        site_configuration = get_public_site_configuration()
+        request._site_configuration = site_configuration
     featured_business_id = (
         site_configuration.featured_business_id
         if site_configuration
