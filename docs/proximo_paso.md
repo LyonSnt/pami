@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 70 pruebas correctas;
+- 72 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 70 pruebas correctas;
+- 72 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -147,6 +147,10 @@ La configuración `Modo mantenimiento` ya es funcional:
 - los usuarios staff autenticados pueden revisar el portal antes de reabrirlo.
 
 Los productos solo pueden mostrar un precio cuando existe un valor positivo. La regla se aplica tanto en formularios y modelos como mediante restricciones de PostgreSQL. La publicación programada del Blog y la exclusión de contenido perteneciente a líneas inactivas ya eran correctas y se conservaron sin cambios.
+
+## Manejo de errores públicos
+
+Las respuestas 404 y 500 utilizan páginas responsive con identidad Pámi, acciones para recuperar la navegación y `noindex, nofollow`. Conservan sus códigos HTTP correctos. La respuesta 500 no usa configuración, navegación ni consultas a base de datos, por lo que puede mostrarse incluso durante un fallo de infraestructura o persistencia.
 
 ## Regla de reanudación
 

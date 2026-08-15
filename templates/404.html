@@ -1,0 +1,14 @@
+{% extends "errors/base_error.html" %}
+
+{% block title %}Página no encontrada{% endblock %}
+{% block error_code %}Error 404{% endblock %}
+{% block heading %}No encontramos esta página{% endblock %}
+{% block description %}Es posible que el enlace haya cambiado o que la dirección no sea correcta.{% endblock %}
+{% block actions %}
+  <a href="/" class="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+    Volver al inicio
+  </a>
+  <a href="/buscar/" class="inline-flex min-h-11 items-center justify-center rounded-lg border border-primary bg-white px-5 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+    Buscar en Pámi
+  </a>
+{% endblock %}
