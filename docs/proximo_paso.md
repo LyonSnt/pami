@@ -66,9 +66,20 @@ El portal dispone de una búsqueda real mediante `/buscar/`:
 
 La presentación inicial del buscador fue aprobada. El campo y su acción utilizan una variante grande, los estados informativos conservan el mismo ancho de lectura y el acceso mediante lupa se integra con el encabezado.
 
-## Próximo paso
+## Despliegue temporal completado
 
-Validar el primer despliegue en un VPS Hetzner CX23 mediante la dirección IP y HTTP temporal. La dirección IP del servidor y cualquier credencial deben mantenerse fuera del repositorio.
+Pámi está desplegado y accesible mediante la IP del VPS y el puerto `8025` sobre HTTP temporal.
+
+Estado confirmado:
+
+- Nginx publica `8025` y reenvía a Gunicorn en `127.0.0.1:8026`;
+- el sistema Agua conserva el puerto `80` y su backend en `127.0.0.1:8015`;
+- PostgreSQL no tiene exposición pública;
+- migraciones, static, media y contenido `seed_demo` funcionan;
+- Home, navegación e imágenes cargan correctamente;
+- `check --deploy` presenta solo las cuatro advertencias esperadas por operar sin HTTPS: HSTS, redirección SSL y cookies seguras.
+
+La IP y cualquier credencial deben mantenerse fuera del repositorio.
 
 El repositorio ya incluye:
 
@@ -79,34 +90,23 @@ El repositorio ya incluye:
 - `.env.production.example` sin secretos;
 - procedimiento completo en `docs/despliegue.md`.
 
-El despliegue debe definir y validar:
+## Próximo paso para reanudar
 
-1. variables de entorno y `SECRET_KEY` de producción;
-2. dominio, DNS y `ALLOWED_HOSTS`;
-3. proxy inverso y certificados TLS;
-4. entrega persistente de static y media;
-5. persistencia y copias de seguridad de PostgreSQL;
-6. ejecución de migraciones y recolección de static;
-7. firewall con exposición exclusiva de los servicios necesarios;
-8. `check --deploy`, prueba funcional y verificación de restauración.
+1. Rotar la `SECRET_KEY` y la contraseña PostgreSQL de Agua que fueron expuestas durante la revisión.
+2. Revisar los firewalls del sistema y de Hetzner; decidir si `8025` quedará público o limitado a una IP de administración.
+3. Completar una prueba funcional de catálogo, portafolio, blog, buscador y contacto con datos no sensibles.
+4. Crear y comprobar copias de seguridad de PostgreSQL, media y `.env` antes de administrar contenido real.
+5. Configurar dominio, DNS y HTTPS; luego activar redirección SSL y cookies seguras.
+6. Mantener HSTS en `0` hasta verificar por completo el portal mediante HTTPS.
 
 ## Después
 
 Continuar con el roadmap oficial:
 
-1. Preparación y ejecución del primer despliegue.
+1. Dominio, HTTPS y cierre de la preparación productiva.
 2. Filtros de catálogo, portafolio y blog.
 3. Optimización de rendimiento y assets.
 
-## Preparación de producción pendiente
-
-Antes del despliegue:
-
-- configurar una `SECRET_KEY` segura;
-- decidir HSTS para subdominios y preload;
-- definir el servicio de static y media;
-- ejecutar `check --deploy` con las variables reales de producción.
-
 ## Regla de reanudación
 
-No exponer el portal a Internet hasta completar la configuración de producción, TLS, firewall, persistencia y copias de seguridad.
+No activar `SECURE_SSL_REDIRECT`, cookies seguras ni HSTS mientras el acceso continúe exclusivamente por IP y HTTP. No usar datos personales o credenciales reutilizadas antes de disponer de HTTPS.

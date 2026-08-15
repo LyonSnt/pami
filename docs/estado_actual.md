@@ -194,4 +194,4 @@ Antes de desplegar se debe:
 
 ## Estado de reanudación
 
-El buscador real está implementado, validado técnicamente y aprobado visualmente. El paquete del primer despliegue está preparado con una imagen multietapa, Gunicorn, integración con el Nginx existente, PostgreSQL persistente y compilación de Tailwind. La imagen productiva construye correctamente. El siguiente paso inmediato es validar el despliegue temporal por IP y puerto `8025` en el VPS de Hetzner.
+El buscador real está implementado, validado técnicamente y aprobado visualmente. El primer despliegue en Hetzner fue completado y validado por IP sobre HTTP temporal: Nginx publica el puerto `8025`, Gunicorn permanece en `127.0.0.1:8026`, PostgreSQL no se expone y el contenido demo carga correctamente. `check --deploy` conserva cuatro advertencias esperadas hasta incorporar dominio y HTTPS. La reanudación debe comenzar por rotación de secretos expuestos, revisión de firewall, backups y preparación de TLS.
