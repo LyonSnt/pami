@@ -102,6 +102,7 @@ Características:
 - Respuesta 500 autónoma y sin consultas a base de datos.
 - Formulario de contacto protegido mediante honeypot y deduplicación temporal por sesión.
 - Notificación de nuevos contactos configurable por correo y tolerante a fallos SMTP.
+- Scaffolding vacío eliminado; la estructura de apps conserva solo paquetes obligatorios y módulos con responsabilidad real.
 - Configuración global reutilizada dentro de la petición del Home para evitar una consulta duplicada.
 - Presupuestos de consultas cubiertos por pruebas para Home y buscador.
 - Archivos estáticos versionados por contenido en producción para permitir caché prolongada segura.

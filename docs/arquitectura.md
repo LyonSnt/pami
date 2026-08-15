@@ -42,20 +42,24 @@ Pámi usa una carpeta global de plantillas en la raíz del proyecto:
 templates/
 ├── base/
 │   ├── base.html
-│   ├── _head.html
 │   ├── _header.html
+│   ├── _navigation.html
 │   ├── _footer.html
 │   ├── _messages.html
 │   ├── _sidebar.html
 │   └── _scripts.html
+├── components/
+│   ├── cards/
+│   ├── layout/
+│   ├── sections/
+│   └── ui/
+├── errors/
 ├── site/
 ├── businesses/
 ├── catalog/
 ├── portfolio/
 ├── blog/
-├── contact/
-├── registration/
-└── admin/
+└── contact/
 ```
 
 Todas las páginas públicas heredan de:
@@ -118,6 +122,8 @@ En la etapa actual, `Chaquetas` y `Buzos` son productos asociados al registro `C
 - Las mutaciones y transiciones pertenecen a services.
 - Los contenidos públicos deben cumplir `is_active`, publicación y, cuando corresponda, fecha de publicación y estado de su línea de negocio.
 - Las operaciones administrativas del CMS utilizan `AuditModelAdminMixin` para registrar altas, cambios y eliminaciones.
+- Los módulos opcionales (`forms.py`, `signals.py`, `permissions.py`, `choices.py`, entre otros) se crean solo cuando contienen una responsabilidad real; no se conservan archivos vacíos como marcadores.
+- Los `__init__.py` de paquetes y migraciones se conservan aunque no exporten contenido.
 
 ## Infraestructura
 

@@ -158,6 +158,10 @@ El formulario de contacto incluye un honeypot invisible y descarta silenciosamen
 
 La notificación por correo se activa únicamente cuando existe `CONTACT_NOTIFICATION_EMAIL`. El mensaje se almacena y audita antes de intentar la entrega; un fallo SMTP se registra, pero no pierde el contacto ni muestra un error al visitante.
 
+## Limpieza de arquitectura
+
+Se retiraron los módulos vacíos heredados del scaffolding inicial y los imports de signals sin implementación. Se conservaron todos los `__init__.py`, paquetes de migraciones, signals funcionales y APIs internas con código. La estructura documentada refleja ahora los templates y componentes reales del portal.
+
 ## Regla de reanudación
 
 No activar `SECURE_SSL_REDIRECT`, cookies seguras ni HSTS mientras el acceso continúe exclusivamente por IP y HTTP. No usar datos personales o credenciales reutilizadas antes de disponer de HTTPS.
