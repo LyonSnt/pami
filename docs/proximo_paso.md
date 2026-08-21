@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 78 pruebas correctas;
+- 79 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 78 pruebas correctas;
+- 79 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -162,9 +162,9 @@ La notificación por correo se activa únicamente cuando existe `CONTACT_NOTIFIC
 
 Se retiraron los módulos vacíos heredados del scaffolding inicial y los imports de signals sin implementación. Se conservaron todos los `__init__.py`, paquetes de migraciones, signals funcionales y APIs internas con código. La estructura documentada refleja ahora los templates y componentes reales del portal.
 
-## Próxima reanudación
+## Ajuste del logotipo móvil
 
-Corregir el logotipo SVG del encabezado para mantener unido el texto `Pámi` en navegadores móviles. Actualmente `Pá` y `mi` usan posiciones horizontales independientes; el ajuste pendiente debe convertirlos en un flujo continuo sin cambiar las dimensiones ni la identidad visual aprobada.
+El nombre `Pámi` del logotipo SVG utiliza un único flujo de texto con segmentos contiguos para sus dos colores. Esto evita separaciones variables entre `Pá` y `mi` según la métrica tipográfica del navegador, sin modificar las dimensiones ni los colores oficiales.
 
 ## Regla de reanudación
 
