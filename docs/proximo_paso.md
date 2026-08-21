@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 92 pruebas correctas;
+- 95 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 92 pruebas correctas;
+- 95 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -177,6 +177,12 @@ El portal utiliza el logo y favicon cargados en `SiteConfiguration` cuando exist
 La navegación identifica la ruta actual sin depender de la etiqueta editorial. Los apartados permanecen activos dentro de sus páginas de detalle, Inicio solo se activa en la raíz y los enlaces externos no se marcan por coincidencias accidentales. El estado se presenta visualmente y mediante `aria-current="page"` en escritorio y móvil, incluidos Buscar y Contacto.
 
 El menú móvil conserva `<details>` como base semántica, alterna entre los iconos de menú y cierre, sincroniza `aria-expanded` y se cierra al seleccionar un enlace, pulsar fuera o presionar Escape. Al cerrarse con el teclado, el foco regresa al control de apertura.
+
+## Página de línea de negocio
+
+El detalle de una línea presenta un encabezado responsive con breadcrumb, información editorial, imagen administrable y acciones hacia catálogo y contacto contextual. Resume hasta dos productos, dos proyectos y dos artículos públicos mediante las cards oficiales y ofrece accesos a sus listados completos.
+
+Las secciones sin contenido se omiten; cuando la línea no tiene ninguna publicación relacionada se presenta un único estado vacío. Los selectores conservan las reglas de actividad, publicación y fecha, y el detalle dispone de un presupuesto de seis consultas. `seed_demo` completa la imagen representativa de Confecciones únicamente cuando el campo está vacío.
 
 ## Regla de reanudación
 

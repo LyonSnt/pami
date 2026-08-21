@@ -126,6 +126,13 @@ class Command(BaseCommand):
                 },
             )
             businesses[item["slug"]] = business
+            if item["slug"] == "confecciones":
+                self.set_demo_image(
+                    business,
+                    "image",
+                    "pami-confecciones.webp",
+                    "hero.webp",
+                )
 
         return businesses
 

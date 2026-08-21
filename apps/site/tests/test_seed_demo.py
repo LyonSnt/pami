@@ -85,6 +85,8 @@ class SeedDemoCommandTests(TestCase):
         self.assertTrue(products.get(slug="chaquetas").image)
         self.assertTrue(products.get(slug="buzos").image)
         self.assertTrue(self.configuration.hero_image)
+        self.confections.refresh_from_db()
+        self.assertTrue(self.confections.image)
 
         projects = PortfolioProject.objects.filter(
             business=self.confections,

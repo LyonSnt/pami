@@ -14,33 +14,107 @@
 {% block og_image %}{% if business.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ business.image.url }}">{% elif social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
 
 {% block content %}
-<section class="bg-white py-16">
-  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-    <p class="text-sm font-semibold text-slate-500">
-      Línea de negocio
-    </p>
+  <section class="bg-white py-16">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {% include "components/ui/breadcrumb.html" with breadcrumbs=breadcrumbs %}
 
-    <h1 class="mt-3 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
-      {{ business.name }}
-    </h1>
+      <div class="mt-10 grid items-center gap-10 lg:grid-cols-2 lg:gap-12">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-wide text-primary">
+            Línea de negocio
+          </p>
 
-    {% if business.short_description %}
-      <p class="mt-6 text-lg leading-8 text-slate-700">
-        {{ business.short_description }}
-      </p>
-    {% endif %}
+          <h1 class="mt-3 text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">
+            {{ business.name }}
+          </h1>
 
-    {% if business.description %}
-      <div class="mt-8 space-y-4 text-base leading-7 text-slate-700">
-        {{ business.description|linebreaks }}
+          {% if business.short_description %}
+            <p class="mt-6 text-lg leading-8 text-slate-700">
+              {{ business.short_description }}
+            </p>
+          {% endif %}
+
+          {% if business.description and business.description != business.short_description %}
+            <div class="mt-6 text-base leading-7 text-slate-700">
+              {{ business.description|linebreaks }}
+            </div>
+          {% endif %}
+
+          <div class="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:flex-wrap">
+            {% url 'catalog:business_list' business.slug as catalog_url %}
+            {% include "components/ui/button.html" with href=catalog_url label="Ver catálogo" %}
+            {% include "components/ui/button.html" with href=contact_url label="Contactar" variant="secondary" %}
+          </div>
+        </div>
+
+        <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
+          {% include "components/ui/card_media.html" with image=business.image alt=business.name eager=True wide=True %}
+        </div>
       </div>
-    {% endif %}
-
-    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-      {% url 'catalog:business_list' business.slug as catalog_url %}
-      {% include "components/ui/button.html" with href=catalog_url label="Ver catálogo" %}
-      {% include "components/ui/button.html" with href=contact_url label="Contactar" variant="secondary" %}
     </div>
-  </div>
-</section>
+  </section>
+
+  {% if products %}
+    <section class="bg-slate-50 py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        {% include "components/layout/section_title.html" with title="Productos de "|add:business.name subtitle="Conoce las prendas disponibles en esta línea." %}
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+          {% for product in products %}
+            {% include "components/cards/product_card.html" with product=product %}
+          {% endfor %}
+        </div>
+
+        <div class="mt-10 text-center">
+          {% include "components/ui/button.html" with href=catalog_url label="Ver todo el catálogo" variant="secondary" %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if projects %}
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        {% include "components/layout/section_title.html" with title="Trabajos realizados" subtitle="Descubre algunos proyectos de esta línea." %}
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+          {% for project in projects %}
+            {% include "components/cards/project_card.html" with project=project %}
+          {% endfor %}
+        </div>
+
+        <div class="mt-10 text-center">
+          {% url 'portfolio:business_list' business.slug as portfolio_url %}
+          {% include "components/ui/button.html" with href=portfolio_url label="Ver todo el portafolio" variant="secondary" %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if posts %}
+    <section class="bg-slate-50 py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        {% include "components/layout/section_title.html" with title="Ideas y novedades" subtitle="Consejos y contenidos relacionados con esta línea." %}
+
+        <div class="mt-10 grid gap-6 sm:grid-cols-2">
+          {% for post in posts %}
+            {% include "components/cards/post_card.html" with post=post %}
+          {% endfor %}
+        </div>
+
+        <div class="mt-10 text-center">
+          {% url 'blog:list' as blog_url %}
+          {% include "components/ui/button.html" with href=blog_url label="Ver todos los artículos" variant="secondary" %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  {% if not products and not projects and not posts %}
+    <section class="bg-slate-50 py-16">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        {% include "components/ui/empty_state.html" with title="Contenido en preparación" message="Próximamente encontrarás productos, trabajos e ideas de esta línea." %}
+      </div>
+    </section>
+  {% endif %}
 {% endblock %}
