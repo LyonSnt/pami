@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 86 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 92 pruebas correctas.
 
 ## Infraestructura
 
@@ -76,6 +76,8 @@ Características:
 - Template base global.
 - Header y footer reutilizables.
 - Navegación dinámica para escritorio y móvil.
+- Estado activo de navegación calculado por ruta, conservado en páginas internas y anunciado mediante `aria-current`.
+- Menú móvil con iconos de apertura y cierre, cierre al elegir una opción, pulsar fuera o presionar Escape.
 - Hero administrable desde `SiteConfiguration`.
 - Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
@@ -198,7 +200,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 86 pruebas ejecutadas correctamente.
+- 92 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.

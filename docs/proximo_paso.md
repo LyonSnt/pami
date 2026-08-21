@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 86 pruebas correctas;
+- 92 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 86 pruebas correctas;
+- 92 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -171,6 +171,12 @@ El nombre `Pámi` del logotipo SVG utiliza un único flujo de texto con segmento
 ## Identidad y contacto administrables
 
 El portal utiliza el logo y favicon cargados en `SiteConfiguration` cuando existen y conserva los SVG oficiales como respaldo. El footer convierte el correo, teléfono y WhatsApp configurados en acciones directas y muestra únicamente las redes sociales que tengan una URL definida. Los enlaces externos se abren de forma segura y la navegación de redes dispone de una etiqueta accesible.
+
+## Navegación activa y menú móvil
+
+La navegación identifica la ruta actual sin depender de la etiqueta editorial. Los apartados permanecen activos dentro de sus páginas de detalle, Inicio solo se activa en la raíz y los enlaces externos no se marcan por coincidencias accidentales. El estado se presenta visualmente y mediante `aria-current="page"` en escritorio y móvil, incluidos Buscar y Contacto.
+
+El menú móvil conserva `<details>` como base semántica, alterna entre los iconos de menú y cierre, sincroniza `aria-expanded` y se cierra al seleccionar un enlace, pulsar fuera o presionar Escape. Al cerrarse con el teclado, el foco regresa al control de apertura.
 
 ## Regla de reanudación
 

@@ -28,7 +28,8 @@
       <a
         href="{% url 'site:search' %}"
         aria-label="Buscar en Pámi"
-        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 transition hover:border-primary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+        {% if search_is_current %}aria-current="page"{% endif %}
+        class="inline-flex h-10 w-10 items-center justify-center rounded-lg border transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2{% if search_is_current %} border-primary bg-primary/10 text-primary{% else %} border-slate-300 bg-white text-slate-700 hover:border-primary hover:text-primary{% endif %}"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="7" />
@@ -36,15 +37,18 @@
         </svg>
       </a>
       {% url 'contact:form' as contact_url %}
-      {% include "components/ui/button.html" with href=contact_url label="Contáctanos" %}
+      {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
     </div>
 
-    <details class="group relative lg:hidden">
-      <summary class="flex cursor-pointer list-none items-center justify-center rounded-lg border border-slate-300 bg-white p-2.5 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
+    <details class="group relative lg:hidden" data-mobile-navigation>
+      <summary aria-expanded="false" data-mobile-navigation-toggle class="flex cursor-pointer list-none items-center justify-center rounded-lg border border-slate-300 bg-white p-2.5 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">
         <span class="sr-only group-open:hidden">Abrir navegación principal</span>
         <span class="sr-only hidden group-open:inline">Cerrar navegación principal</span>
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-6 w-6 group-open:hidden" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="hidden h-6 w-6 group-open:block" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
         </svg>
       </summary>
 
@@ -53,7 +57,8 @@
         <div class="mt-4 border-t border-slate-200 pt-4">
           <a
             href="{% url 'site:search' %}"
-            class="mb-3 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            {% if search_is_current %}aria-current="page"{% endif %}
+            class="mb-3 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if search_is_current %} bg-primary/10 text-primary{% else %} text-slate-700 hover:bg-slate-50 hover:text-primary{% endif %}"
           >
             <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5" stroke="currentColor" stroke-width="2">
               <circle cx="11" cy="11" r="7" />
@@ -61,7 +66,7 @@
             </svg>
             Buscar
           </a>
-          {% include "components/ui/button.html" with href=contact_url label="Contáctanos" %}
+          {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
         </div>
       </div>
     </details>

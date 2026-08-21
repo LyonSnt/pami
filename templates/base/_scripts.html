@@ -1,0 +1,32 @@
+<script>
+  document.querySelectorAll("[data-mobile-navigation]").forEach((navigation) => {
+    const toggle = navigation.querySelector("[data-mobile-navigation-toggle]");
+    const closeNavigation = () => {
+      navigation.removeAttribute("open");
+      toggle.setAttribute("aria-expanded", "false");
+    };
+
+    navigation.addEventListener("toggle", () => {
+      toggle.setAttribute("aria-expanded", navigation.open ? "true" : "false");
+    });
+
+    navigation.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        closeNavigation();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (navigation.open && !navigation.contains(event.target)) {
+        closeNavigation();
+      }
+    });
+
+    navigation.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && navigation.open) {
+        closeNavigation();
+        toggle.focus();
+      }
+    });
+  });
+</script>

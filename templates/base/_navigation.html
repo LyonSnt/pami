@@ -2,12 +2,13 @@
   {% for item in navigation_items %}
     <a
       href="{{ item.url }}"
-      class="rounded-lg transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if mobile %} px-3 py-2.5{% endif %}"
+      class="rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if item.is_current %} text-primary{% if mobile %} bg-primary/10{% endif %}{% else %} hover:text-primary{% if mobile %} hover:bg-slate-50{% endif %}{% endif %}{% if mobile %} px-3 py-2.5{% endif %}"
+      {% if item.is_current %}aria-current="page"{% endif %}
       {% if item.open_in_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
     >
       {{ item.label }}
     </a>
   {% empty %}
-    <a href="{% url 'site:home' %}" class="rounded-lg transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if mobile %} px-3 py-2.5{% endif %}">Inicio</a>
+    <a href="{% url 'site:home' %}" class="rounded-lg transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary{% if home_is_current %} text-primary{% if mobile %} bg-primary/10{% endif %}{% else %} hover:text-primary{% if mobile %} hover:bg-slate-50{% endif %}{% endif %}{% if mobile %} px-3 py-2.5{% endif %}"{% if home_is_current %} aria-current="page"{% endif %}>Inicio</a>
   {% endfor %}
 </nav>

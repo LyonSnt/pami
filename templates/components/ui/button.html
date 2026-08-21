@@ -8,7 +8,8 @@
 {% else %}
   <a
     href="{{ href|default:'#' }}"
-    class="inline-flex items-center justify-center rounded-lg font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2{% if size == 'large' %} px-6 py-4 text-base{% else %} px-5 py-2.5 text-sm{% endif %}{% if variant == 'secondary' %} border border-primary bg-white text-primary hover:bg-slate-50{% elif variant == 'inverse' %} bg-white text-slate-900 hover:bg-slate-100{% else %} bg-primary text-white shadow-sm hover:bg-primary-hover{% endif %}"
+    {% if current %}aria-current="page"{% endif %}
+    class="inline-flex items-center justify-center rounded-lg font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2{% if current %} ring-2 ring-primary ring-offset-2{% endif %}{% if size == 'large' %} px-6 py-4 text-base{% else %} px-5 py-2.5 text-sm{% endif %}{% if variant == 'secondary' %} border border-primary bg-white text-primary hover:bg-slate-50{% elif variant == 'inverse' %} bg-white text-slate-900 hover:bg-slate-100{% else %} bg-primary text-white shadow-sm hover:bg-primary-hover{% endif %}"
   >
     {{ label|default:"Ver más" }}
   </a>
