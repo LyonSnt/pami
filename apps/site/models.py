@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.functional import cached_property
 
 from apps.common.models import BaseModel
 from apps.common.validators import (
@@ -104,6 +105,11 @@ class SiteConfiguration(BaseModel):
 
     def __str__(self):
         return self.site_name
+
+    @cached_property
+    def whatsapp_url(self):
+        number = "".join(character for character in self.whatsapp if character.isdigit())
+        return f"https://wa.me/{number}" if number else ""
 
 
 class NavigationItem(BaseModel):

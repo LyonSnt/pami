@@ -7,11 +7,11 @@
       class="flex flex-col items-start rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
     >
       <img
-        src="{% static 'assets/branding/logo.svg' %}"
+        src="{% if site_configuration.logo %}{{ site_configuration.logo.url }}{% else %}{% static 'assets/branding/logo.svg' %}{% endif %}"
         alt="{% if site_configuration %}{{ site_configuration.site_name }}{% else %}Pámi{% endif %}"
         width="150"
         height="44"
-        class="h-10 w-auto"
+        class="h-10 w-auto max-w-[150px] object-contain object-left"
       >
       {% if site_configuration.slogan %}
         <span class="mt-1 hidden text-xs leading-4 text-slate-500 sm:block">

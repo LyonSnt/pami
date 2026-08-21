@@ -5,6 +5,8 @@ from django.contrib.staticfiles import finders
 from django.template.loader import render_to_string
 from django.test import SimpleTestCase
 
+from apps.site.models import SiteConfiguration
+
 
 class BrandingAssetTests(SimpleTestCase):
     def test_required_branding_assets_exist(self):
@@ -50,9 +52,61 @@ class BrandingAssetTests(SimpleTestCase):
                     slogan="Donde encuentras todo para ti",
                     email="",
                     phone="",
+                    whatsapp_url="",
                     address="",
+                    facebook_url="",
+                    instagram_url="",
+                    tiktok_url="",
+                    youtube_url="",
+                    linkedin_url="",
                 ),
             },
         )
 
         self.assertIn("Donde encuentras todo para ti", html)
+
+    def test_header_uses_configured_logo(self):
+        html = render_to_string(
+            "base/_header.html",
+            {
+                "site_configuration": SimpleNamespace(
+                    site_name="Pámi",
+                    slogan="",
+                    logo=SimpleNamespace(url="/media/site/logo.webp"),
+                ),
+                "navigation_items": [],
+            },
+        )
+
+        self.assertIn('src="/media/site/logo.webp"', html)
+
+    def test_footer_renders_contact_links_and_social_networks(self):
+        html = render_to_string(
+            "base/_footer.html",
+            {
+                "site_configuration": SimpleNamespace(
+                    site_name="Pámi",
+                    slogan="",
+                    email="contacto@pami.test",
+                    phone="099 999 9999",
+                    whatsapp_url="https://wa.me/593999999999",
+                    address="Ecuador",
+                    facebook_url="",
+                    instagram_url="https://instagram.com/pami",
+                    tiktok_url="",
+                    youtube_url="",
+                    linkedin_url="",
+                ),
+            },
+        )
+
+        self.assertIn('href="mailto:contacto@pami.test"', html)
+        self.assertIn('href="tel:099 999 9999"', html)
+        self.assertIn('href="https://wa.me/593999999999"', html)
+        self.assertIn('aria-label="Redes sociales"', html)
+        self.assertIn('href="https://instagram.com/pami"', html)
+
+    def test_whatsapp_url_keeps_only_digits(self):
+        configuration = SiteConfiguration(whatsapp="+593 99 999-9999")
+
+        self.assertEqual(configuration.whatsapp_url, "https://wa.me/593999999999")

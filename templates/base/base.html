@@ -27,7 +27,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="icon" href="{% static 'assets/branding/favicon.svg' %}" type="image/svg+xml">
+  {% if site_configuration.favicon %}
+    <link rel="icon" href="{{ site_configuration.favicon.url }}">
+  {% else %}
+    <link rel="icon" href="{% static 'assets/branding/favicon.svg' %}" type="image/svg+xml">
+  {% endif %}
   <link rel="stylesheet" href="{% static 'css/output.css' %}">
 
   {% block styles %}{% endblock %}

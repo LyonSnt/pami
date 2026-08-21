@@ -18,15 +18,34 @@
       </div>
 
       {% if site_configuration %}
-        <div class="flex flex-col gap-1 sm:items-end">
+        <div class="flex flex-col gap-2 sm:items-end">
           {% if site_configuration.email %}
-            <span>{{ site_configuration.email }}</span>
+            <a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="mailto:{{ site_configuration.email }}">
+              {{ site_configuration.email }}
+            </a>
           {% endif %}
           {% if site_configuration.phone %}
-            <span>{{ site_configuration.phone }}</span>
+            <a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="tel:{{ site_configuration.phone }}">
+              {{ site_configuration.phone }}
+            </a>
+          {% endif %}
+          {% if site_configuration.whatsapp_url %}
+            <a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.whatsapp_url }}" target="_blank" rel="noopener noreferrer">
+              WhatsApp
+            </a>
           {% endif %}
           {% if site_configuration.address %}
             <span>{{ site_configuration.address }}</span>
+          {% endif %}
+
+          {% if site_configuration.facebook_url or site_configuration.instagram_url or site_configuration.tiktok_url or site_configuration.youtube_url or site_configuration.linkedin_url %}
+            <nav aria-label="Redes sociales" class="flex flex-wrap gap-x-4 gap-y-2 sm:justify-end">
+              {% if site_configuration.facebook_url %}<a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.facebook_url }}" target="_blank" rel="noopener noreferrer">Facebook</a>{% endif %}
+              {% if site_configuration.instagram_url %}<a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.instagram_url }}" target="_blank" rel="noopener noreferrer">Instagram</a>{% endif %}
+              {% if site_configuration.tiktok_url %}<a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.tiktok_url }}" target="_blank" rel="noopener noreferrer">TikTok</a>{% endif %}
+              {% if site_configuration.youtube_url %}<a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.youtube_url }}" target="_blank" rel="noopener noreferrer">YouTube</a>{% endif %}
+              {% if site_configuration.linkedin_url %}<a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="{{ site_configuration.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>{% endif %}
+            </nav>
           {% endif %}
         </div>
       {% endif %}

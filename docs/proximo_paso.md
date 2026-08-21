@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 79 pruebas correctas;
+- 82 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 79 pruebas correctas;
+- 82 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -165,6 +165,10 @@ Se retiraron los módulos vacíos heredados del scaffolding inicial y los import
 ## Ajuste del logotipo móvil
 
 El nombre `Pámi` del logotipo SVG utiliza un único flujo de texto con segmentos contiguos para sus dos colores. Esto evita separaciones variables entre `Pá` y `mi` según la métrica tipográfica del navegador, sin modificar las dimensiones ni los colores oficiales.
+
+## Identidad y contacto administrables
+
+El portal utiliza el logo y favicon cargados en `SiteConfiguration` cuando existen y conserva los SVG oficiales como respaldo. El footer convierte el correo, teléfono y WhatsApp configurados en acciones directas y muestra únicamente las redes sociales que tengan una URL definida. Los enlaces externos se abren de forma segura y la navegación de redes dispone de una etiqueta accesible.
 
 ## Regla de reanudación
 
