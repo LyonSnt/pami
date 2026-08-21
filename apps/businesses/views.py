@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 
 from apps.businesses.selectors import get_published_businesses
+from apps.contact.services.links import build_contact_url
 
 
 def business_list(request):
@@ -21,6 +22,10 @@ def business_detail(request, slug):
 
     context = {
         "business": business,
+        "contact_url": build_contact_url(
+            business=business,
+            subject=f"Consulta sobre {business.name}",
+        ),
     }
 
     return render(request, "businesses/detail.html", context)

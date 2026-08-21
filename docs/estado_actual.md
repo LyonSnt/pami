@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 82 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 86 pruebas correctas.
 
 ## Infraestructura
 
@@ -101,6 +101,8 @@ Características:
 - Páginas públicas 404 y 500 con identidad Pámi, acciones de recuperación y exclusión de indexación.
 - Respuesta 500 autónoma y sin consultas a base de datos.
 - Formulario de contacto protegido mediante honeypot y deduplicación temporal por sesión.
+- Solicitudes de información con línea y asunto preseleccionados desde productos, proyectos y líneas de negocio.
+- Límite configurable de envíos de contacto por dirección mediante hash temporal en caché.
 - Notificación de nuevos contactos configurable por correo y tolerante a fallos SMTP.
 - Scaffolding vacío eliminado; la estructura de apps conserva solo paquetes obligatorios y módulos con responsabilidad real.
 - Nombre `Pámi` continuo en el SVG del encabezado para evitar separaciones tipográficas en móvil.
@@ -196,7 +198,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 82 pruebas ejecutadas correctamente.
+- 86 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.

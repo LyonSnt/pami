@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 from django.contrib.admin.sites import AdminSite
 from django.core import mail
+from django.core.cache import cache
 from django.test import RequestFactory, TestCase, override_settings
 from django.urls import reverse
 
@@ -14,6 +15,9 @@ from apps.contact.models import ContactMessage
 
 
 class ContactMessageFormTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
     def test_form_renders_explicit_accessible_controls_and_submit_button(self):
         response = self.client.get(reverse("contact:form"))
 
@@ -42,6 +46,37 @@ class ContactMessageFormTests(TestCase):
             form.fields["business"].queryset,
             [public_business],
         )
+
+    def test_contact_context_prefills_public_business_and_subject(self):
+        business = Business.objects.create(
+            name="Confecciones",
+            slug="confecciones",
+            is_active=True,
+            is_published=True,
+        )
+
+        response = self.client.get(
+            reverse("contact:form"),
+            {"business": business.pk, "subject": "Consulta sobre Chaquetas"},
+        )
+
+        self.assertContains(response, f'value="{business.pk}" selected')
+        self.assertContains(response, 'value="Consulta sobre Chaquetas"')
+
+    def test_contact_context_does_not_prefill_hidden_business(self):
+        business = Business.objects.create(
+            name="Línea oculta",
+            slug="linea-oculta",
+            is_active=False,
+            is_published=True,
+        )
+
+        response = self.client.get(
+            reverse("contact:form"),
+            {"business": business.pk},
+        )
+
+        self.assertNotContains(response, f'value="{business.pk}" selected')
 
     def test_valid_submission_creates_message_and_audit_log(self):
         response = self.client.post(
@@ -150,6 +185,43 @@ class ContactMessageFormTests(TestCase):
             self.client.post(reverse("contact:form"), submission)
             self.client.post(reverse("contact:form"), submission)
 
+        self.assertEqual(ContactMessage.objects.count(), 2)
+
+    @override_settings(
+        CONTACT_RATE_LIMIT_MAX_SUBMISSIONS=2,
+        CONTACT_RATE_LIMIT_WINDOW_SECONDS=600,
+    )
+    def test_rate_limit_rejects_excess_submissions_from_same_address(self):
+        for index in range(2):
+            response = self.client.post(
+                reverse("contact:form"),
+                {
+                    "name": "Persona frecuente",
+                    "email": "frecuente@example.com",
+                    "subject": f"Consulta {index}",
+                    "message": f"Mensaje diferente {index}",
+                },
+                REMOTE_ADDR="192.0.2.10",
+            )
+            self.assertEqual(response.status_code, 302)
+
+        response = self.client.post(
+            reverse("contact:form"),
+            {
+                "name": "Persona frecuente",
+                "email": "frecuente@example.com",
+                "subject": "Consulta bloqueada",
+                "message": "Un tercer mensaje diferente.",
+            },
+            REMOTE_ADDR="192.0.2.10",
+        )
+
+        self.assertEqual(response.status_code, 429)
+        self.assertContains(
+            response,
+            "Has enviado varios mensajes en poco tiempo.",
+            status_code=429,
+        )
         self.assertEqual(ContactMessage.objects.count(), 2)
 
     @override_settings(

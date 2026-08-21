@@ -64,3 +64,20 @@ class ProductPublicViewTests(TestCase):
 
         self.assertContains(response, 'aria-label="Migas de pan"')
         self.assertContains(response, 'aria-current="page"')
+
+    def test_product_contact_action_includes_business_and_subject(self):
+        product = Product.objects.create(
+            business=self.business,
+            name="Chaqueta urbana",
+            slug="chaqueta-urbana",
+            is_active=True,
+            is_published=True,
+        )
+
+        response = self.client.get(self.get_detail_url(product))
+
+        expected_url = (
+            f"{reverse('contact:form')}?business={self.business.pk}"
+            "&amp;subject=Consulta+sobre+Chaqueta+urbana"
+        )
+        self.assertContains(response, f'href="{expected_url}"')

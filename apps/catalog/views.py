@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 
 from apps.businesses.selectors import get_published_businesses
+from apps.contact.services.links import build_contact_url
 from apps.catalog.selectors import (
     get_published_products,
     get_published_products_by_business,
@@ -47,6 +48,10 @@ def product_detail(request, business_slug, product_slug):
     context = {
         "business": business,
         "product": product,
+        "contact_url": build_contact_url(
+            business=business,
+            subject=f"Consulta sobre {product.name}",
+        ),
         "breadcrumbs": [
             {
                 "label": "Catálogo",

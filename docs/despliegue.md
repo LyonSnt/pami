@@ -117,6 +117,8 @@ Las notificaciones permanecen desactivadas mientras `CONTACT_NOTIFICATION_EMAIL`
 EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
 DEFAULT_FROM_EMAIL=Pámi <no-reply@dominio.example>
 CONTACT_NOTIFICATION_EMAIL=equipo@dominio.example
+CONTACT_RATE_LIMIT_MAX_SUBMISSIONS=5
+CONTACT_RATE_LIMIT_WINDOW_SECONDS=600
 EMAIL_HOST=smtp.proveedor.example
 EMAIL_PORT=587
 EMAIL_HOST_USER=usuario-smtp

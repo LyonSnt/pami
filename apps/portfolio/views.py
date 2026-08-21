@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from apps.businesses.selectors import get_published_businesses
+from apps.contact.services.links import build_contact_url
 from apps.portfolio.selectors import (
     get_published_portfolio_projects,
     get_published_portfolio_projects_by_business,
@@ -46,6 +47,10 @@ def portfolio_project_detail(request, business_slug, project_slug):
     context = {
         "business": business,
         "project": project,
+        "contact_url": build_contact_url(
+            business=business,
+            subject=f"Consulta sobre {project.title}",
+        ),
         "breadcrumbs": [
             {"label": "Portafolio", "url": reverse("portfolio:list")},
             {

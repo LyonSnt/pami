@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 82 pruebas correctas;
+- 86 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 82 pruebas correctas;
+- 86 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -155,6 +155,8 @@ Las respuestas 404 y 500 utilizan páginas responsive con identidad Pámi, accio
 ## Protección del contacto
 
 El formulario de contacto incluye un honeypot invisible y descarta silenciosamente envíos automatizados. También evita guardar dos veces el mismo contenido dentro de una ventana configurable de 60 segundos por sesión, sin impedir un nuevo contacto posterior.
+
+Los accesos desde una línea, producto o proyecto preseleccionan únicamente una línea pública y preparan un asunto descriptivo. Adicionalmente, la caché limita por defecto a cinco mensajes aceptados por dirección dentro de diez minutos. La dirección se transforma en un hash para construir la clave temporal y no se almacena en los mensajes ni en la auditoría. Los límites se configuran mediante `CONTACT_RATE_LIMIT_MAX_SUBMISSIONS` y `CONTACT_RATE_LIMIT_WINDOW_SECONDS`.
 
 La notificación por correo se activa únicamente cuando existe `CONTACT_NOTIFICATION_EMAIL`. El mensaje se almacena y audita antes de intentar la entrega; un fallo SMTP se registra, pero no pierde el contacto ni muestra un error al visitante.
 

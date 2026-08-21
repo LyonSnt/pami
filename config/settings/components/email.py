@@ -24,3 +24,13 @@ CONTACT_DUPLICATE_WINDOW_SECONDS = config(
     default=60,
     cast=int,
 )
+CONTACT_RATE_LIMIT_MAX_SUBMISSIONS = config(
+    "CONTACT_RATE_LIMIT_MAX_SUBMISSIONS",
+    default=5,
+    cast=int,
+)
+CONTACT_RATE_LIMIT_WINDOW_SECONDS = config(
+    "CONTACT_RATE_LIMIT_WINDOW_SECONDS",
+    default=600,
+    cast=int,
+)
