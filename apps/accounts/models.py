@@ -35,8 +35,8 @@ class UserProfile(TimeStampedModel):
     )
 
     class Meta:
-        verbose_name = "Usuario"
-        verbose_name_plural = "Usuarios"
+        verbose_name = "Perfil de usuario"
+        verbose_name_plural = "Perfiles de usuario"
 
     def __str__(self):
         return f"Perfil de {self.user}"

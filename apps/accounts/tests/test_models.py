@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from apps.accounts.models import User
+from apps.accounts.models import User, UserProfile
 
 
 class UserProfileTests(TestCase):
@@ -13,3 +13,10 @@ class UserProfileTests(TestCase):
 
         self.assertTrue(hasattr(user, "profile"))
         self.assertEqual(str(user.profile), f"Perfil de {user}")
+
+    def test_profile_has_an_unambiguous_admin_label(self):
+        self.assertEqual(UserProfile._meta.verbose_name, "Perfil de usuario")
+        self.assertEqual(
+            UserProfile._meta.verbose_name_plural,
+            "Perfiles de usuario",
+        )

@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 95 pruebas correctas;
+- 96 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 95 pruebas correctas;
+- 96 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -137,6 +137,8 @@ El comando idempotente `setup_admin_roles` mantiene dos grupos oficiales:
 - `Gestor de contacto`: puede consultar mensajes y ejecutar sus transiciones de estado.
 
 Ninguno puede eliminar contenido, administrar usuarios ni consultar registros de auditoría. Estas operaciones permanecen reservadas al superusuario. Los mensajes tampoco pueden crearse, eliminarse o reasignarse manualmente desde el administrador. Los inicios y cierres de sesión quedan auditados.
+
+Las entradas administrativas de cuentas se distinguen como `Usuarios` y `Perfiles de usuario`. La primera administra autenticación, grupos y permisos; la segunda conserva teléfono y zona horaria sin duplicar cuentas ni datos.
 
 ## Integridad editorial
 
