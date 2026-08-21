@@ -6,6 +6,7 @@ from apps.businesses.selectors import get_published_businesses
 from apps.catalog.selectors import get_published_products_by_business
 from apps.contact.services.links import build_contact_url
 from apps.portfolio.selectors import get_published_portfolio_projects_by_business
+from apps.site.seo import build_absolute_image_url
 
 
 def business_list(request):
@@ -32,6 +33,7 @@ def business_detail(request, slug):
         "products": products,
         "projects": projects,
         "posts": posts,
+        "page_social_image_url": build_absolute_image_url(request, business.image),
         "contact_url": build_contact_url(
             business=business,
             subject=f"Consulta sobre {business.name}",

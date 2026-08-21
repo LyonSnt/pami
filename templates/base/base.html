@@ -3,6 +3,7 @@
 <html lang="es">
 
 <head>
+  {% firstof page_social_image_url social_image_url as active_social_image_url %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,15 +14,23 @@
 
   <meta property="og:locale" content="es_EC">
   <meta property="og:type" content="{% block og_type %}website{% endblock %}">
-  <meta property="og:site_name" content="Pámi">
+  <meta property="og:site_name" content="{% if site_configuration %}{{ site_configuration.site_name }}{% else %}Pámi{% endif %}">
   <meta property="og:title" content="{% block og_title %}Pámi{% endblock %}">
   <meta property="og:description" content="{% block og_description %}Donde encuentras todo para ti.{% endblock %}">
   <meta property="og:url" content="{{ canonical_url }}">
-  {% block og_image %}{% if social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
+  {% if active_social_image_url %}<meta property="og:image" content="{{ active_social_image_url }}">{% endif %}
 
-  <meta name="twitter:card" content="{% if social_image_url %}summary_large_image{% else %}summary{% endif %}">
+  <meta name="twitter:card" content="{% if active_social_image_url %}summary_large_image{% else %}summary{% endif %}">
   <meta name="twitter:title" content="{% block twitter_title %}Pámi{% endblock %}">
   <meta name="twitter:description" content="{% block twitter_description %}Donde encuentras todo para ti.{% endblock %}">
+  {% if active_social_image_url %}<meta name="twitter:image" content="{{ active_social_image_url }}">{% endif %}
+
+  {% if organization_structured_data %}
+    <script type="application/ld+json">{{ organization_structured_data|safe }}</script>
+  {% endif %}
+  {% if page_structured_data %}
+    <script type="application/ld+json">{{ page_structured_data|safe }}</script>
+  {% endif %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

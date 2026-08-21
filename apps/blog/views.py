@@ -6,6 +6,10 @@ from apps.blog.selectors import (
     get_published_blog_post_by_slug,
     get_published_blog_posts,
 )
+from apps.site.seo import (
+    build_absolute_image_url,
+    build_blog_post_structured_data,
+)
 
 
 def blog_post_list(request):
@@ -25,6 +29,8 @@ def blog_post_detail(request, slug):
 
     context = {
         "post": post,
+        "page_social_image_url": build_absolute_image_url(request, post.image),
+        "page_structured_data": build_blog_post_structured_data(request, post),
         "breadcrumbs": [
             {"label": "Blog", "url": reverse("blog:list")},
             {"label": post.title, "url": None},

@@ -4,6 +4,10 @@ from apps.site.selectors import (
     get_active_navigation_items,
     get_public_site_configuration,
 )
+from apps.site.seo import (
+    build_absolute_image_url,
+    build_organization_structured_data,
+)
 
 
 def site_configuration(request):
@@ -12,9 +16,11 @@ def site_configuration(request):
     else:
         configuration = get_public_site_configuration()
         request._site_configuration = configuration
-    social_image_url = ""
-    if configuration and configuration.hero_image:
-        social_image_url = request.build_absolute_uri(configuration.hero_image.url)
+    social_image_url = (
+        build_absolute_image_url(request, configuration.hero_image)
+        if configuration
+        else ""
+    )
 
     current_path = request.path_info
     navigation_items = list(get_active_navigation_items())
@@ -29,6 +35,10 @@ def site_configuration(request):
         "contact_is_current": _is_current_internal_path(current_path, "/contacto/"),
         "canonical_url": request.build_absolute_uri(request.path),
         "social_image_url": social_image_url,
+        "organization_structured_data": build_organization_structured_data(
+            request,
+            configuration,
+        ),
     }
 
 

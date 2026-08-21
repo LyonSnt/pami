@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from apps.businesses.selectors import get_published_businesses
 from apps.contact.services.links import build_contact_url
+from apps.site.seo import build_absolute_image_url
 from apps.portfolio.selectors import (
     get_published_portfolio_projects,
     get_published_portfolio_projects_by_business,
@@ -51,6 +52,7 @@ def portfolio_project_detail(request, business_slug, project_slug):
             business=business,
             subject=f"Consulta sobre {project.title}",
         ),
+        "page_social_image_url": build_absolute_image_url(request, project.image),
         "breadcrumbs": [
             {"label": "Portafolio", "url": reverse("portfolio:list")},
             {

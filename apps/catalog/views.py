@@ -2,6 +2,10 @@ from django.shortcuts import get_object_or_404, render
 
 from apps.businesses.selectors import get_published_businesses
 from apps.contact.services.links import build_contact_url
+from apps.site.seo import (
+    build_absolute_image_url,
+    build_product_structured_data,
+)
 from apps.catalog.selectors import (
     get_published_products,
     get_published_products_by_business,
@@ -52,6 +56,8 @@ def product_detail(request, business_slug, product_slug):
             business=business,
             subject=f"Consulta sobre {product.name}",
         ),
+        "page_social_image_url": build_absolute_image_url(request, product.image),
+        "page_structured_data": build_product_structured_data(request, product),
         "breadcrumbs": [
             {
                 "label": "Catálogo",

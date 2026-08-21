@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 96 pruebas correctas;
+- 101 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 96 pruebas correctas;
+- 101 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -49,6 +49,17 @@ La fase de SEO técnico y contenido SEO esencial quedó implementada:
 5. Un único `h1` en los listados principales y jerarquía preservada en el Home.
 6. Breadcrumbs completos en detalles de Blog y Portafolio.
 7. Pruebas de metadatos, robots y exclusión de contenido no publicado.
+
+La ampliación de SEO social y datos estructurados incorpora:
+
+1. `twitter:image` y tarjeta grande cuando existe una imagen específica o de respaldo.
+2. Resolución centralizada de URLs absolutas para imágenes sociales.
+3. `Organization` global con identidad, contacto y redes configuradas.
+4. `Product` con línea, marca y oferta únicamente cuando el precio es visible.
+5. `BlogPosting` con fechas, descripción, imagen y organización editora.
+6. Serialización JSON-LD que neutraliza caracteres capaces de cerrar el elemento `script`.
+
+No se declaran inventario, reseñas, valoraciones ni información que el CMS no administra. Los proyectos permanecen sin un esquema específico hasta disponer de datos suficientes para representarlos correctamente.
 
 ## Buscador implementado
 

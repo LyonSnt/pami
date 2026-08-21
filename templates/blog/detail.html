@@ -12,8 +12,6 @@
 {% block og_description %}{{ post.seo_description|default:post.excerpt }}{% endblock %}
 {% block twitter_title %}{{ post.seo_title|default:post.title }} | Pámi{% endblock %}
 {% block twitter_description %}{{ post.seo_description|default:post.excerpt }}{% endblock %}
-{% block og_image %}{% if post.image %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ post.image.url }}">{% elif social_image_url %}<meta property="og:image" content="{{ social_image_url }}">{% endif %}{% endblock %}
-
 {% block content %}
   <section class="bg-white py-16">
     <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">

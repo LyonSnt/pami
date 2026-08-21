@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 96 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 101 pruebas correctas.
 
 ## Infraestructura
 
@@ -95,6 +95,8 @@ Características:
 - Acciones adaptadas a pantallas estrechas.
 - Títulos y descripciones SEO específicos por página.
 - Canonical, Open Graph y Twitter Cards en el portal público.
+- Imágenes sociales específicas para Open Graph y Twitter/X, con Hero como respaldo.
+- Datos estructurados JSON-LD seguros para la organización, productos y artículos del Blog.
 - `robots.txt` y `sitemap.xml` con filtros de publicación vigentes.
 - Confirmación de contacto excluida de indexación mediante `noindex, follow`.
 - Encabezados principales semánticos y breadcrumbs completos en detalles editoriales.
@@ -203,7 +205,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 96 pruebas ejecutadas correctamente.
+- 101 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.
