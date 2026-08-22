@@ -6,7 +6,7 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
-El desarrollo se encuentra en estado de versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
+El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
 La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. La suite actual contiene 114 pruebas correctas.
 
@@ -83,7 +83,7 @@ Características:
 - Menú móvil con iconos de apertura y cierre, cierre al elegir una opción, pulsar fuera o presionar Escape.
 - Página de línea de negocio con imagen, productos, proyectos y artículos relacionados publicados.
 - Resumen de línea limitado a dos registros por tipo y protegido mediante presupuesto de consultas.
-- Visor modal accesible para ampliar imágenes principales en páginas de detalle.
+- Visor modal accesible para ampliar todas las imágenes públicas de contenido.
 - Hero administrable desde `SiteConfiguration`.
 - Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
@@ -226,6 +226,18 @@ Antes de desplegar se debe:
 - confirmar la política de preload antes de activar `SECURE_HSTS_PRELOAD`;
 - configurar la entrega de static y media en la infraestructura de producción.
 
-## Estado de reanudación
+## Cierre y estado de reanudación
 
-La versión candidata `1.0.0` está funcionalmente completa y validada mediante 114 pruebas. El primer despliegue fue completado y validado por IP sobre HTTP temporal. El desarrollo futuro debe tratar paginación, filtros y pruebas reales de navegador como mejoras evolutivas, no como bloqueos de la versión actual. La configuración de dominio, respaldos automáticos externos, HTTPS y endurecimiento del entorno corresponde al proceso de despliegue.
+El sistema se dio por concluido funcionalmente como versión candidata estable
+`1.0.0` después del commit
+`fa526c2 mejora:agregar-respaldo-manual-desde-admin`. Está validado mediante
+114 pruebas, sin migraciones pendientes y con revisión visual completada.
+
+No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas
+reales de navegador, integraciones y nuevas líneas de negocio son mejoras
+evolutivas opcionales. La configuración de dominio, respaldos automáticos
+externos, HTTPS y endurecimiento del entorno corresponde al proceso de
+despliegue administrado por el usuario.
+
+Para una futura modificación se debe leer primero `docs/proximo_paso.md`, donde
+se conserva el texto de reanudación y las reglas permanentes del proyecto.
