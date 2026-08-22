@@ -27,17 +27,9 @@
       {% include "components/sections/benefits.html" %}
     </div>
 
-    <div class="relative mx-auto w-full max-w-2xl lg:max-w-none">
+    <div class="relative mx-auto w-full max-w-2xl overflow-hidden rounded-3xl lg:max-w-none">
       {% if site_configuration.hero_image %}
-        <img
-          src="{{ site_configuration.hero_image.url }}"
-          alt="{{ site_configuration.hero_title }}"
-          width="{{ site_configuration.hero_image.width }}"
-          height="{{ site_configuration.hero_image.height }}"
-          decoding="async"
-          fetchpriority="high"
-          class="aspect-video w-full rounded-3xl object-cover lg:aspect-4/3"
-        >
+        {% include "components/ui/zoomable_media.html" with image=site_configuration.hero_image alt=site_configuration.hero_title dialog_id="home-hero-image-dialog" hero=True %}
       {% else %}
         <div class="flex aspect-video w-full items-center justify-center rounded-3xl bg-primary/10 text-center lg:aspect-4/3">
           <div>

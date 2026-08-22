@@ -340,7 +340,7 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 103 pruebas.
+- La suite actual contiene 105 pruebas.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.
 - El demo de desarrollo publica Confecciones con Chaquetas y Buzos; los registros demo anteriores conocidos permanecen conservados pero despublicados.

@@ -146,3 +146,103 @@ class BrandingAssetTests(SimpleTestCase):
         self.assertNotIn('data-image-zoom-trigger', html)
         self.assertNotIn('data-image-zoom-dialog', html)
         self.assertIn("assets/branding/icon.svg", html)
+
+    def test_zoomable_media_supports_compact_and_hero_variants(self):
+        image = SimpleNamespace(
+            url="/media/site/hero.webp",
+            width=1600,
+            height=1200,
+        )
+
+        compact_html = render_to_string(
+            "components/ui/zoomable_media.html",
+            {
+                "image": image,
+                "alt": "Colección de chaquetas",
+                "dialog_id": "compact-image-dialog",
+                "compact": True,
+            },
+        )
+        hero_html = render_to_string(
+            "components/ui/zoomable_media.html",
+            {
+                "image": image,
+                "alt": "Chaquetas y buzos hechos para ti",
+                "dialog_id": "home-hero-image-dialog",
+                "hero": True,
+            },
+        )
+
+        self.assertIn("h-10 w-10", compact_html)
+        self.assertIn('<span class="sr-only">Ampliar</span>', compact_html)
+        self.assertIn("aspect-video lg:aspect-4/3", hero_html)
+        self.assertIn('aria-controls="home-hero-image-dialog"', hero_html)
+
+    def test_public_cards_create_unique_zoom_dialogs(self):
+        image = SimpleNamespace(
+            url="/media/content/image.webp",
+            width=1200,
+            height=900,
+        )
+        business = SimpleNamespace(
+            name="Confecciones",
+            slug="confecciones",
+            image=image,
+            short_description="Prendas para ti.",
+        )
+        cases = (
+            (
+                "components/cards/product_card.html",
+                {
+                    "product": SimpleNamespace(
+                        business=business,
+                        name="Chaquetas",
+                        slug="chaquetas",
+                        image=image,
+                        short_description="Chaquetas cómodas.",
+                        show_price=False,
+                        price=None,
+                    )
+                },
+                "product-card-image-confecciones-chaquetas",
+            ),
+            (
+                "components/cards/project_card.html",
+                {
+                    "project": SimpleNamespace(
+                        business=business,
+                        title="Colección inicial",
+                        slug="coleccion-inicial",
+                        image=image,
+                        short_description="Proyecto de confección.",
+                        client_name="Pámi",
+                    )
+                },
+                "project-card-image-confecciones-coleccion-inicial",
+            ),
+            (
+                "components/cards/post_card.html",
+                {
+                    "post": SimpleNamespace(
+                        business=business,
+                        title="Ideas para combinar",
+                        slug="ideas-para-combinar",
+                        image=image,
+                        excerpt="Consejos para tu estilo.",
+                        published_at=None,
+                    )
+                },
+                "post-card-image-ideas-para-combinar",
+            ),
+            (
+                "components/cards/business_card.html",
+                {"business": business},
+                "business-card-image-confecciones",
+            ),
+        )
+
+        for template_name, context, dialog_id in cases:
+            with self.subTest(template=template_name):
+                html = render_to_string(template_name, context)
+                self.assertIn(f'aria-controls="{dialog_id}"', html)
+                self.assertIn(f'id="{dialog_id}"', html)

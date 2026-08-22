@@ -1,5 +1,9 @@
 <article class="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-  {% include "components/ui/card_media.html" with image=product.image alt=product.name %}
+  {% with dialog_prefix="product-card-image-"|add:product.business.slug|add:"-" %}
+    {% with dialog_id=dialog_prefix|add:product.slug %}
+      {% include "components/ui/zoomable_media.html" with image=product.image alt=product.name dialog_id=dialog_id compact=True %}
+    {% endwith %}
+  {% endwith %}
 
   <div class="flex flex-1 flex-col p-6">
     <p class="text-sm font-medium text-slate-500">
