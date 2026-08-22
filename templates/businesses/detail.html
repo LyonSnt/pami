@@ -46,7 +46,7 @@
         </div>
 
         <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-          {% include "components/ui/card_media.html" with image=business.image alt=business.name eager=True wide=True %}
+          {% include "components/ui/zoomable_media.html" with image=business.image alt=business.name dialog_id="business-image-dialog" wide=True %}
         </div>
       </div>
     </div>

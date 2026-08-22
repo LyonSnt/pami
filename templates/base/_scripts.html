@@ -30,3 +30,32 @@
     });
   });
 </script>
+
+<script>
+  document.querySelectorAll("[data-image-zoom-trigger]").forEach((trigger) => {
+    const dialog = document.getElementById(trigger.getAttribute("aria-controls"));
+    const closeButton = dialog?.querySelector("[data-image-zoom-close]");
+
+    if (!dialog || !closeButton) {
+      return;
+    }
+
+    trigger.addEventListener("click", () => {
+      dialog.showModal();
+    });
+
+    closeButton.addEventListener("click", () => {
+      dialog.close();
+    });
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) {
+        dialog.close();
+      }
+    });
+
+    dialog.addEventListener("close", () => {
+      trigger.focus();
+    });
+  });
+</script>

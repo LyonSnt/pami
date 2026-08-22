@@ -110,3 +110,39 @@ class BrandingAssetTests(SimpleTestCase):
         configuration = SiteConfiguration(whatsapp="+593 99 999-9999")
 
         self.assertEqual(configuration.whatsapp_url, "https://wa.me/593999999999")
+
+    def test_zoomable_media_exposes_an_accessible_dialog(self):
+        image = SimpleNamespace(
+            url="/media/catalog/products/chaqueta.webp",
+            width=1200,
+            height=900,
+        )
+
+        html = render_to_string(
+            "components/ui/zoomable_media.html",
+            {
+                "image": image,
+                "alt": "Chaqueta negra",
+                "dialog_id": "product-image-dialog",
+            },
+        )
+
+        self.assertIn('aria-haspopup="dialog"', html)
+        self.assertIn('aria-controls="product-image-dialog"', html)
+        self.assertIn('id="product-image-dialog"', html)
+        self.assertIn('aria-label="Vista ampliada de Chaqueta negra"', html)
+        self.assertIn('data-image-zoom-close', html)
+
+    def test_zoomable_media_does_not_open_dialog_for_fallback_icon(self):
+        html = render_to_string(
+            "components/ui/zoomable_media.html",
+            {
+                "image": None,
+                "alt": "Sin imagen",
+                "dialog_id": "fallback-dialog",
+            },
+        )
+
+        self.assertNotIn('data-image-zoom-trigger', html)
+        self.assertNotIn('data-image-zoom-dialog', html)
+        self.assertIn("assets/branding/icon.svg", html)

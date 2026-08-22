@@ -18,7 +18,7 @@
 
       <article class="mt-10 grid items-start gap-10 lg:grid-cols-2 lg:gap-0">
         <div class="overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-          {% include "components/ui/card_media.html" with image=product.image alt=product.name eager=True %}
+          {% include "components/ui/zoomable_media.html" with image=product.image alt=product.name dialog_id="product-image-dialog" %}
         </div>
 
         <div class="lg:pl-8">

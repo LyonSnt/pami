@@ -16,7 +16,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 101 pruebas correctas;
+- 103 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -32,7 +32,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 101 pruebas correctas;
+- 103 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -196,6 +196,12 @@ El menú móvil conserva `<details>` como base semántica, alterna entre los ico
 El detalle de una línea presenta un encabezado responsive con breadcrumb, información editorial, imagen administrable y acciones hacia catálogo y contacto contextual. Resume hasta dos productos, dos proyectos y dos artículos públicos mediante las cards oficiales y ofrece accesos a sus listados completos.
 
 Las secciones sin contenido se omiten; cuando la línea no tiene ninguna publicación relacionada se presenta un único estado vacío. Los selectores conservan las reglas de actividad, publicación y fecha, y el detalle dispone de un presupuesto de seis consultas. `seed_demo` completa la imagen representativa de Confecciones únicamente cuando el campo está vacío.
+
+## Visor de imágenes
+
+Las imágenes principales de líneas, productos, proyectos y artículos pueden ampliarse mediante un componente reutilizable basado en el elemento nativo `dialog`. Las imágenes de cards no abren el visor para evitar conflictos con la navegación.
+
+El visor se adapta al espacio disponible sin deformar la imagen, incluye una acción visible de cierre y permite cerrar mediante Escape o pulsando el fondo. El navegador mantiene el foco dentro del diálogo mientras está abierto y el componente lo devuelve al disparador al cerrarse. Cuando no existe imagen se conserva el icono oficial de respaldo sin acción de ampliación.
 
 ## Regla de reanudación
 

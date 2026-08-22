@@ -92,6 +92,9 @@ class HomeViewTests(TestCase):
         self.assertContains(response, 'id="main-content"')
         self.assertContains(response, "<details", count=1)
         self.assertContains(response, 'aria-label="Navegación principal"', count=2)
+        self.assertContains(response, 'dialog.showModal()')
+        self.assertContains(response, 'event.target === dialog')
+        self.assertContains(response, 'trigger.focus()')
 
     def test_home_uses_branding_and_svg_benefit_icons(self):
         response = self.client.get(reverse("site:home"))

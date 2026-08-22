@@ -1,0 +1,59 @@
+{% if image %}
+  <div class="flex w-full items-center justify-center overflow-hidden bg-slate-100{% if wide %} aspect-video{% else %} aspect-4/3{% endif %}">
+    <button
+      type="button"
+      aria-label="Ampliar imagen: {{ alt }}"
+      aria-haspopup="dialog"
+      aria-controls="{{ dialog_id }}"
+      data-image-zoom-trigger
+      class="group relative h-full w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-primary"
+    >
+      <img
+        src="{{ image.url }}"
+        alt="{{ alt }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        fetchpriority="high"
+        decoding="async"
+        class="h-full w-full object-cover"
+      >
+      <span class="absolute bottom-4 right-4 inline-flex items-center gap-2 rounded-lg bg-slate-950/75 px-3 py-2 text-sm font-semibold text-white opacity-90 shadow-sm transition group-hover:bg-slate-950 group-focus-visible:bg-slate-950">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7" />
+          <path stroke-linecap="round" d="M8 11h6M11 8v6m9 9-4.5-4.5" />
+        </svg>
+        Ampliar
+      </span>
+    </button>
+  </div>
+
+  <dialog
+    id="{{ dialog_id }}"
+    aria-label="Vista ampliada de {{ alt }}"
+    data-image-zoom-dialog
+    class="m-auto max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] overflow-visible rounded-2xl bg-transparent p-0 backdrop:bg-slate-950/85"
+  >
+    <div class="relative flex max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] items-center justify-center">
+      <img
+        src="{{ image.url }}"
+        alt="{{ alt }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        decoding="async"
+        class="max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] rounded-2xl object-contain shadow-2xl"
+      >
+      <button
+        type="button"
+        aria-label="Cerrar imagen ampliada"
+        data-image-zoom-close
+        class="absolute right-3 top-3 inline-flex h-11 w-11 items-center justify-center rounded-full bg-slate-950/80 text-white shadow-lg transition hover:bg-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-6 w-6" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      </button>
+    </div>
+  </dialog>
+{% else %}
+  {% include "components/ui/card_media.html" with image=image alt=alt eager=True wide=wide %}
+{% endif %}

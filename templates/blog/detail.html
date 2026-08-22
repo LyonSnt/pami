@@ -35,7 +35,7 @@
         {% endif %}
 
         <div class="mt-10 overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-sm">
-          {% include "components/ui/card_media.html" with image=post.image alt=post.title eager=True wide=True %}
+          {% include "components/ui/zoomable_media.html" with image=post.image alt=post.title dialog_id="post-image-dialog" wide=True %}
         </div>
 
         {% if post.excerpt %}
