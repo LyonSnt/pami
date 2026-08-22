@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from apps.blog.models import BlogPost
 from apps.businesses.models import Business
-from apps.catalog.models import Product
+from apps.catalog.models import Product, ProductFeature
 from apps.portfolio.models import PortfolioProject
 from apps.site.models import NavigationItem, SiteConfiguration
 
@@ -77,12 +77,12 @@ class Command(BaseCommand):
 
     def create_navigation(self):
         NavigationItem.objects.filter(
-            label__in=("Negocios", "Catálogo"),
+            label__in=("Negocios", "Confecciones"),
         ).update(is_active=False)
 
         items = [
             ("Inicio", "/", 1),
-            ("Confecciones", "/catalogo/confecciones/", 2),
+            ("Catálogo", "/catalogo/", 2),
             ("Portafolio", "/portafolio/", 3),
             ("Blog", "/blog/", 4),
             ("Contacto", "/contacto/", 5),
@@ -99,10 +99,6 @@ class Command(BaseCommand):
             )
 
     def create_businesses(self):
-        Business.objects.filter(
-            slug__in=("papeleria", "tecnologia"),
-        ).update(is_published=False)
-
         data = [
             {
                 "name": "Confecciones",
@@ -110,6 +106,13 @@ class Command(BaseCommand):
                 "short_description": "Chaquetas y buzos para acompañar tu estilo.",
                 "description": "Creamos prendas cómodas y versátiles para el público en general.",
                 "order": 1,
+            },
+            {
+                "name": "Soluciones digitales",
+                "slug": "soluciones-digitales",
+                "short_description": "Sistemas web para apoyar la gestión de organizaciones y servicios.",
+                "description": "Desarrollamos soluciones digitales orientadas a centralizar información, facilitar procesos y mejorar el seguimiento operativo.",
+                "order": 2,
             },
         ]
 
@@ -174,6 +177,41 @@ class Command(BaseCommand):
                 "image",
                 f"pami-{slug}.webp",
                 asset_name,
+            )
+
+        water_system, _ = Product.objects.update_or_create(
+            business=businesses["soluciones-digitales"],
+            slug="sistema-gestion-agua",
+            defaults={
+                "name": "Sistema de gestión de agua",
+                "short_description": "Centraliza usuarios, medidores, lecturas, consumos, pagos y reportes en una aplicación web.",
+                "description": "Una solución digital para apoyar la administración diaria de organizaciones que gestionan servicios de agua.",
+                "target_audience": "Juntas administradoras, organizaciones comunitarias y entidades responsables de servicios de agua.",
+                "additional_information": "La implementación, configuración y soporte se coordinan según las necesidades de cada organización.",
+                "commercial_status": Product.CommercialStatus.QUOTE,
+                "price": None,
+                "show_price": False,
+                "order": 1,
+                "is_published": True,
+                "seo_title": "Sistema de gestión de agua",
+                "seo_description": "Conoce el sistema web de Pámi para apoyar la gestión de usuarios, lecturas, pagos y reportes de agua.",
+            },
+        )
+        feature_data = [
+            ("Gestión de usuarios y medidores", "Centraliza la información necesaria para la operación diaria.", 1),
+            ("Lecturas y consumos", "Registra y consulta lecturas asociadas a cada medidor.", 2),
+            ("Facturación y pagos", "Facilita el seguimiento de valores generados y pagos registrados.", 3),
+            ("Reportes", "Presenta información organizada para apoyar el control y la toma de decisiones.", 4),
+        ]
+        for title, description, order in feature_data:
+            ProductFeature.objects.update_or_create(
+                product=water_system,
+                title=title,
+                defaults={
+                    "description": description,
+                    "order": order,
+                    "is_active": True,
+                },
             )
 
     def create_projects(self, businesses):

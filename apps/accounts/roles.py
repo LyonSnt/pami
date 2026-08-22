@@ -18,6 +18,12 @@ CONTENT_EDITOR_PERMISSIONS = {
         "view_product",
         "add_product",
         "change_product",
+        "view_productfeature",
+        "add_productfeature",
+        "change_productfeature",
+        "view_productimage",
+        "add_productimage",
+        "change_productimage",
     },
     "portfolio": {
         "view_portfolioproject",

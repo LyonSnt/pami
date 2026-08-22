@@ -6,7 +6,7 @@ from django.utils import timezone
 
 from apps.blog.models import BlogPost
 from apps.businesses.models import Business
-from apps.catalog.models import Product
+from apps.catalog.models import Product, ProductFeature
 from apps.portfolio.models import PortfolioProject
 
 
@@ -116,3 +116,22 @@ class SearchViewTests(TestCase):
             )
 
         self.assertEqual(response.status_code, 200)
+
+    def test_search_finds_product_by_active_feature(self):
+        product = Product.objects.create(
+            business=self.business,
+            name="Sistema de gestión de agua",
+            slug="sistema-gestion-agua",
+            is_active=True,
+            is_published=True,
+        )
+        ProductFeature.objects.create(
+            product=product,
+            title="Facturación de consumos",
+            is_active=True,
+        )
+
+        response = self.client.get(reverse("site:search"), {"q": "facturación"})
+
+        self.assertContains(response, product.name)
+        self.assertEqual(response.context["result_count"], 1)

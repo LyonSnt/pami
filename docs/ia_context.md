@@ -326,7 +326,7 @@ El enfoque editorial actual del Home es `Confecciones` para público general. Pr
 
 La línea protagonista se selecciona mediante `SiteConfiguration.featured_business`. No se debe fijar un slug de negocio en el Home. El eslogan global se muestra junto al logo y el Hero utiliza el nombre de la línea destacada como etiqueta contextual.
 
-`Chaquetas` y `Buzos` son registros de `Product`, no categorías ni líneas de negocio. No existe todavía un modelo `ProductCategory` porque el catálogo actual no requiere esa complejidad.
+`Chaquetas`, `Buzos` y `Sistema de gestión de agua` son registros de `Product`. Confecciones y Soluciones digitales son registros de `Business`. No existe un modelo `ProductCategory`: las líneas separan el catálogo y cada producto puede administrar características y galería mediante `ProductFeature` y `ProductImage`.
 
 El bloque de beneficios del Hero fue extraído a:
 
@@ -340,10 +340,10 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 114 pruebas.
+- La suite actual contiene 122 pruebas.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.
-- El demo de desarrollo publica Confecciones con Chaquetas y Buzos; los registros demo anteriores conocidos permanecen conservados pero despublicados.
+- El demo de desarrollo publica Confecciones con Chaquetas y Buzos, además de Soluciones digitales con Sistema de gestión de agua. El comando conserva el estado editorial de otras líneas creadas por el usuario.
 
 ---
 

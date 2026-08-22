@@ -7,18 +7,18 @@ from apps.site.seo import (
     build_product_structured_data,
 )
 from apps.catalog.selectors import (
-    get_published_products,
     get_published_products_by_business,
+    with_public_product_details,
 )
 
 from django.urls import reverse
 
 
 def product_list(request):
-    products = get_published_products()
+    businesses = get_published_businesses()
 
     context = {
-        "products": products,
+        "businesses": businesses,
     }
 
     return render(request, "catalog/list.html", context)
@@ -45,7 +45,9 @@ def product_detail(request, business_slug, product_slug):
         slug=business_slug,
     )
     product = get_object_or_404(
-        get_published_products_by_business(business),
+        with_public_product_details(
+            get_published_products_by_business(business)
+        ),
         slug=product_slug,
     )
 

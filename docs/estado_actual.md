@@ -4,11 +4,11 @@
 
 Pámi dispone de una base funcional de CMS y portal público construida con Django, PostgreSQL, Docker Compose y Tailwind CSS v4.
 
-La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
+La arquitectura soporta múltiples líneas de negocio. El Home conserva Confecciones como línea destacada, mientras el catálogo general presenta también Soluciones digitales y queda preparado para Papelería, Calzado u otras líneas futuras.
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. La suite actual contiene 114 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. La suite actual contiene 122 pruebas correctas.
 
 ## Infraestructura
 
@@ -62,6 +62,8 @@ Estado funcional:
 - Consulta de auditoría y administración de usuarios reservadas al superusuario.
 - Modo mantenimiento funcional con respuesta HTTP 503, acceso administrativo y revisión para usuarios staff.
 - Precios visibles protegidos mediante validación y restricciones de base de datos.
+- Productos con estado comercial, público objetivo, información adicional y enlace seguro de demostración.
+- Galerías y características ordenables y reutilizables para cualquier línea de negocio.
 
 ## Portal público
 
@@ -104,6 +106,8 @@ Características:
 - Confirmación de contacto excluida de indexación mediante `noindex, follow`.
 - Encabezados principales semánticos y breadcrumbs completos en detalles editoriales.
 - Buscador responsive con resultados agrupados de productos, proyectos, artículos y líneas de negocio.
+- El catálogo general funciona como selector de líneas y evita mezclar productos de sectores distintos; cada página interna muestra únicamente los productos o servicios de la línea elegida.
+- Búsqueda de productos por características activas y contenido comercial adicional.
 - Búsqueda limitada a contenido activo, publicado y vigente.
 - Acceso al buscador desde la navegación de escritorio y móvil.
 - Página de resultados excluida de indexación mediante `noindex, follow`.
@@ -149,7 +153,7 @@ Componentes relevantes:
 
 Las cards utilizan imágenes administrables y el icono oficial como fallback decorativo.
 
-El catálogo inicial de Confecciones utiliza `Product` para administrar `Chaquetas` y `Buzos`. No se añadió un modelo de categorías ni se realizaron cambios arquitectónicos o de migraciones para este enfoque.
+El catálogo utiliza `Business` como línea de negocio y `Product` como producto o servicio. No necesita categorías para incorporar Confecciones, Soluciones digitales, Papelería o Calzado. `ProductFeature` y `ProductImage` aportan características y galerías genéricas sin crear modelos exclusivos para cada sector.
 
 El Home ya no depende del slug fijo `confecciones`: utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
 
@@ -209,7 +213,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 114 pruebas ejecutadas correctamente.
+- 122 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.
@@ -228,10 +232,9 @@ Antes de desplegar se debe:
 
 ## Cierre y estado de reanudación
 
-El sistema se dio por concluido funcionalmente como versión candidata estable
-`1.0.0` después del commit
-`fa526c2 mejora:agregar-respaldo-manual-desde-admin`. Está validado mediante
-114 pruebas, sin migraciones pendientes y con revisión visual completada.
+El sistema se considera funcionalmente concluido como versión candidata estable
+`1.0.0` en el último commit disponible de `main`. Está validado mediante 122
+pruebas, sin migraciones pendientes y con revisión visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas
 reales de navegador, integraciones y nuevas líneas de negocio son mejoras

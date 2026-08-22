@@ -6,7 +6,7 @@ from django.test import TestCase, override_settings
 
 from apps.blog.models import BlogPost
 from apps.businesses.models import Business
-from apps.catalog.models import Product
+from apps.catalog.models import Product, ProductFeature
 from apps.portfolio.models import PortfolioProject
 from apps.site.models import NavigationItem, SiteConfiguration
 
@@ -71,7 +71,7 @@ class SeedDemoCommandTests(TestCase):
             self.configuration.featured_business,
             self.confections,
         )
-        self.assertFalse(self.stationery.is_published)
+        self.assertTrue(self.stationery.is_published)
         self.assertFalse(self.legacy_product.is_published)
         self.assertFalse(self.legacy_navigation.is_active)
 
@@ -106,6 +106,36 @@ class SeedDemoCommandTests(TestCase):
         self.assertNotIn("Artículo demo", posts.get(slug="ideas-combinar-buzos").excerpt)
 
         self.assertEqual(
-            NavigationItem.objects.filter(label="Confecciones").count(),
+            NavigationItem.objects.filter(
+                label="Catálogo",
+                url="/catalogo/",
+                is_active=True,
+            ).count(),
             1,
+        )
+        self.assertFalse(
+            NavigationItem.objects.filter(
+                label="Confecciones",
+                is_active=True,
+            ).exists()
+        )
+
+        digital_business = Business.objects.get(slug="soluciones-digitales")
+        water_system = Product.objects.get(
+            business=digital_business,
+            slug="sistema-gestion-agua",
+        )
+        self.assertTrue(digital_business.is_published)
+        self.assertTrue(water_system.is_published)
+        self.assertEqual(
+            water_system.commercial_status,
+            Product.CommercialStatus.QUOTE,
+        )
+        self.assertFalse(water_system.show_price)
+        self.assertEqual(
+            ProductFeature.objects.filter(
+                product=water_system,
+                is_active=True,
+            ).count(),
+            4,
         )

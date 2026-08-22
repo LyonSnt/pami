@@ -7,7 +7,7 @@ from django.urls import reverse
 from PIL import Image
 
 from apps.businesses.models import Business
-from apps.catalog.models import Product
+from apps.catalog.models import Product, ProductFeature, ProductImage
 
 
 class ProductPublicViewTests(TestCase):
@@ -113,3 +113,142 @@ class ProductPublicViewTests(TestCase):
             self.assertTrue(product.image_card.name.endswith(".webp"))
             self.assertEqual(product.image_card.width, 640)
             self.assertEqual(product.image_card.height, 480)
+
+    def test_detail_presents_only_active_generic_product_content(self):
+        product = Product.objects.create(
+            business=self.business,
+            name="Sistema de gestión de agua",
+            slug="sistema-gestion-agua",
+            commercial_status=Product.CommercialStatus.QUOTE,
+            target_audience="Juntas administradoras de agua.",
+            additional_information="Incluye implementación y soporte.",
+            demo_url="/contacto/",
+            is_active=True,
+            is_published=True,
+        )
+        active_feature = ProductFeature.objects.create(
+            product=product,
+            title="Gestión de lecturas",
+            description="Registra consumos por medidor.",
+            is_active=True,
+        )
+        ProductFeature.objects.create(
+            product=product,
+            title="Característica oculta",
+            is_active=False,
+        )
+
+        response = self.client.get(self.get_detail_url(product))
+
+        self.assertContains(response, "Bajo cotización")
+        self.assertContains(response, "Juntas administradoras de agua")
+        self.assertContains(response, "Incluye implementación y soporte")
+        self.assertContains(response, "Ver demostración")
+        self.assertContains(response, active_feature.title)
+        self.assertNotContains(response, "Característica oculta")
+        self.assertEqual(
+            response.context["product"].public_features,
+            [active_feature],
+        )
+
+    def test_detail_presents_only_active_gallery_images(self):
+        product = Product.objects.create(
+            business=self.business,
+            name="Agenda",
+            slug="agenda",
+            is_active=True,
+            is_published=True,
+        )
+        source = BytesIO()
+        Image.new("RGB", (800, 600), color="blue").save(source, format="PNG")
+        source.seek(0)
+
+        with TemporaryDirectory() as media_root, self.settings(MEDIA_ROOT=media_root):
+            active_image = ProductImage.objects.create(
+                product=product,
+                image=SimpleUploadedFile(
+                    "agenda.png",
+                    source.read(),
+                    content_type="image/png",
+                ),
+                alt_text="Vista interior de la agenda",
+                is_active=True,
+            )
+            ProductImage.objects.create(
+                product=product,
+                image=SimpleUploadedFile(
+                    "oculta.png",
+                    source.getvalue(),
+                    content_type="image/png",
+                ),
+                alt_text="Imagen oculta",
+                is_active=False,
+            )
+
+            response = self.client.get(self.get_detail_url(product))
+
+        self.assertContains(response, "Galería")
+        self.assertContains(response, active_image.alt_text)
+        self.assertNotContains(response, "Imagen oculta")
+
+    def test_general_catalog_presents_lines_without_mixing_products(self):
+        digital_business = Business.objects.create(
+            name="Soluciones digitales",
+            slug="soluciones-digitales",
+            is_active=True,
+            is_published=True,
+        )
+        Product.objects.create(
+            business=digital_business,
+            name="Sistema de gestión de agua",
+            slug="sistema-gestion-agua",
+            is_active=True,
+            is_published=True,
+        )
+
+        response = self.client.get(reverse("catalog:list"))
+
+        self.assertContains(response, "Líneas de negocio")
+        self.assertContains(response, self.business.name)
+        self.assertContains(response, digital_business.name)
+        self.assertNotContains(response, "Sistema de gestión de agua")
+        self.assertContains(response, "Ver productos y servicios", count=2)
+        self.assertContains(
+            response,
+            reverse(
+                "catalog:business_list",
+                kwargs={"business_slug": digital_business.slug},
+            ),
+        )
+
+    def test_business_catalog_only_presents_products_from_selected_line(self):
+        other_business = Business.objects.create(
+            name="Papelería",
+            slug="papeleria",
+            is_active=True,
+            is_published=True,
+        )
+        selected_product = Product.objects.create(
+            business=self.business,
+            name="Producto de la línea elegida",
+            slug="producto-linea-elegida",
+            is_active=True,
+            is_published=True,
+        )
+        Product.objects.create(
+            business=other_business,
+            name="Producto de otra línea",
+            slug="producto-otra-linea",
+            is_active=True,
+            is_published=True,
+        )
+
+        response = self.client.get(
+            reverse(
+                "catalog:business_list",
+                kwargs={"business_slug": self.business.slug},
+            )
+        )
+
+        self.assertContains(response, selected_product.name)
+        self.assertNotContains(response, "Producto de otra línea")

@@ -76,6 +76,18 @@ class AdministrativeRoleAccessTests(TestCase):
             200,
         )
         self.assertEqual(
+            self.client.get(
+                reverse("admin:catalog_productfeature_changelist")
+            ).status_code,
+            200,
+        )
+        self.assertEqual(
+            self.client.get(
+                reverse("admin:catalog_productimage_changelist")
+            ).status_code,
+            200,
+        )
+        self.assertEqual(
             self.client.get(reverse("admin:accounts_user_changelist")).status_code,
             403,
         )

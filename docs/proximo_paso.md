@@ -3,11 +3,7 @@
 ## Sistema concluido
 
 Pámi se considera funcionalmente concluido como versión candidata estable
-`1.0.0`. El último commit de cierre funcional es:
-
-```text
-fa526c2 mejora:agregar-respaldo-manual-desde-admin
-```
+`1.0.0`. Para reanudar se debe utilizar el último commit disponible en `main`.
 
 No existe un bloque obligatorio de desarrollo pendiente. Cualquier cambio
 posterior debe responder a una nueva necesidad de contenido, negocio,
@@ -15,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 114 pruebas correctas;
+- 122 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -36,6 +32,9 @@ integración o infraestructura.
 - Mantenimiento y páginas públicas 404 y 500.
 - Imágenes administrables, ampliables y optimizadas mediante ImageKit.
 - Descarga manual de la base PostgreSQL desde Django Admin para superusuarios.
+- Catálogo preparado para múltiples líneas con galerías, características y estados comerciales.
+- Catálogo general organizado como selector de líneas, sin mezclar sus productos o servicios.
+- Línea Soluciones digitales y Sistema de gestión de agua bajo cotización.
 
 ## Mejoras futuras opcionales
 
@@ -68,7 +67,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 114 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 122 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. El cambio que quiero realizar es:

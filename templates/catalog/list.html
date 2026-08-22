@@ -10,15 +10,24 @@
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title="Catálogo" subtitle="Explora los productos y servicios disponibles en Pámi." level=1 %}
+    {% include "components/layout/section_title.html" with title="Catálogo" subtitle="Elige una línea de negocio para conocer sus productos y servicios." level=1 %}
 
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {% for product in products %}
-        {% include "components/cards/product_card.html" with product=product %}
-      {% empty %}
-        {% include "components/ui/empty_state.html" with title="No hay productos publicados" message="Cuando existan productos disponibles, aparecerán en el catálogo." %}
-      {% endfor %}
-    </div>
+    {% if businesses %}
+      <section class="mt-12" aria-labelledby="catalog-businesses-title">
+        <h2 id="catalog-businesses-title" class="text-2xl font-bold text-slate-900">
+          Líneas de negocio
+        </h2>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {% for business in businesses %}
+            {% include "components/cards/business_card.html" with business=business catalog_mode=True %}
+          {% endfor %}
+        </div>
+      </section>
+    {% else %}
+      <div class="mt-12">
+        {% include "components/ui/empty_state.html" with title="No hay líneas publicadas" message="Cuando existan líneas disponibles, aparecerán en el catálogo." %}
+      </div>
+    {% endif %}
   </div>
 </section>
 {% endblock %}
