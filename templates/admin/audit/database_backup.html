@@ -1,0 +1,26 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+  <div id="content-main">
+    <div class="module">
+      <h2>Crear respaldo manual</h2>
+      <div style="padding: 1rem;">
+        <p>
+          Descarga una copia comprimida de la base de datos PostgreSQL de Pámi.
+          El archivo contiene información sensible y debe almacenarse cifrado
+          en una ubicación segura.
+        </p>
+        <p>
+          Este respaldo no incluye las imágenes almacenadas en
+          <code>media/</code>; deben copiarse por separado desde el servidor.
+        </p>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="button default">
+            Crear y descargar respaldo
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

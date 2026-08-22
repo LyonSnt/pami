@@ -171,6 +171,23 @@ Las migraciones y la recolección de static se ejecutan durante el inicio del nu
 
 ## Copias de seguridad
 
+### Descarga manual desde Django Admin
+
+Los superusuarios disponen de la sección `Auditoría > Respaldos de base de
+datos`. El botón `Crear y descargar respaldo` ejecuta `pg_dump` en formato
+personalizado comprimido y entrega un archivo `.dump` sin conservarlo en una
+ruta pública del contenedor. La operación, tanto exitosa como fallida, queda
+registrada en la auditoría.
+
+El archivo contiene la base PostgreSQL, pero no las imágenes de `media/`. Una
+copia completa requiere también el directorio `/opt/pami-data/media`. Todo
+respaldo descargado debe almacenarse cifrado y fuera del VPS.
+
+Antes de restaurar en producción se debe activar mantenimiento, crear una copia
+adicional del estado actual y probar el archivo en una base separada. Un archivo
+personalizado se inspecciona y restaura con `pg_restore`; no debe importarse a
+ciegas sobre la única base productiva.
+
 Crear un directorio privado fuera del repositorio:
 
 ```bash

@@ -40,3 +40,10 @@ class AuditLog(TimeStampedModel):
 
     def __str__(self):
         return f"{self.get_action_display()} - {self.object_repr}"
+
+
+class DatabaseBackup(AuditLog):
+    class Meta:
+        proxy = True
+        verbose_name = "Respaldo de base de datos"
+        verbose_name_plural = "Respaldos de base de datos"
