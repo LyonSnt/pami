@@ -26,6 +26,7 @@ media/*
 
 # Docker / local data
 postgres_data/
+/deploy-data/
 
 # IDE
 .vscode/

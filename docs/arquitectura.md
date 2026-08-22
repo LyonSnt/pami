@@ -159,7 +159,6 @@ Templates
 │
 ├── base
 │   ├── base.html
-│   ├── _head.html
 │   ├── _header.html
 │   ├── _navigation.html
 │   ├── _footer.html

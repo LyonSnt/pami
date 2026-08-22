@@ -12,6 +12,7 @@ env/
 media/
 staticfiles/
 node_modules/
+/deploy-data/
 .visual-review/
 docs/
 tests/

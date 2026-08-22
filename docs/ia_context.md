@@ -297,7 +297,7 @@ Implementadas:
 
 ## Frontend
 
-Implementado y pendiente de validación visual final con contenido real.
+Implementado y validado visualmente en móvil, tablet y escritorio con contenido representativo.
 
 Incluye:
 
@@ -316,8 +316,11 @@ Incluye:
 - Tokens oficiales de marca
 - Recursos SVG oficiales
 - Media reutilizable en cards
+- Navegación con estado activo
+- Visor accesible de imágenes principales
+- SEO social y datos estructurados
 
-El Home basado en componentes se encuentra implementado y debe validarse visualmente contra el mockup aprobado utilizando imágenes y contenido representativos.
+El Home basado en componentes fue validado visualmente contra el diseño aprobado utilizando imágenes y contenido representativos.
 
 El enfoque editorial actual del Home es `Confecciones` para público general. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
 
@@ -337,7 +340,7 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 33 pruebas.
+- La suite actual contiene 103 pruebas.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.
 - El demo de desarrollo publica Confecciones con Chaquetas y Buzos; los registros demo anteriores conocidos permanecen conservados pero despublicados.

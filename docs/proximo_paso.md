@@ -1,5 +1,11 @@
 # Próximo paso de desarrollo
 
+## Versión candidata 1.0.0
+
+El alcance funcional previsto para la primera versión está completo. El repositorio incluye README de instalación y operación, exclusiones explícitas para datos locales y productivos, documentación sincronizada y una suite de 103 pruebas.
+
+No existe un bloque de desarrollo obligatorio pendiente antes de etiquetar la versión. Los siguientes trabajos son evolutivos y deben iniciarse únicamente cuando exista una necesidad real de contenido o negocio.
+
 ## Estado actual
 
 Se completaron los nueve bloques derivados de la auditoría integral:

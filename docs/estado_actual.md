@@ -6,6 +6,8 @@ Pámi dispone de una base funcional de CMS y portal público construida con Djan
 
 La arquitectura conserva soporte para múltiples líneas de negocio, pero el enfoque editorial público actual está centrado en Confecciones para público general.
 
+El desarrollo se encuentra en estado de versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
+
 La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 103 pruebas correctas.
 
 ## Infraestructura
@@ -226,4 +228,4 @@ Antes de desplegar se debe:
 
 ## Estado de reanudación
 
-El buscador real está implementado, validado técnicamente y aprobado visualmente. El primer despliegue en Hetzner fue completado y validado por IP sobre HTTP temporal: Nginx publica el puerto `8025`, Gunicorn permanece en `127.0.0.1:8026`, PostgreSQL no se expone y el contenido demo carga correctamente. `check --deploy` conserva cuatro advertencias esperadas hasta incorporar dominio y HTTPS. La reanudación debe comenzar por rotación de secretos expuestos, revisión de firewall, backups y preparación de TLS.
+La versión candidata `1.0.0` está funcionalmente completa y validada mediante 103 pruebas. El primer despliegue fue completado y validado por IP sobre HTTP temporal. El desarrollo futuro debe tratar paginación, filtros, variantes responsive de imágenes y pruebas reales de navegador como mejoras evolutivas, no como bloqueos de la versión actual. La configuración de dominio, backups, HTTPS y endurecimiento del entorno corresponde al proceso de despliegue.
