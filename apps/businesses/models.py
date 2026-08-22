@@ -1,11 +1,16 @@
 from django.db import models
 from django.utils.text import slugify
 
+from apps.common.images import responsive_image_spec
 from apps.common.models import BaseModel
 from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class Business(BaseModel):
+    image_card_small = responsive_image_spec(width=320, height=240)
+    image_card = responsive_image_spec(width=640, height=480)
+    image_detail = responsive_image_spec(width=1200, height=675)
+
     name = models.CharField(max_length=120, verbose_name="Nombre")
     slug = models.SlugField(max_length=140, unique=True, verbose_name="Slug")
     short_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción corta")

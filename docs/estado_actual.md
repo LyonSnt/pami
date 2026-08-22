@@ -8,7 +8,7 @@ La arquitectura conserva soporte para múltiples líneas de negocio, pero el enf
 
 El desarrollo se encuentra en estado de versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 105 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. El proyecto no tiene cambios de migración pendientes y la suite actual contiene 107 pruebas correctas.
 
 ## Infraestructura
 
@@ -209,7 +209,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 105 pruebas ejecutadas correctamente.
+- 107 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.
@@ -228,4 +228,4 @@ Antes de desplegar se debe:
 
 ## Estado de reanudación
 
-La versión candidata `1.0.0` está funcionalmente completa y validada mediante 105 pruebas. El primer despliegue fue completado y validado por IP sobre HTTP temporal. El desarrollo futuro debe tratar paginación, filtros, variantes responsive de imágenes y pruebas reales de navegador como mejoras evolutivas, no como bloqueos de la versión actual. La configuración de dominio, backups, HTTPS y endurecimiento del entorno corresponde al proceso de despliegue.
+La versión candidata `1.0.0` está funcionalmente completa y validada mediante 107 pruebas. El primer despliegue fue completado y validado por IP sobre HTTP temporal. El desarrollo futuro debe tratar paginación, filtros y pruebas reales de navegador como mejoras evolutivas, no como bloqueos de la versión actual. La configuración de dominio, backups, HTTPS y endurecimiento del entorno corresponde al proceso de despliegue.

@@ -2,11 +2,16 @@ from django.db import models
 from django.utils.text import slugify
 
 from apps.businesses.models import Business
+from apps.common.images import responsive_image_spec
 from apps.common.models import BaseModel
 from apps.common.validators import validate_file_size, validate_image_extension
 
 
 class PortfolioProject(BaseModel):
+    image_card_small = responsive_image_spec(width=320, height=240)
+    image_card = responsive_image_spec(width=640, height=480)
+    image_detail = responsive_image_spec(width=960, height=720)
+
     business = models.ForeignKey(
         Business,
         on_delete=models.PROTECT,

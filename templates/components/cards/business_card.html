@@ -1,6 +1,6 @@
 <article class="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
   {% with dialog_id="business-card-image-"|add:business.slug %}
-    {% include "components/ui/zoomable_media.html" with image=business.image alt=business.name dialog_id=dialog_id compact=True %}
+    {% include "components/ui/zoomable_media.html" with image=business.image display_image=business.image_card small_image=business.image_card_small alt=business.name dialog_id=dialog_id compact=True %}
   {% endwith %}
 
   <div class="flex flex-1 flex-col p-6">

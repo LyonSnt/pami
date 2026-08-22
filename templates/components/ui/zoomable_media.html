@@ -1,4 +1,5 @@
 {% if image %}
+  {% with rendered_image=display_image|default:image %}
   <div class="flex w-full items-center justify-center overflow-hidden bg-slate-100{% if hero %} aspect-video lg:aspect-4/3{% elif wide %} aspect-video{% else %} aspect-4/3{% endif %}">
     <button
       type="button"
@@ -8,15 +9,21 @@
       data-image-zoom-trigger
       class="group relative h-full w-full cursor-zoom-in focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-primary"
     >
-      <img
-        src="{{ image.url }}"
-        alt="{{ alt }}"
-        width="{{ image.width }}"
-        height="{{ image.height }}"
-        fetchpriority="high"
-        decoding="async"
-        class="h-full w-full object-cover"
-      >
+      <picture class="block h-full w-full">
+        {% if desktop_image %}
+          <source media="(min-width: 1024px)" srcset="{{ desktop_image.url }}">
+        {% endif %}
+        <img
+          src="{{ rendered_image.url }}"
+          {% if small_image %}srcset="{{ small_image.url }} 320w, {{ rendered_image.url }} 640w" sizes="(min-width: 1280px) 32rem, (min-width: 640px) 50vw, 100vw"{% endif %}
+          alt="{{ alt }}"
+          width="{{ rendered_image.width }}"
+          height="{{ rendered_image.height }}"
+          {% if eager %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+          decoding="async"
+          class="h-full w-full object-cover"
+        >
+      </picture>
       <span class="absolute {% if compact %}bottom-3 right-3 h-10 w-10 justify-center rounded-full{% else %}bottom-4 right-4 gap-2 rounded-lg px-3 py-2{% endif %} inline-flex items-center bg-slate-950/75 text-sm font-semibold text-white opacity-90 shadow-sm transition group-hover:bg-slate-950 group-focus-visible:bg-slate-950">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" class="h-5 w-5" stroke="currentColor" stroke-width="2">
           <circle cx="11" cy="11" r="7" />
@@ -58,6 +65,7 @@
       </button>
     </div>
   </dialog>
+  {% endwith %}
 {% else %}
   {% include "components/ui/card_media.html" with image=image alt=alt eager=True wide=wide %}
 {% endif %}

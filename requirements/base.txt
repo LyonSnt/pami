@@ -3,3 +3,4 @@ psycopg[binary]>=3.2,<3.3
 python-decouple>=3.8,<3.9
 gunicorn>=23.0,<24.0
 Pillow
+django-imagekit>=6.0,<7.0

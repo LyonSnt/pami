@@ -1,5 +1,10 @@
+from io import BytesIO
+from tempfile import TemporaryDirectory
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
+from PIL import Image
 
 from apps.businesses.models import Business
 from apps.catalog.models import Product
@@ -81,3 +86,30 @@ class ProductPublicViewTests(TestCase):
             "&amp;subject=Consulta+sobre+Chaqueta+urbana"
         )
         self.assertContains(response, f'href="{expected_url}"')
+
+    def test_product_generates_webp_card_variant_without_changing_original(self):
+        source = BytesIO()
+        Image.new("RGB", (800, 600), color="red").save(source, format="PNG")
+        source.seek(0)
+
+        with TemporaryDirectory() as media_root, self.settings(MEDIA_ROOT=media_root):
+            product = Product.objects.create(
+                business=self.business,
+                name="Producto con imagen",
+                slug="producto-con-imagen",
+                image=SimpleUploadedFile(
+                    "original.png",
+                    source.read(),
+                    content_type="image/png",
+                ),
+                is_active=True,
+                is_published=True,
+            )
+
+            original_name = product.image.name
+            product.image_card.generate()
+
+            self.assertEqual(product.image.name, original_name)
+            self.assertTrue(product.image_card.name.endswith(".webp"))
+            self.assertEqual(product.image_card.width, 640)
+            self.assertEqual(product.image_card.height, 480)

@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.functional import cached_property
 
+from apps.common.images import responsive_image_spec
 from apps.common.models import BaseModel
 from apps.common.validators import (
     validate_file_size,
@@ -10,6 +11,17 @@ from apps.common.validators import (
 
 
 class SiteConfiguration(BaseModel):
+    image_mobile = responsive_image_spec(
+        width=960,
+        height=540,
+        source="hero_image",
+    )
+    image_desktop = responsive_image_spec(
+        width=1200,
+        height=900,
+        source="hero_image",
+    )
+
     featured_business = models.ForeignKey(
         "businesses.Business",
         on_delete=models.SET_NULL,

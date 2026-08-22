@@ -1,7 +1,7 @@
 <article class="flex h-full flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
   {% with dialog_prefix="product-card-image-"|add:product.business.slug|add:"-" %}
     {% with dialog_id=dialog_prefix|add:product.slug %}
-      {% include "components/ui/zoomable_media.html" with image=product.image alt=product.name dialog_id=dialog_id compact=True %}
+      {% include "components/ui/zoomable_media.html" with image=product.image display_image=product.image_card small_image=product.image_card_small alt=product.name dialog_id=dialog_id compact=True %}
     {% endwith %}
   {% endwith %}
 

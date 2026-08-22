@@ -2,7 +2,7 @@
 
 ## Versión candidata 1.0.0
 
-El alcance funcional previsto para la primera versión está completo. El repositorio incluye README de instalación y operación, exclusiones explícitas para datos locales y productivos, documentación sincronizada y una suite de 105 pruebas.
+El alcance funcional previsto para la primera versión está completo. El repositorio incluye README de instalación y operación, exclusiones explícitas para datos locales y productivos, documentación sincronizada y una suite de 107 pruebas.
 
 No existe un bloque de desarrollo obligatorio pendiente antes de etiquetar la versión. Los siguientes trabajos son evolutivos y deben iniciarse únicamente cuando exista una necesidad real de contenido o negocio.
 
@@ -22,7 +22,7 @@ Se completaron los nueve bloques derivados de la auditoría integral:
 
 Validación vigente:
 
-- 105 pruebas correctas;
+- 107 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS v4 compilado;
@@ -38,7 +38,7 @@ Se ajustaron proporciones responsive, cuadrículas, páginas de detalle, conteni
 
 Validación final:
 
-- 105 pruebas correctas;
+- 107 pruebas correctas;
 - Django check sin problemas;
 - sin cambios de migración pendientes;
 - Tailwind CSS recompilado;
@@ -122,7 +122,7 @@ Continuar con el roadmap oficial:
 
 1. Dominio, HTTPS y cierre de la preparación productiva.
 2. Filtros de catálogo, portafolio y blog.
-3. Generación de variantes responsive para nuevas imágenes editoriales, cuando el volumen de contenido lo justifique.
+3. Ajuste de nuevos tamaños responsive si cambia la composición editorial.
 
 ## Rendimiento y assets
 

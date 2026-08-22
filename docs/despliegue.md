@@ -136,6 +136,19 @@ Si se desea cargar el contenido inicial aprobado de Confecciones:
 docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py seed_demo
 ```
 
+Generar por anticipado las variantes WebP responsive del Hero, tarjetas y
+páginas de detalle:
+
+```bash
+docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py generateimages
+```
+
+Las variantes se guardan en `media/CACHE/images/` dentro del mismo volumen
+persistente de medios. Los originales se conservan para la vista ampliada. El
+comando es seguro para ejecuciones repetidas y conviene utilizarlo después de
+cargar o restaurar muchas imágenes; las imágenes nuevas también se generan al
+ser solicitadas por primera vez.
+
 Verificar Django en modo de despliegue:
 
 ```bash
@@ -154,7 +167,7 @@ docker compose --env-file .env -f docker-compose.prod.yml up -d --build
 docker compose --env-file .env -f docker-compose.prod.yml ps
 ```
 
-Las migraciones y la recolección de static se ejecutan durante el inicio del nuevo contenedor web.
+Las migraciones y la recolección de static se ejecutan durante el inicio del nuevo contenedor web. Si la actualización incorpora nuevos tamaños de imagen, ejecutar también `python manage.py generateimages` dentro del servicio `web`.
 
 ## Copias de seguridad
 

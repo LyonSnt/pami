@@ -9,6 +9,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
+    "imagekit",
     # django_htmx
     # django_filters
     # django_extensions

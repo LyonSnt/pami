@@ -178,6 +178,50 @@ class BrandingAssetTests(SimpleTestCase):
         self.assertIn("aspect-video lg:aspect-4/3", hero_html)
         self.assertIn('aria-controls="home-hero-image-dialog"', hero_html)
 
+    def test_zoomable_media_renders_responsive_sources_and_keeps_original_zoom(self):
+        original = SimpleNamespace(
+            url="/media/content/original.webp",
+            width=1800,
+            height=1200,
+        )
+        small = SimpleNamespace(
+            url="/media/CACHE/images/small.webp",
+            width=320,
+            height=240,
+        )
+        display = SimpleNamespace(
+            url="/media/CACHE/images/card.webp",
+            width=640,
+            height=480,
+        )
+        desktop = SimpleNamespace(
+            url="/media/CACHE/images/desktop.webp",
+            width=1200,
+            height=900,
+        )
+
+        html = render_to_string(
+            "components/ui/zoomable_media.html",
+            {
+                "image": original,
+                "display_image": display,
+                "small_image": small,
+                "desktop_image": desktop,
+                "alt": "Chaquetas y buzos",
+                "dialog_id": "responsive-image-dialog",
+            },
+        )
+
+        self.assertIn('<source media="(min-width: 1024px)"', html)
+        self.assertIn("/media/CACHE/images/desktop.webp", html)
+        self.assertIn(
+            'srcset="/media/CACHE/images/small.webp 320w, '
+            '/media/CACHE/images/card.webp 640w"',
+            html,
+        )
+        self.assertIn('src="/media/CACHE/images/card.webp"', html)
+        self.assertIn('src="/media/content/original.webp"', html)
+
     def test_public_cards_create_unique_zoom_dialogs(self):
         image = SimpleNamespace(
             url="/media/content/image.webp",
