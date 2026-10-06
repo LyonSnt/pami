@@ -13,7 +13,7 @@ La auditoría técnica y los nueve bloques de corrección fueron completados. La
 ## Infraestructura
 
 - Python 3.12-slim.
-- Django 5.1.
+- Django 5.2 LTS.
 - PostgreSQL 17-alpine.
 - Docker Compose como entorno oficial.
 - Servicios `web`, `db` y `tailwind` en desarrollo.

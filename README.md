@@ -19,7 +19,7 @@ Portal público y CMS desarrollado con Django para administrar la marca Pámi y 
 
 ## Tecnologías
 
-- Python 3.12 y Django 5.1.
+- Python 3.12 y Django 5.2 LTS.
 - PostgreSQL 17.
 - Docker Compose.
 - Tailwind CSS v4.

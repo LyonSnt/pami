@@ -41,7 +41,7 @@ integración o infraestructura.
 
 Estas mejoras no bloquean la versión actual:
 
-1. Actualizar Django 5.1 a Django 5.2 LTS.
+1. Mantener Django 5.2 LTS actualizado dentro de la serie 5.2.
 2. Filtros y paginación cuando aumente el volumen real de contenido.
 3. Pruebas automatizadas con navegador para recorridos completos.
 4. Nuevos tamaños de imagen si cambia la composición editorial.
