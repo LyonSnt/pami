@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "tailwind": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css",
-    "tailwind:watch": "tailwindcss -i ./static/css/input.css -o ./static/css/output.css --watch=always"
+    "tailwind": "tailwindcss -i ./assets/css/input.css -o ./static/css/output.css",
+    "tailwind:watch": "tailwindcss -i ./assets/css/input.css -o ./static/css/output.css --watch=always"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0",

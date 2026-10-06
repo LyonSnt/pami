@@ -5,7 +5,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY static/css/input.css ./static/css/input.css
+COPY assets/css/input.css ./assets/css/input.css
 COPY templates/ ./templates/
 COPY apps/ ./apps/
 RUN npm run tailwind

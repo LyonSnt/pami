@@ -250,13 +250,13 @@ npm run tailwind:watch
 
 Archivo fuente:
 
-static/css/input.css
+assets/css/input.css
 
 Archivo generado:
 
 static/css/output.css
 
-Tokens oficiales definidos en `static/css/input.css`:
+Tokens oficiales definidos en `assets/css/input.css`:
 
 - `primary`: `#E31B23`;
 - `primary-hover`: `#C8161D`;

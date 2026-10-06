@@ -61,7 +61,7 @@ Construir e iniciar la aplicación:
 docker compose --env-file .env -f docker-compose.prod.yml up -d --build
 ```
 
-El contenedor web ejecuta las migraciones y `collectstatic` antes de iniciar Gunicorn. La recolección excluye `css/input.css`, que es la fuente de Tailwind, y publica su `output.css` compilado y versionado. Gunicorn se publica exclusivamente en `127.0.0.1:8026`; PostgreSQL no se expone al host ni a Internet.
+El contenedor web ejecuta las migraciones y `collectstatic` antes de iniciar Gunicorn. La fuente de Tailwind vive fuera del directorio público en `assets/css/input.css`; únicamente `static/css/output.css` se compila, publica y versiona. Gunicorn se publica exclusivamente en `127.0.0.1:8026`; PostgreSQL no se expone al host ni a Internet.
 
 ## Configuración temporal de Nginx por IP
 
