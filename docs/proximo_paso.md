@@ -3,9 +3,7 @@
 ## Sistema concluido
 
 Pámi se considera funcionalmente concluido como versión candidata estable
-`1.0.0`. El cierre funcional vigente es
-`f00869f mejora:organizar-catalogo-por-lineas`. Para reanudar se debe utilizar
-ese commit o el último commit documental posterior disponible en `main`.
+`1.0.0`. Para reanudar se debe utilizar el último commit disponible en `main`.
 
 No existe un bloque obligatorio de desarrollo pendiente. Cualquier cambio
 posterior debe responder a una nueva necesidad de contenido, negocio,
@@ -13,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 122 pruebas correctas;
+- 130 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -37,16 +35,18 @@ integración o infraestructura.
 - Catálogo preparado para múltiples líneas con galerías, características y estados comerciales.
 - Catálogo general organizado como selector de líneas, sin mezclar sus productos o servicios.
 - Línea Soluciones digitales y Sistema de gestión de agua bajo cotización.
+- Interruptores públicos para Catálogo, Portafolio, Blog y Contacto; únicamente Catálogo activo en la configuración inicial.
 
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
 
-1. Filtros y paginación cuando aumente el volumen real de contenido.
-2. Pruebas automatizadas con navegador para recorridos completos.
-3. Nuevos tamaños de imagen si cambia la composición editorial.
-4. Integraciones externas de correo, analítica o canales comerciales.
-5. Nuevas líneas de negocio y sus contenidos.
+1. Actualizar Django 5.1 a Django 5.2 LTS.
+2. Filtros y paginación cuando aumente el volumen real de contenido.
+3. Pruebas automatizadas con navegador para recorridos completos.
+4. Nuevos tamaños de imagen si cambia la composición editorial.
+5. Integraciones externas de correo, analítica o canales comerciales.
+6. Nuevas líneas de negocio y sus contenidos.
 
 ## Responsabilidades operativas
 
@@ -69,7 +69,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 122 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 130 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. El cambio que quiero realizar es:

@@ -65,6 +65,23 @@ class SiteConfiguration(BaseModel):
 
     maintenance_mode = models.BooleanField(default=False, verbose_name="Modo mantenimiento")
 
+    show_catalog = models.BooleanField(
+        default=True,
+        verbose_name="Mostrar catálogo",
+    )
+    show_portfolio = models.BooleanField(
+        default=False,
+        verbose_name="Mostrar portafolio",
+    )
+    show_blog = models.BooleanField(
+        default=False,
+        verbose_name="Mostrar blog",
+    )
+    show_contact = models.BooleanField(
+        default=False,
+        verbose_name="Mostrar contacto",
+    )
+
     hero_title = models.CharField(
         max_length=180,
         default="Todo lo que tu empresa necesita, en un solo lugar.",

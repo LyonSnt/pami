@@ -84,6 +84,7 @@ class BrandingAssetTests(SimpleTestCase):
         html = render_to_string(
             "base/_footer.html",
             {
+                "contact_enabled": True,
                 "site_configuration": SimpleNamespace(
                     site_name="Pámi",
                     slogan="",
@@ -104,6 +105,32 @@ class BrandingAssetTests(SimpleTestCase):
         self.assertIn('href="tel:099 999 9999"', html)
         self.assertIn('href="https://wa.me/593999999999"', html)
         self.assertIn('aria-label="Redes sociales"', html)
+        self.assertIn('href="https://instagram.com/pami"', html)
+
+    def test_footer_hides_contact_links_when_module_is_disabled(self):
+        html = render_to_string(
+            "base/_footer.html",
+            {
+                "contact_enabled": False,
+                "site_configuration": SimpleNamespace(
+                    site_name="Pámi",
+                    slogan="",
+                    email="contacto@pami.test",
+                    phone="099 999 9999",
+                    whatsapp_url="https://wa.me/593999999999",
+                    address="Ecuador",
+                    facebook_url="",
+                    instagram_url="https://instagram.com/pami",
+                    tiktok_url="",
+                    youtube_url="",
+                    linkedin_url="",
+                ),
+            },
+        )
+
+        self.assertNotIn("mailto:", html)
+        self.assertNotIn("tel:", html)
+        self.assertNotIn("wa.me", html)
         self.assertIn('href="https://instagram.com/pami"', html)
 
     def test_whatsapp_url_keeps_only_digits(self):

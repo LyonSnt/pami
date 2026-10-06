@@ -71,6 +71,10 @@ class SeedDemoCommandTests(TestCase):
             self.configuration.featured_business,
             self.confections,
         )
+        self.assertTrue(self.configuration.show_catalog)
+        self.assertFalse(self.configuration.show_portfolio)
+        self.assertFalse(self.configuration.show_blog)
+        self.assertFalse(self.configuration.show_contact)
         self.assertTrue(self.stationery.is_published)
         self.assertFalse(self.legacy_product.is_published)
         self.assertFalse(self.legacy_navigation.is_active)
@@ -116,6 +120,12 @@ class SeedDemoCommandTests(TestCase):
         self.assertFalse(
             NavigationItem.objects.filter(
                 label="Confecciones",
+                is_active=True,
+            ).exists()
+        )
+        self.assertFalse(
+            NavigationItem.objects.filter(
+                label__in=("Portafolio", "Blog", "Contacto"),
                 is_active=True,
             ).exists()
         )

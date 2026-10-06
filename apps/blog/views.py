@@ -10,9 +10,11 @@ from apps.site.seo import (
     build_absolute_image_url,
     build_blog_post_structured_data,
 )
+from apps.site.access import require_public_module
 
 
 def blog_post_list(request):
+    require_public_module(request, "blog")
     posts = get_published_blog_posts()
 
     context = {
@@ -23,6 +25,7 @@ def blog_post_list(request):
 
 
 def blog_post_detail(request, slug):
+    require_public_module(request, "blog")
     post = get_published_blog_post_by_slug(slug)
     if post is None:
         raise Http404

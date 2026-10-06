@@ -7,6 +7,7 @@ Portal público y CMS desarrollado con Django para administrar la marca Pámi y 
 - Home administrable y responsive.
 - Líneas de negocio, catálogo, portafolio y Blog.
 - Catálogo multilínea con estados comerciales, características y galerías.
+- Módulos públicos activables desde Django Admin; la configuración inicial deja visible únicamente el catálogo.
 - Buscador público con reglas de publicación.
 - Formulario de contacto protegido y auditable.
 - Roles administrativos para contenido y contacto.
@@ -59,7 +60,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 122 pruebas.
+La suite estable contiene 130 pruebas.
 
 ## Roles administrativos
 

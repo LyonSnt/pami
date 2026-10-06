@@ -36,8 +36,10 @@
           <path stroke-linecap="round" d="m20 20-4-4" />
         </svg>
       </a>
-      {% url 'contact:form' as contact_url %}
-      {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
+      {% if contact_enabled %}
+        {% url 'contact:form' as contact_url %}
+        {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
+      {% endif %}
     </div>
 
     <details class="group relative lg:hidden" data-mobile-navigation>
@@ -66,7 +68,9 @@
             </svg>
             Buscar
           </a>
-          {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
+          {% if contact_enabled %}
+            {% include "components/ui/button.html" with href=contact_url label="Contáctanos" current=contact_is_current %}
+          {% endif %}
         </div>
       </div>
     </details>

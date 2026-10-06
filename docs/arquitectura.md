@@ -85,11 +85,21 @@ Serán registros en el modelo `Business`.
 
 `Business` es el eje del CMS. Las apps `catalog`, `portfolio`, `blog` y `contact` pueden relacionar su contenido con una línea de negocio.
 
+`SiteConfiguration` define qué módulos están disponibles públicamente mediante
+`show_catalog`, `show_portfolio`, `show_blog` y `show_contact`. Un módulo
+desactivado permanece disponible en Django Admin, pero se excluye del Home,
+navegación, buscador y sitemap y sus vistas públicas responden 404. La
+configuración inicial expone únicamente el catálogo.
+
 `Chaquetas` y `Buzos` son productos asociados a `Confecciones`; `Sistema de gestión de agua` es un producto o servicio asociado a `Soluciones digitales`. El catálogo general muestra únicamente las líneas y cada página interna consulta los productos de la línea elegida, evitando mezclar sectores distintos.
 
 `Product` contiene la información comercial común: estado comercial, precio opcional, público objetivo, información adicional y enlace seguro de demostración. `ProductFeature` administra características ordenables y `ProductImage` una galería ordenable con variantes responsive. Esta composición permite incorporar Papelería, Calzado u otros sectores sin crear modelos exclusivos para cada uno.
 
 No existe `ProductCategory`. Solo deberá incorporarse una taxonomía adicional si una línea alcanza un volumen que necesite subdivisiones y filtros internos; no debe utilizarse para representar las líneas de negocio.
+
+Las antiguas rutas `/negocios/` se conservan únicamente como redirecciones
+permanentes hacia `/catalogo/`. De esta forma se mantienen enlaces históricos
+sin duplicar públicamente la presentación de líneas de negocio.
 
 `SiteConfiguration.featured_business` define la línea promocionada en el Home. El Hero utiliza su nombre como etiqueta y el Home consulta productos y proyectos de esa misma línea. Esta relación se administra desde Django Admin y permite cambiar en el futuro de Confecciones a Papelería, Sistemas de agua u otra línea sin modificar templates ni views.
 

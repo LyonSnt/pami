@@ -62,7 +62,9 @@
           {% endif %}
 
           <div class="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:flex-wrap">
-            {% include "components/ui/button.html" with href=contact_url label="Solicitar información" %}
+            {% if contact_url %}
+              {% include "components/ui/button.html" with href=contact_url label="Solicitar información" %}
+            {% endif %}
 
             {% if product.demo_url %}
               {% include "components/ui/button.html" with href=product.demo_url label="Ver demostración" variant="secondary" %}

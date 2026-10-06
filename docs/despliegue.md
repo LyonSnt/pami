@@ -191,6 +191,11 @@ la navegación principal a `Catálogo`. La ejecución de `seed_demo` es opcional
 se utiliza solamente si se desea incorporar la línea demostrativa Soluciones
 digitales y su Sistema de gestión de agua.
 
+Las versiones posteriores incorporan interruptores en `Configuración del
+sitio > Módulos públicos`. La configuración inicial mantiene Catálogo activo y
+Portafolio, Blog y Contacto desactivados. Estos módulos pueden reactivarse sin
+restaurar datos ni ejecutar migraciones adicionales.
+
 ## Copias de seguridad
 
 ### Descarga manual desde Django Admin

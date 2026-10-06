@@ -25,7 +25,7 @@ class HomeViewTests(TestCase):
             is_published=True,
         )
 
-    def test_home_only_contains_published_confections_content(self):
+    def test_home_only_contains_published_catalog_content_when_optional_modules_are_off(self):
         jacket = Product.objects.create(
             business=self.public_business,
             name="Chaquetas",
@@ -77,10 +77,11 @@ class HomeViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["business"], self.public_business)
         self.assertQuerySetEqual(response.context["products"], [jacket, sweatshirt])
-        self.assertQuerySetEqual(response.context["projects"], [public_project])
+        self.assertEqual(response.context["projects"], [])
         self.assertNotIn("businesses", response.context)
         self.assertNotIn("posts", response.context)
-        self.assertContains(response, "Nuestras confecciones")
+        self.assertContains(response, "Productos y servicios destacados")
+        self.assertNotContains(response, public_project.title)
         self.assertNotContains(response, "Producto de otra línea")
         self.assertContains(response, "Donde encuentras todo para ti")
         self.assertContains(response, "Confecciones")
@@ -122,7 +123,7 @@ class HomeViewTests(TestCase):
             is_published=True,
         )
 
-        with self.assertNumQueries(5):
+        with self.assertNumQueries(4):
             response = self.client.get(reverse("site:home"))
 
         self.assertEqual(response.status_code, 200)

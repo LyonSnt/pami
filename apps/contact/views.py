@@ -12,9 +12,11 @@ from apps.contact.services.submission import (
     is_rate_limited,
     remember_submission,
 )
+from apps.site.access import require_public_module
 
 
 def contact_form(request):
+    require_public_module(request, "contact")
     if request.method == "POST":
         form = ContactMessageForm(request.POST)
 
@@ -74,4 +76,5 @@ def contact_form(request):
 
 
 def contact_success(request):
+    require_public_module(request, "contact")
     return render(request, "contact/success.html")

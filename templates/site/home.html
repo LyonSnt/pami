@@ -14,33 +14,40 @@
 
 {% block content %}
   {% include "components/sections/hero.html" %}
-  <section class="bg-slate-50 py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      {% include "components/layout/section_title.html" with title="Nuestras confecciones" subtitle="Descubre nuestras chaquetas y buzos." %}
+  {% if catalog_enabled %}
+    <section class="bg-slate-50 py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {% include "components/layout/section_title.html" with title="Productos y servicios destacados" subtitle="Descubre las soluciones disponibles en nuestro catálogo." %}
 
-      <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
-        {% for product in products %}
-          {% include "components/cards/product_card.html" with product=product %}
-        {% empty %}
-          {% include "components/ui/empty_state.html" with title="Próximamente nuevas confecciones" message="Estamos preparando nuestras chaquetas y buzos para ti." %}
-        {% endfor %}
+        <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
+          {% for product in products %}
+            {% include "components/cards/product_card.html" with product=product %}
+          {% empty %}
+            {% include "components/ui/empty_state.html" with title="Próximamente nuevos productos y servicios" message="Estamos preparando nuevas soluciones para ti." %}
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  </section>
-  <section class="bg-white py-16">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      {% include "components/layout/section_title.html" with title="Trabajos recientes" subtitle="Conoce algunas confecciones realizadas por Pámi." %}
+    </section>
+  {% endif %}
 
-      <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
-        {% for project in projects %}
-          {% include "components/cards/project_card.html" with project=project %}
-        {% empty %}
-          {% include "components/ui/empty_state.html" with title="Próximamente nuevos trabajos" message="Aquí mostraremos nuestras confecciones más recientes." %}
-        {% endfor %}
+  {% if portfolio_enabled %}
+    <section class="bg-white py-16">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {% include "components/layout/section_title.html" with title="Trabajos recientes" subtitle="Conoce algunos proyectos realizados por Pámi." %}
+
+        <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
+          {% for project in projects %}
+            {% include "components/cards/project_card.html" with project=project %}
+          {% empty %}
+            {% include "components/ui/empty_state.html" with title="Próximamente nuevos trabajos" message="Aquí mostraremos nuestros proyectos más recientes." %}
+          {% endfor %}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  {% endif %}
 
-  {% url 'contact:form' as contact_url %}
-  {% include "components/sections/call_to_action.html" with title="¿Buscas una prenda para ti?" subtitle="Contáctanos para conocer nuestros modelos de chaquetas y buzos." button_label="Solicitar información" button_href=contact_url %}
+  {% if contact_enabled %}
+    {% url 'contact:form' as contact_url %}
+    {% include "components/sections/call_to_action.html" with title="¿Necesitas más información?" subtitle="Contáctanos para conocer nuestros productos y servicios." button_label="Solicitar información" button_href=contact_url %}
+  {% endif %}
 {% endblock %}

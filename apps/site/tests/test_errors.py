@@ -33,3 +33,12 @@ class PublicErrorPageTests(TestCase):
             'name="robots" content="noindex, nofollow"',
             status_code=500,
         )
+
+
+class DevelopmentErrorPageTests(TestCase):
+    @override_settings(DEBUG=True)
+    def test_unexpected_missing_route_keeps_django_diagnostics(self):
+        response = self.client.get("/ruta-inexistente-de-desarrollo/")
+
+        self.assertEqual(response.status_code, 404)
+        self.assertContains(response, "Using the URLconf", status_code=404)

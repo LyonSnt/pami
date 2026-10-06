@@ -16,7 +16,7 @@ class SearchForm(forms.Form):
                     "focus-visible:outline-none focus-visible:ring-2 "
                     "focus-visible:ring-primary"
                 ),
-                "placeholder": "Busca chaquetas, buzos, proyectos o artículos",
+                "placeholder": "Busca productos, servicios o líneas de negocio",
                 "autocomplete": "off",
             }
         ),

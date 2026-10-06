@@ -6,7 +6,15 @@ from apps.site.models import NavigationItem, SiteConfiguration
 
 @admin.register(SiteConfiguration)
 class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
-    list_display = ("site_name", "email", "phone", "whatsapp", "maintenance_mode", "created_at")
+    list_display = (
+        "site_name",
+        "show_catalog",
+        "show_portfolio",
+        "show_blog",
+        "show_contact",
+        "maintenance_mode",
+        "created_at",
+    )
     search_fields = ("site_name", "email", "phone", "whatsapp")
     list_filter = ("maintenance_mode",)
     autocomplete_fields = ("featured_business",)
@@ -47,6 +55,14 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
         }),
         ("SEO", {
             "fields": ("seo_title", "seo_description")
+        }),
+        ("Módulos públicos", {
+            "fields": (
+                "show_catalog",
+                "show_portfolio",
+                "show_blog",
+                "show_contact",
+            )
         }),
         ("Estado", {
             "fields": ("maintenance_mode",)

@@ -1,13 +1,13 @@
 {% extends "base/base.html" %}
 
 {% block title %}Buscar | Pámi{% endblock %}
-{% block meta_description %}Busca productos, proyectos, artículos y líneas de negocio en Pámi.{% endblock %}
+{% block meta_description %}Busca productos, servicios y líneas de negocio en Pámi.{% endblock %}
 {% block robots %}noindex, follow{% endblock %}
 
 {% block content %}
 <section class="bg-slate-50 py-16">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    {% include "components/layout/section_title.html" with title="Buscar en Pámi" subtitle="Encuentra productos, proyectos, artículos y líneas de negocio." level=1 %}
+    {% include "components/layout/section_title.html" with title="Buscar en Pámi" subtitle="Encuentra productos, servicios y líneas de negocio." level=1 %}
 
     <form method="get" action="{% url 'site:search' %}" role="search" class="mx-auto mt-10 max-w-3xl">
       <label for="{{ form.q.id_for_label }}" class="sr-only">Buscar en Pámi</label>
@@ -57,7 +57,7 @@
             <section aria-labelledby="search-businesses">
               <h2 id="search-businesses" class="text-2xl font-bold text-slate-900">Líneas de negocio</h2>
               <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {% for business in businesses %}{% include "components/cards/business_card.html" with business=business %}{% endfor %}
+                {% for business in businesses %}{% include "components/cards/business_card.html" with business=business catalog_mode=True %}{% endfor %}
               </div>
             </section>
           {% endif %}
@@ -69,7 +69,7 @@
       {% endif %}
     {% else %}
       <div class="mx-auto mt-10 max-w-3xl">
-        {% include "components/ui/empty_state.html" with title="Escribe lo que deseas encontrar" message="Puedes buscar, por ejemplo, chaquetas, buzos, confecciones o ideas." %}
+        {% include "components/ui/empty_state.html" with title="Escribe lo que deseas encontrar" message="Puedes buscar, por ejemplo, chaquetas, buzos, confecciones o sistemas." %}
       </div>
     {% endif %}
   </div>

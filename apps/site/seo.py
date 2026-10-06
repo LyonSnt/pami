@@ -9,6 +9,7 @@ from apps.blog.selectors import get_published_blog_posts
 from apps.businesses.selectors import get_published_businesses
 from apps.catalog.selectors import get_published_products
 from apps.portfolio.selectors import get_published_portfolio_projects
+from apps.site.selectors import get_site_configuration, is_public_module_enabled
 
 
 def build_absolute_image_url(request, image):
@@ -126,14 +127,17 @@ class StaticViewSitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
-        return (
-            "site:home",
-            "businesses:list",
-            "catalog:list",
-            "portfolio:list",
-            "blog:list",
-            "contact:form",
-        )
+        configuration = get_site_configuration()
+        items = ["site:home"]
+        if is_public_module_enabled(configuration, "catalog"):
+            items.append("catalog:list")
+        if is_public_module_enabled(configuration, "portfolio"):
+            items.append("portfolio:list")
+        if is_public_module_enabled(configuration, "blog"):
+            items.append("blog:list")
+        if is_public_module_enabled(configuration, "contact"):
+            items.append("contact:form")
+        return items
 
     def location(self, item):
         return reverse(item)
@@ -144,10 +148,13 @@ class BusinessSitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
+        configuration = get_site_configuration()
+        if not is_public_module_enabled(configuration, "catalog"):
+            return get_published_businesses().none()
         return get_published_businesses()
 
     def location(self, business):
-        return reverse("businesses:detail", args=[business.slug])
+        return reverse("catalog:business_list", args=[business.slug])
 
     def lastmod(self, business):
         return business.updated_at
@@ -158,6 +165,9 @@ class ProductSitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
+        configuration = get_site_configuration()
+        if not is_public_module_enabled(configuration, "catalog"):
+            return get_published_products().none()
         return get_published_products()
 
     def location(self, product):
@@ -172,6 +182,9 @@ class PortfolioSitemap(Sitemap):
     changefreq = "monthly"
 
     def items(self):
+        configuration = get_site_configuration()
+        if not is_public_module_enabled(configuration, "portfolio"):
+            return get_published_portfolio_projects().none()
         return get_published_portfolio_projects()
 
     def location(self, project):
@@ -186,6 +199,9 @@ class BlogSitemap(Sitemap):
     changefreq = "weekly"
 
     def items(self):
+        configuration = get_site_configuration()
+        if not is_public_module_enabled(configuration, "blog"):
+            return get_published_blog_posts().none()
         return get_published_blog_posts()
 
     def location(self, post):

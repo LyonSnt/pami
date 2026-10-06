@@ -65,6 +65,10 @@ class Command(BaseCommand):
             "hero_description": "Conoce prendas cómodas, versátiles y pensadas para acompañar tu estilo.",
             "hero_primary_button_text": "Ver confecciones",
             "hero_primary_button_url": "/catalogo/confecciones/",
+            "show_catalog": True,
+            "show_portfolio": False,
+            "show_blog": False,
+            "show_contact": False,
         }
 
         if configuration:
@@ -83,10 +87,11 @@ class Command(BaseCommand):
         items = [
             ("Inicio", "/", 1),
             ("Catálogo", "/catalogo/", 2),
-            ("Portafolio", "/portafolio/", 3),
-            ("Blog", "/blog/", 4),
-            ("Contacto", "/contacto/", 5),
         ]
+
+        NavigationItem.objects.filter(
+            label__in=("Portafolio", "Blog", "Contacto"),
+        ).update(is_active=False)
 
         for label, url, order in items:
             NavigationItem.objects.update_or_create(

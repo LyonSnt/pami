@@ -61,7 +61,9 @@
           {% endif %}
 
           <div class="mt-8 flex flex-col items-start gap-6 sm:flex-row sm:flex-wrap">
+          {% if contact_url %}
             {% include "components/ui/button.html" with href=contact_url label="Solicitar información" %}
+          {% endif %}
 
             {% url 'portfolio:list' as portfolio_url %}
             {% include "components/ui/button.html" with href=portfolio_url label="Volver al portafolio" variant="secondary" %}

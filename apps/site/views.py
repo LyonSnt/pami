@@ -14,15 +14,14 @@ from apps.portfolio.selectors import (
     search_published_portfolio_projects,
 )
 from apps.site.forms import SearchForm
-from apps.site.selectors import get_public_site_configuration
+from apps.site.selectors import (
+    get_request_site_configuration,
+    request_module_is_enabled,
+)
 
 
 def home(request):
-    if hasattr(request, "_site_configuration"):
-        site_configuration = request._site_configuration
-    else:
-        site_configuration = get_public_site_configuration()
-        request._site_configuration = site_configuration
+    site_configuration = get_request_site_configuration(request)
     featured_business_id = (
         site_configuration.featured_business_id
         if site_configuration
@@ -33,8 +32,16 @@ def home(request):
         if featured_business_id
         else None
     )
-    products = get_published_products_by_business(business)[:2] if business else []
-    projects = get_published_portfolio_projects_by_business(business)[:3] if business else []
+    products = (
+        get_published_products_by_business(business)[:2]
+        if business and request_module_is_enabled(request, "catalog")
+        else []
+    )
+    projects = (
+        get_published_portfolio_projects_by_business(business)[:3]
+        if business and request_module_is_enabled(request, "portfolio")
+        else []
+    )
 
     context = {
         "site_configuration": site_configuration,
@@ -58,10 +65,13 @@ def search(request):
         query = form.cleaned_data["q"]
 
     if query:
-        businesses = search_published_businesses(query)[:6]
-        products = search_published_products(query)[:6]
-        projects = search_published_portfolio_projects(query)[:6]
-        posts = search_published_blog_posts(query)[:6]
+        if request_module_is_enabled(request, "catalog"):
+            businesses = search_published_businesses(query)[:6]
+            products = search_published_products(query)[:6]
+        if request_module_is_enabled(request, "portfolio"):
+            projects = search_published_portfolio_projects(query)[:6]
+        if request_module_is_enabled(request, "blog"):
+            posts = search_published_blog_posts(query)[:6]
 
     result_count = sum(
         len(results)

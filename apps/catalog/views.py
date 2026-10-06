@@ -6,6 +6,8 @@ from apps.site.seo import (
     build_absolute_image_url,
     build_product_structured_data,
 )
+from apps.site.access import require_public_module
+from apps.site.selectors import request_module_is_enabled
 from apps.catalog.selectors import (
     get_published_products_by_business,
     with_public_product_details,
@@ -15,6 +17,7 @@ from django.urls import reverse
 
 
 def product_list(request):
+    require_public_module(request, "catalog")
     businesses = get_published_businesses()
 
     context = {
@@ -25,6 +28,7 @@ def product_list(request):
 
 
 def product_business_list(request, business_slug):
+    require_public_module(request, "catalog")
     business = get_object_or_404(
         get_published_businesses(),
         slug=business_slug,
@@ -40,6 +44,7 @@ def product_business_list(request, business_slug):
 
 
 def product_detail(request, business_slug, product_slug):
+    require_public_module(request, "catalog")
     business = get_object_or_404(
         get_published_businesses(),
         slug=business_slug,
@@ -54,9 +59,13 @@ def product_detail(request, business_slug, product_slug):
     context = {
         "business": business,
         "product": product,
-        "contact_url": build_contact_url(
-            business=business,
-            subject=f"Consulta sobre {product.name}",
+        "contact_url": (
+            build_contact_url(
+                business=business,
+                subject=f"Consulta sobre {product.name}",
+            )
+            if request_module_is_enabled(request, "contact")
+            else ""
         ),
         "page_social_image_url": build_absolute_image_url(request, product.image),
         "page_structured_data": build_product_structured_data(request, product),

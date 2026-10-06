@@ -35,6 +35,23 @@ class SiteConfigurationAdminTests(TestCase):
             model_admin.has_delete_permission(request, configuration)
         )
 
+    def test_public_module_switches_are_available(self):
+        model_admin = SiteConfigurationAdmin(SiteConfiguration, AdminSite())
+        fieldset_fields = {
+            field
+            for _, options in model_admin.fieldsets
+            for field in options["fields"]
+        }
+
+        self.assertTrue(
+            {
+                "show_catalog",
+                "show_portfolio",
+                "show_blog",
+                "show_contact",
+            }.issubset(fieldset_fields)
+        )
+
 
 class EditorialAdminTests(TestCase):
     def test_active_status_is_available_in_editorial_admins(self):

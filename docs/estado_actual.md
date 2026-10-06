@@ -8,7 +8,7 @@ La arquitectura soporta múltiples líneas de negocio. El Home conserva Confecci
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio, incluyendo Home, catálogo, portafolio, blog y contacto. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. La suite actual contiene 122 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 130 pruebas correctas.
 
 ## Infraestructura
 
@@ -64,6 +64,7 @@ Estado funcional:
 - Precios visibles protegidos mediante validación y restricciones de base de datos.
 - Productos con estado comercial, público objetivo, información adicional y enlace seguro de demostración.
 - Galerías y características ordenables y reutilizables para cualquier línea de negocio.
+- Interruptores administrativos independientes para Catálogo, Portafolio, Blog y Contacto.
 
 ## Portal público
 
@@ -107,6 +108,9 @@ Características:
 - Encabezados principales semánticos y breadcrumbs completos en detalles editoriales.
 - Buscador responsive con resultados agrupados de productos, proyectos, artículos y líneas de negocio.
 - El catálogo general funciona como selector de líneas y evita mezclar productos de sectores distintos; cada página interna muestra únicamente los productos o servicios de la línea elegida.
+- Los módulos desactivados se excluyen de navegación, Home, buscador y sitemap, y sus rutas públicas responden 404 sin eliminar sus datos.
+- Los módulos desactivados muestran el 404 institucional incluso en desarrollo; los errores inesperados conservan el diagnóstico técnico cuando `DEBUG=True`.
+- Las rutas históricas de Negocios redirigen permanentemente al catálogo para evitar dos recorridos públicos equivalentes.
 - Búsqueda de productos por características activas y contenido comercial adicional.
 - Búsqueda limitada a contenido activo, publicado y vigente.
 - Acceso al buscador desde la navegación de escritorio y móvil.
@@ -213,7 +217,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 122 pruebas ejecutadas correctamente.
+- 130 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.
@@ -233,9 +237,9 @@ Antes de desplegar se debe:
 ## Cierre y estado de reanudación
 
 El sistema se considera funcionalmente concluido como versión candidata estable
-`1.0.0`. El último cierre funcional corresponde al commit
-`f00869f mejora:organizar-catalogo-por-lineas`. Está validado mediante 122
-pruebas, sin migraciones pendientes y con revisión visual completada.
+`1.0.0`. El estado vigente corresponde al último commit disponible en `main` y
+está validado mediante 130 pruebas, sin migraciones pendientes y con revisión
+visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas
 reales de navegador, integraciones y nuevas líneas de negocio son mejoras
