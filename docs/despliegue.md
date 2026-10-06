@@ -16,7 +16,7 @@ La IP, contraseñas, llaves privadas y el archivo `.env` nunca deben guardarse e
 - Firewall con SSH y HTTP habilitados.
 - Puerto de PostgreSQL sin exposición pública.
 
-Puertos temporales necesarios:
+Puertos utilizados durante la etapa temporal:
 
 - `22/tcp` para SSH, restringido por origen cuando sea posible;
 - `8025/tcp` para el acceso temporal de Pámi por IP.
@@ -83,7 +83,10 @@ La URL temporal será:
 http://SERVER_IPV4:8025
 ```
 
-Se debe permitir `8025/tcp` tanto en el firewall de Hetzner como en el firewall del sistema. No se deben abrir `8026/tcp` ni `5432/tcp`.
+Si existe un firewall de Hetzner o del sistema que bloquee conexiones entrantes,
+se debe permitir `8025/tcp` en él. Si no hay una política de filtrado activa,
+no es necesario crear una regla adicional. No se deben exponer públicamente
+`8026/tcp` ni `5432/tcp`.
 
 Revisar el estado y los registros:
 
@@ -130,11 +133,17 @@ EMAIL_TIMEOUT=10
 
 No se deben versionar las credenciales SMTP. Después de configurarlas, realizar un envío real y confirmar tanto el registro en Django Admin como la recepción del correo. Si SMTP falla, el mensaje permanece almacenado y el error aparece en los registros de la aplicación.
 
-Si se desea cargar el contenido inicial aprobado de Confecciones:
+Si se desea cargar o sincronizar el contenido demostrativo aprobado:
 
 ```bash
 docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py seed_demo
 ```
+
+El comando publica Confecciones con Chaquetas y Buzos, además de Soluciones
+digitales con Sistema de gestión de agua bajo cotización. Es idempotente y no
+despublica líneas adicionales creadas por el usuario, como Papelería o Calzado.
+No asigna un precio ni imágenes ficticias al sistema; esos datos se completan
+desde Django Admin cuando exista contenido comercial real.
 
 Generar por anticipado las variantes WebP responsive del Hero, tarjetas y
 páginas de detalle:
@@ -168,6 +177,19 @@ docker compose --env-file .env -f docker-compose.prod.yml ps
 ```
 
 Las migraciones y la recolección de static se ejecutan durante el inicio del nuevo contenedor web. Si la actualización incorpora nuevos tamaños de imagen, ejecutar también `python manage.py generateimages` dentro del servicio `web`.
+
+Después de actualizar a `f00869f` o una versión posterior, sincronizar los
+permisos del editor para habilitar la administración de características e
+imágenes de productos:
+
+```bash
+docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py setup_admin_roles
+```
+
+La actualización crea las estructuras de características y galerías y cambia
+la navegación principal a `Catálogo`. La ejecución de `seed_demo` es opcional:
+se utiliza solamente si se desea incorporar la línea demostrativa Soluciones
+digitales y su Sistema de gestión de agua.
 
 ## Copias de seguridad
 

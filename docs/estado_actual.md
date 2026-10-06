@@ -233,7 +233,8 @@ Antes de desplegar se debe:
 ## Cierre y estado de reanudación
 
 El sistema se considera funcionalmente concluido como versión candidata estable
-`1.0.0` en el último commit disponible de `main`. Está validado mediante 122
+`1.0.0`. El último cierre funcional corresponde al commit
+`f00869f mejora:organizar-catalogo-por-lineas`. Está validado mediante 122
 pruebas, sin migraciones pendientes y con revisión visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas

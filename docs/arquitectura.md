@@ -2,7 +2,7 @@
 
 Pámi es un portal web/CMS propio para administrar una marca principal con múltiples líneas de negocio.
 
-La arquitectura continúa preparada para múltiples líneas, aunque el enfoque editorial público actual se concentra en `Confecciones`. Esta prioridad no convierte Confecciones en una app independiente ni elimina la capacidad de publicar otras líneas en el futuro.
+La arquitectura administra múltiples líneas de negocio. El Home mantiene `Confecciones` como línea destacada, mientras el catálogo público permite navegar de forma independiente por Confecciones, Soluciones digitales y cualquier línea futura.
 
 ## Stack
 
@@ -79,13 +79,17 @@ Los componentes de interfaz reutilizables viven en `templates/components/` y se 
 
 ## Decisiones clave
 
-Las líneas como Confecciones, Papelería y Tecnología no serán apps separadas.
+Las líneas como Confecciones, Soluciones digitales, Papelería y Calzado no son apps separadas.
 
 Serán registros en el modelo `Business`.
 
 `Business` es el eje del CMS. Las apps `catalog`, `portfolio`, `blog` y `contact` pueden relacionar su contenido con una línea de negocio.
 
-En la etapa actual, `Chaquetas` y `Buzos` son productos asociados al registro `Confecciones`. No se introduce una taxonomía de categorías hasta que existan productos concretos que necesiten agruparse y filtrarse dentro de cada tipo de prenda.
+`Chaquetas` y `Buzos` son productos asociados a `Confecciones`; `Sistema de gestión de agua` es un producto o servicio asociado a `Soluciones digitales`. El catálogo general muestra únicamente las líneas y cada página interna consulta los productos de la línea elegida, evitando mezclar sectores distintos.
+
+`Product` contiene la información comercial común: estado comercial, precio opcional, público objetivo, información adicional y enlace seguro de demostración. `ProductFeature` administra características ordenables y `ProductImage` una galería ordenable con variantes responsive. Esta composición permite incorporar Papelería, Calzado u otros sectores sin crear modelos exclusivos para cada uno.
+
+No existe `ProductCategory`. Solo deberá incorporarse una taxonomía adicional si una línea alcanza un volumen que necesite subdivisiones y filtros internos; no debe utilizarse para representar las líneas de negocio.
 
 `SiteConfiguration.featured_business` define la línea promocionada en el Home. El Hero utiliza su nombre como etiqueta y el Home consulta productos y proyectos de esa misma línea. Esta relación se administra desde Django Admin y permite cambiar en el futuro de Confecciones a Papelería, Sistemas de agua u otra línea sin modificar templates ni views.
 

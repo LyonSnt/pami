@@ -3,7 +3,9 @@
 ## Sistema concluido
 
 Pámi se considera funcionalmente concluido como versión candidata estable
-`1.0.0`. Para reanudar se debe utilizar el último commit disponible en `main`.
+`1.0.0`. El cierre funcional vigente es
+`f00869f mejora:organizar-catalogo-por-lineas`. Para reanudar se debe utilizar
+ese commit o el último commit documental posterior disponible en `main`.
 
 No existe un bloque obligatorio de desarrollo pendiente. Cualquier cambio
 posterior debe responder a una nueva necesidad de contenido, negocio,

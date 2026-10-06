@@ -1,6 +1,6 @@
 # Pámi
 
-Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. La presentación editorial actual está enfocada en Confecciones, con Chaquetas y Buzos, bajo el eslogan oficial **“Donde encuentras todo para ti”**.
+Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. El Home destaca Confecciones, con Chaquetas y Buzos, y el catálogo incorpora también Soluciones digitales, bajo el eslogan oficial **“Donde encuentras todo para ti”**.
 
 ## Funcionalidades
 
