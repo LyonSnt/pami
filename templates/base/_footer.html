@@ -18,9 +18,8 @@
       </div>
 
       {% if site_configuration %}
-        {% if contact_enabled or site_configuration.facebook_url or site_configuration.instagram_url or site_configuration.tiktok_url or site_configuration.youtube_url or site_configuration.linkedin_url %}
+        {% if site_configuration.email or site_configuration.phone or site_configuration.whatsapp_url or site_configuration.address or site_configuration.facebook_url or site_configuration.instagram_url or site_configuration.tiktok_url or site_configuration.youtube_url or site_configuration.linkedin_url %}
           <div class="flex flex-col gap-2 sm:items-end">
-          {% if contact_enabled %}
             {% if site_configuration.email %}
               <a class="rounded transition hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary" href="mailto:{{ site_configuration.email }}">
                 {{ site_configuration.email }}
@@ -39,7 +38,6 @@
             {% if site_configuration.address %}
               <span>{{ site_configuration.address }}</span>
             {% endif %}
-          {% endif %}
 
           {% if site_configuration.facebook_url or site_configuration.instagram_url or site_configuration.tiktok_url or site_configuration.youtube_url or site_configuration.linkedin_url %}
             <nav aria-label="Redes sociales" class="flex flex-wrap gap-x-4 gap-y-2 sm:justify-end">

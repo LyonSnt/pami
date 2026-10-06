@@ -49,8 +49,8 @@ class ContactMessageFormTests(TestCase):
 
     def test_contact_context_prefills_public_business_and_subject(self):
         business = Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
+            name="Creaciones",
+            slug="creaciones",
             is_active=True,
             is_published=True,
         )

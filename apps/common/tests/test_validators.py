@@ -51,9 +51,9 @@ class FileValidatorTests(SimpleTestCase):
 class SafeLinkValidatorTests(SimpleTestCase):
     def test_accepts_internal_paths_anchors_and_http_urls(self):
         valid_links = (
-            "/catalogo/confecciones/",
+            "/catalogo/creaciones/",
             "#contenido",
-            "https://example.com/confecciones",
+            "https://example.com/creaciones",
             "http://example.com/contacto",
         )
 
@@ -65,7 +65,7 @@ class SafeLinkValidatorTests(SimpleTestCase):
         invalid_links = (
             "javascript:alert(1)",
             "//example.com/ruta",
-            "catalogo/confecciones/",
+            "catalogo/creaciones/",
         )
 
         for link in invalid_links:

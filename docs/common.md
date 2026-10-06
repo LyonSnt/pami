@@ -4,7 +4,7 @@ La app `common` contiene componentes reutilizables para todo el proyecto Pámi y
 
 ## Responsabilidad
 
-`common` no debe contener lógica específica de Pámi, confecciones, papelería o tecnología.
+`common` no debe contener lógica específica de Pámi, ropa, papelería o tecnología.
 
 Debe contener únicamente elementos reutilizables:
 

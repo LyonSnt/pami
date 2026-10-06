@@ -13,8 +13,8 @@ from apps.portfolio.models import PortfolioProject
 class SearchViewTests(TestCase):
     def setUp(self):
         self.business = Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
+            name="Creaciones",
+            slug="creaciones",
             short_description="Prendas para todos los días",
             is_active=True,
             is_published=True,
@@ -112,7 +112,7 @@ class SearchViewTests(TestCase):
         with self.assertNumQueries(6):
             response = self.client.get(
                 reverse("site:search"),
-                {"q": "confecciones"},
+                {"q": "creaciones"},
             )
 
         self.assertEqual(response.status_code, 200)

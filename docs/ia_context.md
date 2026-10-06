@@ -322,11 +322,11 @@ Incluye:
 
 El Home basado en componentes fue validado visualmente contra el diseño aprobado utilizando imágenes y contenido representativos.
 
-El enfoque editorial actual del Home es `Confecciones` para público general. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
+El enfoque editorial actual del Home es la línea `Creaciones`, que compone la marca `Creaciones Hadasha` en el Hero. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
 
 La línea protagonista se selecciona mediante `SiteConfiguration.featured_business`. No se debe fijar un slug de negocio en el Home. El eslogan global se muestra junto al logo y el Hero utiliza el nombre de la línea destacada como etiqueta contextual.
 
-`Chaquetas`, `Buzos` y `Sistema de gestión de agua` son registros de `Product`. Confecciones y Soluciones digitales son registros de `Business`. No existe un modelo `ProductCategory`: las líneas separan el catálogo y cada producto puede administrar características y galería mediante `ProductFeature` y `ProductImage`.
+`Chaquetas`, `Buzos` y `Sistema de gestión de agua` son registros de `Product`. Creaciones y Soluciones digitales son registros de `Business`. No existe un modelo `ProductCategory`: las líneas separan el catálogo y cada producto puede administrar características y galería mediante `ProductFeature` y `ProductImage`.
 
 El bloque de beneficios del Hero fue extraído a:
 
@@ -340,11 +340,11 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 130 pruebas.
+- La suite actual contiene 131 pruebas.
 - `SiteConfiguration` controla la publicación global de Catálogo, Portafolio, Blog y Contacto. Los módulos apagados se conservan en el CMS, pero no deben filtrarse al portal, buscador o sitemap.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.
-- El demo de desarrollo publica Confecciones con Chaquetas y Buzos, además de Soluciones digitales con Sistema de gestión de agua. El comando conserva el estado editorial de otras líneas creadas por el usuario.
+- El demo de desarrollo publica Creaciones Hadasha con Chaquetas y Buzos, además de Soluciones digitales con Sistema de gestión de agua. El comando conserva el estado editorial de otras líneas creadas por el usuario.
 
 ---
 

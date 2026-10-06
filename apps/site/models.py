@@ -90,7 +90,7 @@ class SiteConfiguration(BaseModel):
 
     hero_description = models.TextField(
         blank=True,
-        default="Confecciones, papelería, tecnología y más, con soluciones para personas, empresas e instituciones.",
+        default="Creaciones Hadasha, papelería, tecnología y más, con soluciones para personas, empresas e instituciones.",
         verbose_name="Descripción del Hero",
     )
 

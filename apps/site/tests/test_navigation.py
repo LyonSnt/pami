@@ -20,7 +20,7 @@ class NavigationStateTests(TestCase):
             order=1,
         )
         request = self.request_factory.get(
-            "/portafolio/confecciones/coleccion-inicial/"
+            "/portafolio/creaciones/coleccion-inicial/"
         )
         context = site_configuration(request)
 
@@ -33,7 +33,7 @@ class NavigationStateTests(TestCase):
     def test_home_is_only_current_on_root_path(self):
         home_context = site_configuration(self.request_factory.get("/"))
         detail_context = site_configuration(
-            self.request_factory.get("/catalogo/confecciones/chaquetas/")
+            self.request_factory.get("/catalogo/creaciones/chaquetas/")
         )
 
         self.assertTrue(home_context["home_is_current"])

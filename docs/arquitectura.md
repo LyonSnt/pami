@@ -2,7 +2,7 @@
 
 Pámi es un portal web/CMS propio para administrar una marca principal con múltiples líneas de negocio.
 
-La arquitectura administra múltiples líneas de negocio. El Home mantiene `Confecciones` como línea destacada, mientras el catálogo público permite navegar de forma independiente por Confecciones, Soluciones digitales y cualquier línea futura.
+La arquitectura administra múltiples líneas de negocio. El Home mantiene `Creaciones` como línea destacada y compone la marca `Creaciones Hadasha` entre la etiqueta y el título del Hero. El catálogo público permite navegar de forma independiente por Creaciones, Soluciones digitales y cualquier línea futura.
 
 ## Stack
 
@@ -79,7 +79,7 @@ Los componentes de interfaz reutilizables viven en `templates/components/` y se 
 
 ## Decisiones clave
 
-Las líneas como Confecciones, Soluciones digitales, Papelería y Calzado no son apps separadas.
+Las líneas como Creaciones, Soluciones digitales, Papelería y Calzado no son apps separadas.
 
 Serán registros en el modelo `Business`.
 
@@ -91,7 +91,7 @@ desactivado permanece disponible en Django Admin, pero se excluye del Home,
 navegación, buscador y sitemap y sus vistas públicas responden 404. La
 configuración inicial expone únicamente el catálogo.
 
-`Chaquetas` y `Buzos` son productos asociados a `Confecciones`; `Sistema de gestión de agua` es un producto o servicio asociado a `Soluciones digitales`. El catálogo general muestra únicamente las líneas y cada página interna consulta los productos de la línea elegida, evitando mezclar sectores distintos.
+`Chaquetas` y `Buzos` son productos asociados a `Creaciones`, que representa la marca Creaciones Hadasha; `Sistema de gestión de agua` es un producto o servicio asociado a `Soluciones digitales`. El catálogo general muestra únicamente las líneas y cada página interna consulta los productos de la línea elegida, evitando mezclar sectores distintos.
 
 `Product` contiene la información comercial común: estado comercial, precio opcional, público objetivo, información adicional y enlace seguro de demostración. `ProductFeature` administra características ordenables y `ProductImage` una galería ordenable con variantes responsive. Esta composición permite incorporar Papelería, Calzado u otros sectores sin crear modelos exclusivos para cada uno.
 
@@ -101,7 +101,7 @@ Las antiguas rutas `/negocios/` se conservan únicamente como redirecciones
 permanentes hacia `/catalogo/`. De esta forma se mantienen enlaces históricos
 sin duplicar públicamente la presentación de líneas de negocio.
 
-`SiteConfiguration.featured_business` define la línea promocionada en el Home. El Hero utiliza su nombre como etiqueta y el Home consulta productos y proyectos de esa misma línea. Esta relación se administra desde Django Admin y permite cambiar en el futuro de Confecciones a Papelería, Sistemas de agua u otra línea sin modificar templates ni views.
+`SiteConfiguration.featured_business` define la línea promocionada en el Home. El Hero utiliza su nombre como etiqueta y el Home consulta productos y proyectos de esa misma línea. Esta relación se administra desde Django Admin y permite cambiar en el futuro de Creaciones a Papelería, Sistemas de agua u otra línea sin modificar templates ni views. La línea utiliza el slug canónico `creaciones`.
 
 ## Apps base del CMS
 

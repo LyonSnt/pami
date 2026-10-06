@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 130 pruebas correctas;
+- 131 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -22,7 +22,7 @@ integración o infraestructura.
 
 ## Alcance completado
 
-- Home administrable enfocado en Confecciones, Chaquetas y Buzos.
+- Home administrable enfocado en Creaciones Hadasha, Chaquetas y Buzos.
 - Líneas de negocio, catálogo, portafolio y Blog.
 - Buscador público con reglas de publicación.
 - Contacto protegido, contextual, auditable y con notificaciones configurables.
@@ -69,7 +69,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 130 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 131 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. El cambio que quiero realizar es:

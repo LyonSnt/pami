@@ -139,7 +139,7 @@ Si se desea cargar o sincronizar el contenido demostrativo aprobado:
 docker compose --env-file .env -f docker-compose.prod.yml exec web python manage.py seed_demo
 ```
 
-El comando publica Confecciones con Chaquetas y Buzos, además de Soluciones
+El comando publica Creaciones Hadasha con Chaquetas y Buzos, además de Soluciones
 digitales con Sistema de gestión de agua bajo cotización. Es idempotente y no
 despublica líneas adicionales creadas por el usuario, como Papelería o Calzado.
 No asigna un precio ni imágenes ficticias al sistema; esos datos se completan

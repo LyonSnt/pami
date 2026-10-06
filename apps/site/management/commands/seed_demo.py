@@ -18,11 +18,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         businesses = self.create_businesses()
-        configuration = self.create_site_configuration(businesses["confecciones"])
+        configuration = self.create_site_configuration(businesses["creaciones"])
         self.set_demo_image(
             configuration,
             "hero_image",
-            "pami-confecciones-hero.webp",
+            "pami-creaciones-hero.webp",
             "hero.webp",
         )
         self.create_navigation()
@@ -42,7 +42,7 @@ class Command(BaseCommand):
             / "static"
             / "assets"
             / "demo"
-            / "confecciones"
+            / "creaciones"
             / asset_name
         )
         with asset_path.open("rb") as asset_file:
@@ -54,17 +54,17 @@ class Command(BaseCommand):
             "featured_business": featured_business,
             "site_name": "Pámi",
             "slogan": "Donde encuentras todo para ti",
-            "description": "Pámi crea prendas cómodas y versátiles para acompañarte todos los días.",
+            "description": "Pámi reúne productos y servicios de sus diferentes líneas de negocio.",
             "email": "contacto@pami.test",
             "phone": "099 999 9999",
             "whatsapp": "099 999 9999",
             "address": "Ecuador",
-            "seo_title": "Pámi | Chaquetas y buzos",
-            "seo_description": "Descubre chaquetas y buzos confeccionados por Pámi.",
-            "hero_title": "Chaquetas y buzos hechos para ti.",
-            "hero_description": "Conoce prendas cómodas, versátiles y pensadas para acompañar tu estilo.",
-            "hero_primary_button_text": "Ver confecciones",
-            "hero_primary_button_url": "/catalogo/confecciones/",
+            "seo_title": "Pámi | Creaciones Hadasha",
+            "seo_description": "Descubre las chaquetas y buzos de Creaciones Hadasha.",
+            "hero_title": "HADASHA",
+            "hero_description": "Creamos tu estilo con prendas cómodas, versátiles y pensadas para ti.",
+            "hero_primary_button_text": "Ver productos",
+            "hero_primary_button_url": "/catalogo/creaciones/",
             "show_catalog": True,
             "show_portfolio": False,
             "show_blog": False,
@@ -81,7 +81,7 @@ class Command(BaseCommand):
 
     def create_navigation(self):
         NavigationItem.objects.filter(
-            label__in=("Negocios", "Confecciones"),
+            label="Negocios",
         ).update(is_active=False)
 
         items = [
@@ -106,10 +106,10 @@ class Command(BaseCommand):
     def create_businesses(self):
         data = [
             {
-                "name": "Confecciones",
-                "slug": "confecciones",
-                "short_description": "Chaquetas y buzos para acompañar tu estilo.",
-                "description": "Creamos prendas cómodas y versátiles para el público en general.",
+                "name": "Creaciones",
+                "slug": "creaciones",
+                "short_description": "Hadasha: creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
+                "description": "Creamos prendas cómodas y versátiles para acompañar tu estilo.",
                 "order": 1,
             },
             {
@@ -134,11 +134,11 @@ class Command(BaseCommand):
                 },
             )
             businesses[item["slug"]] = business
-            if item["slug"] == "confecciones":
+            if item["slug"] == "creaciones":
                 self.set_demo_image(
                     business,
                     "image",
-                    "pami-confecciones.webp",
+                    "pami-creaciones.webp",
                     "hero.webp",
                 )
 
@@ -146,8 +146,8 @@ class Command(BaseCommand):
 
     def create_products(self, businesses):
         data = [
-            ("confecciones", "Chaquetas", "chaquetas", "Chaquetas cómodas y versátiles para diferentes estilos.", "45.00", 1, "chaquetas.webp"),
-            ("confecciones", "Buzos", "buzos", "Buzos pensados para brindar comodidad todos los días.", "30.00", 2, "buzos.webp"),
+            ("creaciones", "Chaquetas", "chaquetas", "Chaquetas cómodas y versátiles para diferentes estilos.", "45.00", 1, "chaquetas.webp"),
+            ("creaciones", "Buzos", "buzos", "Buzos pensados para brindar comodidad todos los días.", "30.00", 2, "buzos.webp"),
         ]
 
         Product.objects.filter(
@@ -221,8 +221,8 @@ class Command(BaseCommand):
 
     def create_projects(self, businesses):
         data = [
-            ("confecciones", "Colección inicial de chaquetas", "coleccion-inicial-chaquetas", "Confección de una colección demostrativa de chaquetas.", "Pámi", "proyecto-chaquetas.webp"),
-            ("confecciones", "Colección inicial de buzos", "coleccion-inicial-buzos", "Confección de una colección demostrativa de buzos.", "Pámi", "proyecto-buzos.webp"),
+            ("creaciones", "Colección inicial de chaquetas", "coleccion-inicial-chaquetas", "Confección de una colección demostrativa de chaquetas.", "Pámi", "proyecto-chaquetas.webp"),
+            ("creaciones", "Colección inicial de buzos", "coleccion-inicial-buzos", "Confección de una colección demostrativa de buzos.", "Pámi", "proyecto-buzos.webp"),
         ]
 
         PortfolioProject.objects.filter(
@@ -258,7 +258,7 @@ class Command(BaseCommand):
     def create_posts(self, businesses):
         data = [
             (
-                "confecciones",
+                "creaciones",
                 "Cómo elegir una chaqueta para tu estilo",
                 "elegir-chaqueta-para-tu-estilo",
                 "Encuentra una chaqueta cómoda y versátil que se adapte a tu forma de vestir.",
@@ -266,7 +266,7 @@ class Command(BaseCommand):
                 "proyecto-chaquetas.webp",
             ),
             (
-                "confecciones",
+                "creaciones",
                 "Ideas para combinar tus buzos",
                 "ideas-combinar-buzos",
                 "Descubre formas sencillas de incorporar un buzo cómodo a tus looks diarios.",

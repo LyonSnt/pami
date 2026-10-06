@@ -33,9 +33,9 @@ class SeoTests(TestCase):
 
     def setUp(self):
         self.business = Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
-            short_description="Confecciones para todos los días.",
+            name="Creaciones",
+            slug="creaciones",
+            short_description="Creaciones Hadasha para todos los días.",
             is_active=True,
             is_published=True,
         )
@@ -162,7 +162,7 @@ class SeoTests(TestCase):
     def test_organization_structured_data_uses_configured_identity(self):
         SiteConfiguration.objects.create(
             site_name="Pámi",
-            description="Confecciones para todos.",
+            description="Creaciones Hadasha para todos.",
             email="contacto@example.com",
             phone="0999999999",
             instagram_url="https://instagram.com/pami",

@@ -4,11 +4,11 @@
 
 Pámi dispone de una base funcional de CMS y portal público construida con Django, PostgreSQL, Docker Compose y Tailwind CSS v4.
 
-La arquitectura soporta múltiples líneas de negocio. El Home conserva Confecciones como línea destacada, mientras el catálogo general presenta también Soluciones digitales y queda preparado para Papelería, Calzado u otras líneas futuras.
+La arquitectura soporta múltiples líneas de negocio. El Home conserva Creaciones como línea destacada y presenta la marca completa Creaciones Hadasha, mientras el catálogo general presenta también Soluciones digitales y queda preparado para Papelería, Calzado u otras líneas futuras.
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Confecciones también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 130 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 131 pruebas correctas.
 
 ## Infraestructura
 
@@ -90,9 +90,9 @@ Características:
 - Hero administrable desde `SiteConfiguration`.
 - Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
-- Home enfocado en productos y trabajos publicados de Confecciones.
+- Home enfocado en productos y trabajos publicados de Creaciones.
 - Imágenes WebP representativas para el Hero, Chaquetas, Buzos y los trabajos destacados.
-- Imágenes y contenido representativos para los artículos de Confecciones.
+- Imágenes y contenido representativos para los artículos de Creaciones Hadasha.
 - Breadcrumb accesible.
 - Estados vacíos reutilizables.
 - CTA reutilizable.
@@ -125,7 +125,7 @@ Características:
 - Scaffolding vacío eliminado; la estructura de apps conserva solo paquetes obligatorios y módulos con responsabilidad real.
 - Nombre `Pámi` continuo en el SVG del encabezado para evitar separaciones tipográficas en móvil.
 - Logo y favicon cargados en la configuración administrativa utilizados por el portal, con los SVG oficiales como respaldo.
-- Correo, teléfono, WhatsApp y redes sociales configurados presentados como enlaces accesibles en el footer.
+- Correo, teléfono, WhatsApp, dirección y redes sociales configurados presentados como enlaces accesibles en el footer, independientemente de que el formulario de contacto esté activo.
 - Configuración global reutilizada dentro de la petición del Home para evitar una consulta duplicada.
 - Presupuestos de consultas cubiertos por pruebas para Home y buscador.
 - Archivos estáticos versionados por contenido en producción para permitir caché prolongada segura.
@@ -157,13 +157,13 @@ Componentes relevantes:
 
 Las cards utilizan imágenes administrables y el icono oficial como fallback decorativo.
 
-El catálogo utiliza `Business` como línea de negocio y `Product` como producto o servicio. No necesita categorías para incorporar Confecciones, Soluciones digitales, Papelería o Calzado. `ProductFeature` y `ProductImage` aportan características y galerías genéricas sin crear modelos exclusivos para cada sector.
+El catálogo utiliza `Business` como línea de negocio y `Product` como producto o servicio. No necesita categorías para incorporar Creaciones, Soluciones digitales, Papelería o Calzado. `ProductFeature` y `ProductImage` aportan características y galerías genéricas sin crear modelos exclusivos para cada sector.
 
-El Home ya no depende del slug fijo `confecciones`: utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
+El Home utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. La línea principal usa el slug canónico `creaciones`. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
 
 El comando `seed_demo` es idempotente para este contenido: actualiza la configuración demostrativa, publica Chaquetas y Buzos con orden explícito y despublica únicamente los registros demo anteriores conocidos sin eliminarlos. La base de desarrollo fue cargada con este estado.
 
-El mismo comando completa las imágenes demo aprobadas cuando los campos correspondientes están vacíos. Las imágenes reemplazadas posteriormente desde Django Admin se conservan. Los originales optimizados viven en `static/assets/demo/confecciones/` y el conjunto WebP ocupa menos de 450 KB.
+El mismo comando completa las imágenes demo aprobadas cuando los campos correspondientes están vacíos. Las imágenes reemplazadas posteriormente desde Django Admin se conservan. Los originales optimizados viven en `static/assets/demo/creaciones/` y el conjunto WebP ocupa menos de 450 KB.
 
 La validación responsive del Home confirmó:
 
@@ -217,7 +217,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 
 ## Calidad
 
-- 130 pruebas ejecutadas correctamente.
+- 131 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Los SVG de branding son XML válido.
@@ -238,7 +238,7 @@ Antes de desplegar se debe:
 
 El sistema se considera funcionalmente concluido como versión candidata estable
 `1.0.0`. El estado vigente corresponde al último commit disponible en `main` y
-está validado mediante 130 pruebas, sin migraciones pendientes y con revisión
+está validado mediante 131 pruebas, sin migraciones pendientes y con revisión
 visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas

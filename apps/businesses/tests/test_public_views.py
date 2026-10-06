@@ -7,8 +7,8 @@ from apps.businesses.models import Business
 class BusinessPublicViewTests(TestCase):
     def create_public_business(self):
         return Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
+            name="Creaciones",
+            slug="creaciones",
             is_active=True,
             is_published=True,
         )

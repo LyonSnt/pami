@@ -1,6 +1,6 @@
 # Pámi
 
-Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. El Home destaca Confecciones, con Chaquetas y Buzos, y el catálogo incorpora también Soluciones digitales, bajo el eslogan oficial **“Donde encuentras todo para ti”**.
+Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. El Home destaca Creaciones Hadasha, con Chaquetas y Buzos, y el catálogo incorpora también Soluciones digitales, bajo el eslogan oficial **“Donde encuentras todo para ti”**.
 
 ## Funcionalidades
 
@@ -60,7 +60,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 130 pruebas.
+La suite estable contiene 131 pruebas.
 
 ## Roles administrativos
 

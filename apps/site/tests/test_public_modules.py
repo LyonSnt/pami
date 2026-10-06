@@ -13,8 +13,8 @@ class PublicModuleVisibilityTests(TestCase):
     def setUp(self):
         self.configuration = SiteConfiguration.objects.create()
         self.business = Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
+            name="Creaciones",
+            slug="creaciones",
             is_active=True,
             is_published=True,
         )
@@ -75,6 +75,23 @@ class PublicModuleVisibilityTests(TestCase):
         self.assertNotContains(response, ">Blog<", html=False)
         self.assertNotContains(response, "Contáctanos")
         self.assertNotContains(response, self.project.title)
+
+    def test_footer_contact_details_remain_visible_when_form_is_disabled(self):
+        self.configuration.email = "ventas@example.com"
+        self.configuration.phone = "0991234567"
+        self.configuration.whatsapp = "593991234567"
+        self.configuration.address = "Ecuador"
+        self.configuration.save(
+            update_fields=("email", "phone", "whatsapp", "address", "updated_at")
+        )
+
+        response = self.client.get(reverse("site:home"))
+
+        self.assertContains(response, 'href="mailto:ventas@example.com"')
+        self.assertContains(response, 'href="tel:0991234567"')
+        self.assertContains(response, 'href="https://wa.me/593991234567"')
+        self.assertContains(response, "Ecuador")
+        self.assertNotContains(response, reverse("contact:form"))
 
     def test_search_only_returns_content_from_enabled_modules(self):
         response = self.client.get(reverse("site:search"), {"q": "chaqueta"})

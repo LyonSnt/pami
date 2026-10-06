@@ -29,16 +29,16 @@ class SeedDemoCommandTests(TestCase):
         self.configuration = SiteConfiguration.objects.create(
             hero_title="Contenido anterior",
         )
-        self.confections = Business.objects.create(
-            name="Confecciones",
-            slug="confecciones",
+        self.creations = Business.objects.create(
+            name="Creaciones",
+            slug="creaciones",
         )
         self.stationery = Business.objects.create(
             name="Papelería",
             slug="papeleria",
         )
         self.legacy_product = Product.objects.create(
-            business=self.confections,
+            business=self.creations,
             name="Uniformes corporativos",
             slug="uniformes-corporativos",
         )
@@ -61,7 +61,11 @@ class SeedDemoCommandTests(TestCase):
 
         self.assertEqual(
             self.configuration.hero_title,
-            "Chaquetas y buzos hechos para ti.",
+            "HADASHA",
+        )
+        self.assertEqual(
+            self.configuration.hero_primary_button_url,
+            "/catalogo/creaciones/",
         )
         self.assertEqual(
             self.configuration.slogan,
@@ -69,7 +73,7 @@ class SeedDemoCommandTests(TestCase):
         )
         self.assertEqual(
             self.configuration.featured_business,
-            self.confections,
+            self.creations,
         )
         self.assertTrue(self.configuration.show_catalog)
         self.assertFalse(self.configuration.show_portfolio)
@@ -78,9 +82,10 @@ class SeedDemoCommandTests(TestCase):
         self.assertTrue(self.stationery.is_published)
         self.assertFalse(self.legacy_product.is_published)
         self.assertFalse(self.legacy_navigation.is_active)
+        self.assertFalse(Business.objects.filter(slug="confecciones").exists())
 
         products = Product.objects.filter(
-            business=self.confections,
+            business=self.creations,
             slug__in=("chaquetas", "buzos"),
         )
         self.assertEqual(products.count(), 2)
@@ -89,11 +94,16 @@ class SeedDemoCommandTests(TestCase):
         self.assertTrue(products.get(slug="chaquetas").image)
         self.assertTrue(products.get(slug="buzos").image)
         self.assertTrue(self.configuration.hero_image)
-        self.confections.refresh_from_db()
-        self.assertTrue(self.confections.image)
+        self.creations.refresh_from_db()
+        self.assertEqual(self.creations.name, "Creaciones")
+        self.assertEqual(
+            self.creations.short_description,
+            "Hadasha: creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
+        )
+        self.assertTrue(self.creations.image)
 
         projects = PortfolioProject.objects.filter(
-            business=self.confections,
+            business=self.creations,
             slug__in=("coleccion-inicial-chaquetas", "coleccion-inicial-buzos"),
         )
         self.assertEqual(projects.count(), 2)
@@ -101,7 +111,7 @@ class SeedDemoCommandTests(TestCase):
         self.assertTrue(projects.get(slug="coleccion-inicial-buzos").image)
 
         posts = BlogPost.objects.filter(
-            business=self.confections,
+            business=self.creations,
             slug__in=("elegir-chaqueta-para-tu-estilo", "ideas-combinar-buzos"),
         )
         self.assertEqual(posts.count(), 2)
@@ -119,7 +129,7 @@ class SeedDemoCommandTests(TestCase):
         )
         self.assertFalse(
             NavigationItem.objects.filter(
-                label="Confecciones",
+                label="Creaciones",
                 is_active=True,
             ).exists()
         )

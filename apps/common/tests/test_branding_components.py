@@ -107,7 +107,7 @@ class BrandingAssetTests(SimpleTestCase):
         self.assertIn('aria-label="Redes sociales"', html)
         self.assertIn('href="https://instagram.com/pami"', html)
 
-    def test_footer_hides_contact_links_when_module_is_disabled(self):
+    def test_footer_keeps_contact_channels_when_form_is_disabled(self):
         html = render_to_string(
             "base/_footer.html",
             {
@@ -128,9 +128,10 @@ class BrandingAssetTests(SimpleTestCase):
             },
         )
 
-        self.assertNotIn("mailto:", html)
-        self.assertNotIn("tel:", html)
-        self.assertNotIn("wa.me", html)
+        self.assertIn('href="mailto:contacto@pami.test"', html)
+        self.assertIn('href="tel:099 999 9999"', html)
+        self.assertIn('href="https://wa.me/593999999999"', html)
+        self.assertIn("Ecuador", html)
         self.assertIn('href="https://instagram.com/pami"', html)
 
     def test_whatsapp_url_keeps_only_digits(self):
@@ -256,8 +257,8 @@ class BrandingAssetTests(SimpleTestCase):
             height=900,
         )
         business = SimpleNamespace(
-            name="Confecciones",
-            slug="confecciones",
+            name="Creaciones",
+            slug="creaciones",
             image=image,
             short_description="Prendas para ti.",
         )
@@ -275,7 +276,7 @@ class BrandingAssetTests(SimpleTestCase):
                         price=None,
                     )
                 },
-                "product-card-image-confecciones-chaquetas",
+                "product-card-image-creaciones-chaquetas",
             ),
             (
                 "components/cards/project_card.html",
@@ -289,7 +290,7 @@ class BrandingAssetTests(SimpleTestCase):
                         client_name="Pámi",
                     )
                 },
-                "project-card-image-confecciones-coleccion-inicial",
+                "project-card-image-creaciones-coleccion-inicial",
             ),
             (
                 "components/cards/post_card.html",
@@ -308,7 +309,7 @@ class BrandingAssetTests(SimpleTestCase):
             (
                 "components/cards/business_card.html",
                 {"business": business},
-                "business-card-image-confecciones",
+                "business-card-image-creaciones",
             ),
         )
 
