@@ -67,7 +67,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 167 pruebas.
+La suite estable contiene 168 pruebas.
 
 ## Roles administrativos
 
@@ -78,6 +78,10 @@ Para elegir productos del Home, abrir `Catálogo > Productos` y marcar
 activos y publicados, según Orden y Nombre, hasta alcanzar la cantidad elegida.
 Desmarcar un producto no lo retira del catálogo. Los productos nuevos quedan
 sin marcar.
+
+En el mismo bloque `Publicación`, `Mostrar botón Ver detalle` controla el
+botón de las tarjetas en destacados y catálogo. Está desactivado por defecto;
+desmarcarlo conserva la lupa y el acceso directo a la página de detalle.
 
 Los grupos oficiales se crean o actualizan de forma idempotente:
 

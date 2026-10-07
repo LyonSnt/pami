@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 167 pruebas correctas;
+- 168 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -143,6 +143,22 @@ fotos sin metadatos y renovación de caché con conservación del original.
 Las 167 pruebas pasan y no hay cambios de modelos pendientes. El usuario
 revisó el resultado y autorizó el commit; el push y el despliegue siguen a su cargo.
 
+## Botón de detalle por producto aprobado para cierre
+
+`Product.show_detail_button` añade `Mostrar botón Ver detalle` en
+`Catálogo > Productos > Publicación`, con valor inicial `False`. El componente
+compartido de tarjetas controla el botón en destacados y catálogo sin afectar
+la lupa, publicación ni acceso directo al detalle. La migración
+`catalog.0008_product_detail_button` está aplicada en desarrollo. Las 168 pruebas
+pasan y no hay migraciones pendientes. El usuario revisó el resultado y
+autorizó el commit; el push y el despliegue siguen a su cargo.
+
+Por indicación del usuario, el valor inicial se cambió a desactivado. La
+migración `0008` también utiliza `False` para la instalación
+inicial. En desarrollo, donde ya se había aplicado, se conservan los valores
+guardados; no se sobrescriben selecciones existentes. La prueba de activación
+y desactivación en Home y catálogo pasó tras este ajuste.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -175,7 +191,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 167 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 168 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente

@@ -174,6 +174,11 @@ Los puntos de entrada WSGI y ASGI utilizan configuración de producción por def
 
 ## Static y media
 
+`Product.show_detail_button` controla la acción `Ver detalle` en el componente
+compartido `product_card.html`. Su valor inicial es `False` y no modifica las
+reglas de publicación, las rutas de detalle ni el visor de imagen. El campo
+es una opción de presentación, no un control de acceso al contenido.
+
 Las variantes generadas por `responsive_image_spec` aplican primero
 `ImageOps.exif_transpose` de Pillow y después el recorte `ResizeToFill`.
 La orientación EXIF de cámara se convierte en píxeles correctamente orientados,

@@ -84,6 +84,11 @@ class Product(BaseModel):
         ),
     )
     is_published = models.BooleanField(default=True, verbose_name="Publicado")
+    show_detail_button = models.BooleanField(
+        default=False,
+        verbose_name="Mostrar botón Ver detalle",
+        help_text="Controla el botón en destacados y catálogo. La página de detalle y la lupa siguen disponibles.",
+    )
 
     seo_title = models.CharField(max_length=180, blank=True, verbose_name="Título SEO")
     seo_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción SEO")

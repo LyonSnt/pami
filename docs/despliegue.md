@@ -204,6 +204,12 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+La migración `catalog.0008_product_detail_button` añade la casilla
+`Mostrar botón Ver detalle` con valor inicial desactivado para todos los productos.
+Se aplica al arrancar el contenedor actualizado; no requiere `seed_demo`.
+Después puede desactivarse por producto en el bloque `Publicación` del
+administrador, sin eliminar ni restringir el acceso a su página de detalle.
+
 La corrección de orientación EXIF en las variantes WebP requiere actualizar
 la imagen de la aplicación, sin migraciones nuevas ni cambios de datos.
 Las fotos existentes utilizan automáticamente nuevas rutas de caché al

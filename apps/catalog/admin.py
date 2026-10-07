@@ -21,7 +21,7 @@ class ProductImageInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(AuditModelAdminMixin, admin.ModelAdmin):
     list_display = ("name", "business", "commercial_status", "price", "show_price", "is_featured", "order", "is_active", "is_published", "created_at")
-    list_filter = ("business", "commercial_status", "show_price", "is_featured", "is_active", "is_published")
+    list_filter = ("business", "commercial_status", "show_price", "is_featured", "show_detail_button", "is_active", "is_published")
     search_fields = ("name", "slug", "short_description")
     prepopulated_fields = {"slug": ("name",)}
     autocomplete_fields = ("business",)
@@ -47,7 +47,7 @@ class ProductAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             "fields": ("commercial_status", "price", "show_price")
         }),
         ("Publicación", {
-            "fields": ("order", "is_featured", "is_active", "is_published")
+            "fields": ("order", "is_featured", "show_detail_button", "is_active", "is_published")
         }),
         ("SEO", {
             "fields": ("seo_title", "seo_description")
