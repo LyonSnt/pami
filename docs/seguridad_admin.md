@@ -111,6 +111,63 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml exec web python m
 El comando elimina los contadores de esa cuenta, no el historial individual
 de fallos. No se debe desactivar la protección para recuperar una cuenta.
 
+## Segundo factor: mejora recomendada y pospuesta
+
+El 7 de octubre de 2026 el usuario decidió dejar documentado el análisis
+del segundo factor y posponer su implementación. No está instalado ni activo,
+no es un requisito funcional para usar Pámi y no hay autorización vigente
+para implementarlo. Debe retomarse como un alcance nuevo aprobado por el usuario.
+
+Los controles actuales incluyen contraseña, permisos por roles, bloqueo de
+intentos con Axes, auditoría y ruta configurable. HTTPS y cookies seguras
+deben mantenerse correctamente configurados en el VPS. Estos controles no
+impiden que alguien que obtenga la contraseña correcta pueda iniciar sesión.
+Por eso se recomienda un segundo factor para el administrador público,
+especialmente para el superusuario, que gestiona cuentas y puede descargar
+respaldos de la base de datos. Cambiar la ruta no reemplaza esta protección.
+
+Alcance propuesto para una futura implementación:
+
+- Contraseña seguida de un código temporal de seis dígitos generado por una
+  aplicación autenticadora (TOTP).
+- Configuración por usuario mediante QR y confirmación de un código antes de
+  activar el dispositivo.
+- Exigencia de verificación para todas las cuentas administrativas, incluidos
+  superusuarios, protegiendo todas las vistas del CMS y las sesiones anteriores.
+- Códigos de recuperación de un solo uso y procedimiento de recuperación
+  desde el VPS si se pierde el teléfono y los códigos.
+- Pantallas en español bajo la ruta configurada mediante `ADMIN_URL_PATH`.
+- Conservación del bloqueo de contraseñas y límites para los errores del
+  segundo factor, comprobando su integración con Axes.
+- Activación controlada que permita configurar el dispositivo antes de exigir
+  el segundo factor, evitando perder el acceso al único administrador.
+
+Se evaluó `django-two-factor-auth` sobre `django-otp` como posible solución;
+las dependencias y su compatibilidad deberán verificarse nuevamente al retomar.
+El paquete no hace obligatoria por sí solo la configuración del segundo
+factor: habría que implementar y probar esa política para Pámi.
+
+La modalidad propuesta no requiere una suscripción externa ni cobros por
+código. Se ejecutaría en el VPS actual dentro de Docker, con dependencias
+incluidas en la imagen y migraciones aplicadas en el arranque. Cada
+administrador necesitaría una aplicación autenticadora en su teléfono,
+guardar los códigos de recuperación por separado y mantener la hora del
+teléfono y servidor sincronizada. No se propone SMS, llamadas ni correo como
+segundo factor. Las obligaciones de mantener y actualizar la aplicación y
+el VPS continúan vigentes.
+
+Antes de habilitarlo en producción se deben validar en desarrollo el alta
+del dispositivo, acceso sin verificación, códigos incorrectos y reutilizados,
+expiración, bloqueo, recuperación y revocación de sesiones. El despliegue lo
+realiza el usuario después de aprobar el resultado y autorizar el commit.
+
+Mientras se pospone, mantener contraseña larga y única, acceso administrativo
+limitado a las cuentas necesarias, HTTPS, cookies seguras y respaldos.
+
+Referencias: [recomendaciones de MFA de OWASP](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html),
+[política de acceso de Django Two-Factor Authentication](https://django-two-factor-auth.readthedocs.io/en/stable/implementing.html) y
+[licencia del proyecto](https://github.com/jazzband/django-two-factor-auth/blob/master/LICENSE).
+
 ## Instalación y alcance
 
 La imagen actualizada debe reconstruirse para instalar la nueva dependencia.

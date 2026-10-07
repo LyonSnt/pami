@@ -299,6 +299,13 @@ Detalles y recuperación en [Seguridad del administrador](seguridad_admin.md).
 
 ## Consideraciones de producción
 
+El segundo factor del administrador fue analizado y pospuesto por el usuario
+el 7 de octubre de 2026. No está implementado ni activo. Es una mejora de
+seguridad recomendada, no un requisito funcional pendiente. El alcance
+propuesto y la decisión se conservan en
+[Seguridad del administrador](seguridad_admin.md#segundo-factor-mejora-recomendada-y-pospuesta)
+y [Próximo paso](proximo_paso.md). Su implementación requiere nueva aprobación.
+
 La configuración de producción incluye redirección HTTPS, cookies seguras y HSTS configurables.
 
 Antes de desplegar se debe:

@@ -161,6 +161,23 @@ y desactivación en Home y catálogo pasó tras este ajuste.
 
 ## Mejoras futuras opcionales
 
+### Segundo factor del administrador: pospuesto
+
+El 7 de octubre de 2026 el usuario pidió documentar el análisis y posponer la
+implementación. El segundo factor es una mejora de seguridad recomendada,
+especialmente para el superusuario, y no un requisito funcional pendiente.
+Actualmente no está instalado ni activo. La propuesta contempla aplicación
+autenticadora TOTP, códigos de recuperación y exigencia de verificación en
+todo el CMS, conservando Axes y la ruta configurable. No requiere contratar
+un proveedor de SMS ni una suscripción de autenticación.
+
+El alcance, los requisitos y las condiciones para retomarlo están en
+[Seguridad del administrador](seguridad_admin.md#segundo-factor-mejora-recomendada-y-pospuesta).
+No implementar sin una nueva aprobación explícita del usuario. El despliegue
+continúa a su cargo.
+
+### Otras mejoras
+
 Estas mejoras no bloquean la versión actual:
 
 1. Mantener Django 5.2 LTS actualizado dentro de la serie 5.2.
