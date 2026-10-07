@@ -32,6 +32,12 @@ Las URLs públicas principales se registran en:
 
 - `config/urls/public.py`
 
+La ruta administrativa utiliza `settings.ADMIN_URL_PATH`, configurada desde
+`ADMIN_URL_PATH` en el entorno y normalizada como un segmento con barra final.
+El valor inicial conserva `/admin/`; al cambiarlo no se registra ni redirige
+la ruta anterior. El namespace `admin` se mantiene para resolver los enlaces
+internos y la excepción de mantenimiento sigue la ruta configurada.
+
 Las apps pueden tener su propio `urls.py`, pero la composición pública se controla desde `config/urls/public.py`.
 
 ## Templates

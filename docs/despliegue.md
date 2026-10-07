@@ -210,6 +210,12 @@ iniciales bloquean el nombre de usuario durante 15 minutos tras 5 fallos.
 La configuración, las limitaciones detrás de un proxy y el procedimiento de
 desbloqueo están en [Seguridad del administrador](seguridad_admin.md).
 
+La ruta se puede cambiar agregando `ADMIN_URL_PATH=panel-pami` al `.env` del
+VPS y recreando el servicio web. El valor inicial es `admin`. No requiere
+migraciones nuevas; la ruta anterior no redirige al administrador. Si hay reglas
+de acceso o límites del proxy asociadas a `/admin/`, deben ajustarse a la nueva
+ruta. El procedimiento completo está en la guía de seguridad indicada arriba.
+
 Las migraciones `businesses.0003_business_editorial_texts` y
 `businesses.0004_initialize_editorial_texts` agregan el título de destacados
 del Home y la introducción del catálogo por línea. Completan únicamente

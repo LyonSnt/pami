@@ -37,7 +37,7 @@ class MaintenanceModeMiddleware:
     @staticmethod
     def _is_exempt_request(request):
         exempt_prefixes = (
-            "/admin/",
+            f"/{settings.ADMIN_URL_PATH}",
             settings.STATIC_URL,
             settings.MEDIA_URL,
         )

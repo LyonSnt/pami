@@ -84,7 +84,7 @@ class SeoTests(TestCase):
         response = self.client.get(reverse("robots"))
 
         self.assertEqual(response["Content-Type"], "text/plain; charset=utf-8")
-        self.assertContains(response, "Disallow: /admin/")
+        self.assertNotContains(response, "Disallow: /admin/")
         self.assertContains(response, "Disallow: /contacto/enviado/")
         self.assertContains(response, "Sitemap: http://testserver/sitemap.xml")
 

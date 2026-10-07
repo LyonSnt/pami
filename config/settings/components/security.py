@@ -1,4 +1,7 @@
 from decouple import config
+from config.admin_path import normalize_admin_path
+
+ADMIN_URL_PATH = normalize_admin_path(config("ADMIN_URL_PATH", default="admin"))
 
 CSRF_TRUSTED_ORIGINS = config(
     "CSRF_TRUSTED_ORIGINS",

@@ -1,7 +1,44 @@
 # Protección del acceso administrativo
 
-El login en `/admin/` permanece accesible y exige una cuenta activa con acceso
-staff. La visibilidad del formulario no concede acceso al CMS.
+El login exige una cuenta activa con acceso staff. Su ruta inicial es `/admin/`
+y se puede cambiar desde el entorno. La visibilidad del formulario no concede
+acceso al CMS.
+
+## Ruta configurable
+
+`ADMIN_URL_PATH` define el nombre de la ruta, con valor inicial `admin`:
+
+```dotenv
+ADMIN_URL_PATH=panel-pami
+```
+
+Con ese ejemplo el administrador se encuentra en `/panel-pami/` y el login en
+`/panel-pami/login/`. Se permiten letras ASCII, números, guiones y guiones bajos;
+las barras iniciales y finales son opcionales. No se permiten rutas anidadas,
+valores vacíos ni nombres reservados para secciones públicas, static o media.
+
+Después de editar el `.env`, recrear el servicio para cargar el valor nuevo:
+
+```bash
+docker compose --env-file .env -f docker-compose.prod.yml up -d --build --force-recreate web
+```
+
+No requiere migraciones adicionales. Todos los enlaces administrativos usan
+el namespace `admin` de Django y siguen la nueva ruta. El modo mantenimiento
+permite acceder al administrador configurado y el bloqueo de Axes permanece
+activo. La ruta antigua `/admin/` responde 404 sin redirigir cuando se utiliza
+un nombre diferente y el portal está fuera del modo mantenimiento. Durante el
+mantenimiento, las rutas no exceptuadas reciben la respuesta general 503.
+
+`robots.txt` no enumera la ruta administrativa para evitar publicarla; las
+páginas del administrador mantienen su metadato de exclusión de indexación.
+Los archivos `/static/admin/` conservan su ruta habitual: son recursos de CSS
+y JavaScript, no el acceso al CMS.
+
+Cambiar el nombre reduce visitas automatizadas a la ruta conocida, pero no
+reemplaza autenticación, límites de intentos ni HTTPS. Si existen reglas del
+proxy específicas para `/admin/`, el responsable del despliegue debe ajustarlas
+al nombre elegido. Las reglas de proxy genéricas del proyecto siguen funcionando.
 
 ## Protección contra intentos fallidos
 
@@ -72,7 +109,7 @@ La imagen actualizada debe reconstruirse para instalar la nueva dependencia.
 Sus migraciones `axes` se aplican con `python manage.py migrate`, como parte
 del arranque existente. El despliegue lo realiza el usuario.
 
-Esta fase no añade segundo factor, acceso privado ni cambios de ruta. HTTPS,
+Esta fase no añade segundo factor ni acceso privado. HTTPS,
 cookies seguras y contraseñas fuertes siguen siendo necesarios en producción.
 
 Referencias: [instalación de Axes](https://django-axes.readthedocs.io/en/stable/2_installation.html),

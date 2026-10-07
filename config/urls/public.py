@@ -9,7 +9,7 @@ from apps.site.seo import robots_txt, sitemaps
 urlpatterns = [
     path("robots.txt", robots_txt, name="robots"),
     path("sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="sitemap"),
-    path("admin/", admin.site.urls),
+    path(settings.ADMIN_URL_PATH, admin.site.urls),
     path("", include("apps.site.urls")),
     path("", include("apps.businesses.urls")),
     path("", include("apps.catalog.urls")),

@@ -226,7 +226,6 @@ def robots_txt(request):
         (
             "User-agent: *",
             "Allow: /",
-            "Disallow: /admin/",
             "Disallow: /contacto/enviado/",
             f"Sitemap: {sitemap_url}",
         )

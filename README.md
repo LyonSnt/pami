@@ -52,6 +52,12 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml exec web python m
 
 El portal queda disponible en `http://localhost:8025/` y el administrador en `http://localhost:8025/admin/`, salvo que se modifique `WEB_PORT`.
 
+La ruta del administrador se configura con `ADMIN_URL_PATH` en `.env`;
+el valor inicial es `admin`. Por ejemplo, `ADMIN_URL_PATH=panel-pami` utiliza
+`/panel-pami/` y deja `/admin/` sin acceso ni redirección. Se requiere recrear
+el servicio web para cargar el nuevo valor. Detalles en
+[Seguridad del administrador](docs/seguridad_admin.md).
+
 ## Comandos de calidad
 
 ```bash
@@ -61,7 +67,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 141 pruebas.
+La suite estable contiene 155 pruebas.
 
 ## Roles administrativos
 

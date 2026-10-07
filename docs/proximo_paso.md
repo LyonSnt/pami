@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 141 pruebas correctas;
+- 155 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -83,6 +83,17 @@ ejecutó la suite completa y confirmó mediante captura el resultado:
 141 pruebas correctas en 19,206 segundos. El usuario autorizó el commit;
 el push y el despliegue del bloque siguen a su cargo.
 
+## Ruta administrativa configurable aprobada para cierre
+
+El cambio local de ruta administrativa está implementado y validado:
+`ADMIN_URL_PATH` permite un nombre por entorno, con `admin` como valor inicial.
+El login y los enlaces internos, el modo mantenimiento y Axes siguen la nueva
+ruta. `/admin/` no redirige si se elige otro nombre; fuera de mantenimiento
+responde 404. `robots.txt` no publica la ruta administrativa. Las 155 pruebas
+de la suite completa pasan y no hay migraciones pendientes. El usuario autorizó
+el commit; el push y el despliegue siguen a su cargo. El `.env` real no se modificó;
+la elección de ruta se realiza según [Seguridad del administrador](seguridad_admin.md).
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -115,7 +126,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 141 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 155 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente
