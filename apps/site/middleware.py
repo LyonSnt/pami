@@ -6,6 +6,20 @@ from apps.site.access import PublicModuleDisabled
 from apps.site.selectors import get_public_site_configuration
 
 
+class LegacyAdminNotFoundMiddleware:
+    """Render a neutral unavailable page for the retired admin path."""
+
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if settings.ADMIN_URL_PATH != "admin/" and (
+            request.path_info == "/admin" or request.path_info.startswith("/admin/")
+        ):
+            return render(request, "errors/unavailable_page.html", status=404)
+        return self.get_response(request)
+
+
 class PublicModuleDisabledMiddleware(MiddlewareMixin):
     def process_exception(self, request, exception):
         if isinstance(exception, PublicModuleDisabled):

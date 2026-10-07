@@ -239,6 +239,17 @@ conservan tamaños, colores y fondos consistentes con el Design System.
 
 ## Calidad
 
+El ajuste local de la antigua ruta administrativa muestra el 404 institucional
+para `/admin`, `/admin/` y sus subrutas cuando se configura otro nombre, incluso
+con `DEBUG=True` y durante mantenimiento. Se verificaron las 22 pruebas de
+ruta administrativa, páginas de error y mantenimiento; todas correctas. Los
+diagnósticos de otras rutas inexistentes de desarrollo permanecen disponibles.
+El usuario revisó el resultado y autorizó el commit; el push y el despliegue
+siguen a su cargo.
+La ruta antigua utiliza el mensaje propio `Página no disponible` y la
+descripción `Esta dirección no está disponible. Puedes volver al inicio para continuar.`,
+con un único botón `Volver al inicio`. Las otras páginas 404 conservan su búsqueda.
+
 La ruta administrativa es configurable con `ADMIN_URL_PATH` (valor inicial
 `admin`). La excepción de mantenimiento sigue la ruta elegida y `robots.txt`
 no la publica. La ruta personalizada y las protecciones de login están

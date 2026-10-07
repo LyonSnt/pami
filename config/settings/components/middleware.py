@@ -1,6 +1,7 @@
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'apps.site.middleware.LegacyAdminNotFoundMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

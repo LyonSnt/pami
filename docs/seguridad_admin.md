@@ -26,9 +26,17 @@ docker compose --env-file .env -f docker-compose.prod.yml up -d --build --force-
 No requiere migraciones adicionales. Todos los enlaces administrativos usan
 el namespace `admin` de Django y siguen la nueva ruta. El modo mantenimiento
 permite acceder al administrador configurado y el bloqueo de Axes permanece
-activo. La ruta antigua `/admin/` responde 404 sin redirigir cuando se utiliza
-un nombre diferente y el portal está fuera del modo mantenimiento. Durante el
-mantenimiento, las rutas no exceptuadas reciben la respuesta general 503.
+activo. Cuando se utiliza otro nombre, `/admin`, `/admin/` y sus subrutas
+responden con una página institucional propia, HTTP 404, sin redirigir ni revelar la ruta nueva,
+tanto con `DEBUG=True` como con `DEBUG=False`. Esta respuesta también se
+mantiene durante el mantenimiento. Los demás errores inesperados de desarrollo
+conservan el diagnóstico técnico de Django.
+
+La página de la ruta antigua muestra `Página no disponible` y
+`Esta dirección no está disponible. Puedes volver al inicio para continuar.`,
+con un único botón `Volver al inicio`. No incluye búsqueda ni mensajes de
+acceso restringido. El 404 general y el de módulos desactivados conservan
+su texto y sus acciones habituales.
 
 `robots.txt` no enumera la ruta administrativa para evitar publicarla; las
 páginas del administrador mantienen su metadato de exclusión de indexación.

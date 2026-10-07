@@ -88,11 +88,22 @@ el push y el despliegue del bloque siguen a su cargo.
 El cambio local de ruta administrativa está implementado y validado:
 `ADMIN_URL_PATH` permite un nombre por entorno, con `admin` como valor inicial.
 El login y los enlaces internos, el modo mantenimiento y Axes siguen la nueva
-ruta. `/admin/` no redirige si se elige otro nombre; fuera de mantenimiento
-responde 404. `robots.txt` no publica la ruta administrativa. Las 155 pruebas
+ruta. `/admin/` no redirige si se elige otro nombre y responde con el 404
+institucional incluso en desarrollo y mantenimiento. `robots.txt` no publica
+la ruta administrativa. Las 155 pruebas
 de la suite completa pasan y no hay migraciones pendientes. El usuario autorizó
 el commit; el push y el despliegue siguen a su cargo. El `.env` real no se modificó;
 la elección de ruta se realiza según [Seguridad del administrador](seguridad_admin.md).
+
+## Mensaje de la ruta antigua aprobado para cierre
+
+Cuando `ADMIN_URL_PATH` tiene otro nombre, `/admin`, `/admin/` y sus subrutas
+muestran el 404 institucional también en desarrollo y durante mantenimiento,
+con el mensaje `Página no disponible` y únicamente `Volver al inicio`,
+sin búsqueda, redirección ni indicación de la nueva ruta. La ruta administrativa activa
+continúa funcionando y las demás rutas inexistentes conservan su diagnóstico
+de desarrollo. Las 22 pruebas de ruta, errores y mantenimiento pasan. El usuario
+revisó el resultado y autorizó el commit; el push y el despliegue siguen a su cargo.
 
 ## Mejoras futuras opcionales
 

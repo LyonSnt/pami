@@ -1,7 +1,7 @@
 import importlib
 
 from django.core.exceptions import ImproperlyConfigured
-from django.test import SimpleTestCase, override_settings
+from django.test import Client, SimpleTestCase, override_settings
 from django.urls import clear_url_caches, reverse
 
 from apps.accounts.tests import test_admin_login_security as login_tests
@@ -48,16 +48,26 @@ class CustomAdminPathTests(login_tests.AdminLoginSecurityTests):
         self.assertContains(self.client.get(reverse("admin:index")), "/panel-prueba/logout/")
 
     def test_old_admin_urls_return_404_without_redirect(self):
-        for url in ("/admin", "/admin/", "/admin/login/", "/admin/accounts/user/"):
-            with self.subTest(url=url):
-                response = self.client.get(url)
-                self.assertEqual(response.status_code, 404)
-                self.assertNotIn("Location", response)
+        for debug in (True, False):
+            with override_settings(DEBUG=debug):
+                for url in ("/admin", "/admin/", "/admin/login/", "/admin/accounts/user/"):
+                    for method in ("get", "post"):
+                        with self.subTest(debug=debug, url=url, method=method):
+                            response = getattr(Client(enforce_csrf_checks=True), method)(url)
+                            self.assertContains(response, "Página no disponible", status_code=404)
+                            self.assertContains(response, "Esta dirección no está disponible. Puedes volver al inicio para continuar.", status_code=404)
+                            self.assertContains(response, "Volver al inicio", status_code=404)
+                            self.assertNotContains(response, "Buscar en Pámi", status_code=404)
+                            self.assertNotContains(response, 'href="/buscar/"', status_code=404)
+                            self.assertNotIn("Location", response)
+                            self.assertNotContains(response, "Using the URLconf", status_code=404)
+                            self.assertNotContains(response, "panel-prueba", status_code=404)
 
     def test_custom_login_remains_available_during_maintenance(self):
         SiteConfiguration.objects.create(maintenance_mode=True)
         self.assertEqual(self.client.get(self.url).status_code, 200)
         self.assertEqual(self.client.get(reverse("site:home")).status_code, 503)
+        self.assertContains(self.client.get("/admin/login/"), "Página no disponible", status_code=404)
         self.assertEqual(self.lock_user().status_code, 429)
 
     def test_robots_does_not_publish_custom_admin_path(self):
