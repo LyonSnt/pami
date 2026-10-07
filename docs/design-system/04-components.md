@@ -89,6 +89,21 @@ benefits.html
 
 Bloque reutilizable de beneficios mostrado actualmente dentro del Hero.
 
+Presenta mensajes generales de Pámi, independientes de la línea destacada:
+
+- **Cuidamos los detalles:** En cada producto y servicio.
+- **Entrega confiable:** Acordamos tiempos contigo.
+- **Atención cercana:** Te ayudamos a elegir.
+
+Los textos están definidos en la plantilla y no son administrables desde el
+CMS. Se mantienen breves para facilitar la lectura en las tres columnas y
+evitar promesas absolutas de calidad o rapidez. Utiliza un check para el cuidado
+de los detalles, un camión con trazos que no atraviesan las ruedas para la
+entrega y una burbuja de conversación para la atención cercana. Los iconos SVG
+son decorativos, con tamaño `h-5 w-5`, trazo de grosor 2 y color institucional
+sobre fondo suave. El bloque muestra una columna en móvil y tres desde el
+breakpoint `sm`.
+
 ---
 
 call_to_action.html

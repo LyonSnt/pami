@@ -216,6 +216,12 @@ Recursos disponibles en `static/assets/branding/`:
 - `favicon.svg`.
 
 Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisionales.
+El bloque del Hero presenta los mensajes generales `Cuidamos los detalles`,
+`Entrega confiable` y `Atención cercana`, con descripciones breves. Estos textos
+están definidos en la plantilla, no se administran desde el CMS y son
+independientes de la línea destacada.
+Los iconos representan un check, un camión y una burbuja de conversación;
+conservan tamaños, colores y fondos consistentes con el Design System.
 
 ## Calidad
 
