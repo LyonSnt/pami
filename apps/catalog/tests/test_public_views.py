@@ -208,11 +208,11 @@ class ProductPublicViewTests(TestCase):
 
         response = self.client.get(reverse("catalog:list"))
 
-        self.assertContains(response, "Líneas de negocio")
+        self.assertContains(response, "Explora nuestro catálogo")
         self.assertContains(response, self.business.name)
         self.assertContains(response, digital_business.name)
         self.assertNotContains(response, "Sistema de gestión de agua")
-        self.assertContains(response, "Ver productos y servicios", count=2)
+        self.assertContains(response, "Ver catálogo", count=2)
         self.assertContains(
             response,
             reverse(
@@ -220,6 +220,16 @@ class ProductPublicViewTests(TestCase):
                 kwargs={"business_slug": digital_business.slug},
             ),
         )
+
+    def test_business_catalog_uses_configured_intro_and_generic_fallback(self):
+        url = reverse("catalog:business_list", kwargs={"business_slug": self.business.slug})
+        response = self.client.get(url)
+        self.assertContains(response, "Consulta los productos y servicios disponibles.")
+        self.business.catalog_intro = "Conoce nuestras prendas."
+        self.business.save()
+        response = self.client.get(url)
+        self.assertContains(response, "Conoce nuestras prendas.")
+        self.assertNotContains(response, "Consulta los productos y servicios disponibles.")
 
     def test_business_catalog_only_presents_products_from_selected_line(self):
         other_business = Business.objects.create(

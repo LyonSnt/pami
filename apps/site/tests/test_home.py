@@ -88,6 +88,24 @@ class HomeViewTests(TestCase):
         self.assertContains(response, "Creaciones")
         self.assertContains(response, "Creaciones Hadasha")
 
+    def test_home_uses_editorial_title_for_any_featured_business(self):
+        self.public_business.featured_title = "Prendas destacadas"
+        self.public_business.save()
+        response = self.client.get(reverse("site:home"))
+        self.assertContains(response, "Prendas destacadas")
+        self.assertContains(response, "Conoce lo que ofrece Creaciones Hadasha.")
+        self.assertNotContains(response, "Productos y servicios destacados")
+
+        self.hidden_business.featured_title = "Sistemas destacados"
+        self.hidden_business.save()
+        configuration = SiteConfiguration.objects.get()
+        configuration.featured_business = self.hidden_business
+        configuration.save()
+        response = self.client.get(reverse("site:home"))
+        self.assertContains(response, "Sistemas destacados")
+        self.assertContains(response, "Conoce lo que ofrece Tecnología.")
+        self.assertNotContains(response, "Prendas destacadas")
+
     def test_home_contains_global_accessibility_navigation(self):
         response = self.client.get(reverse("site:home"))
 
@@ -103,9 +121,9 @@ class HomeViewTests(TestCase):
         response = self.client.get(reverse("site:home"))
 
         self.assertContains(response, "assets/branding/favicon.svg")
-        self.assertContains(response, "Calidad garantizada")
+        self.assertContains(response, "Cuidamos los detalles")
         self.assertContains(response, "Entrega confiable")
-        self.assertContains(response, "Soporte cercano")
+        self.assertContains(response, "Atención cercana")
         self.assertNotContains(response, ">✓<")
         self.assertNotContains(response, ">◉<")
 

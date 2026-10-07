@@ -340,7 +340,7 @@ El Hero reutiliza este componente y no duplica su HTML.
 
 - Los selectors públicos aplican reglas completas de visibilidad.
 - Las operaciones administrativas principales generan auditoría.
-- La suite actual contiene 131 pruebas.
+- La suite actual contiene 133 pruebas.
 - `SiteConfiguration` controla la publicación global de Catálogo, Portafolio, Blog y Contacto. Los módulos apagados se conservan en el CMS, pero no deben filtrarse al portal, buscador o sitemap.
 - `manage.py check` no reporta problemas.
 - No existen cambios de migración pendientes al cierre de la última validación.

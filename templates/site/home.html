@@ -17,13 +17,19 @@
   {% if catalog_enabled %}
     <section class="bg-slate-50 py-16">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {% include "components/layout/section_title.html" with title="Productos y servicios destacados" subtitle="Descubre las soluciones disponibles en nuestro catálogo." %}
+        {% if business %}
+          {% with featured_subtitle="Conoce lo que ofrece "|add:business.name|add:"." %}
+            {% include "components/layout/section_title.html" with title=business.featured_title|default:"Productos y servicios destacados" subtitle=featured_subtitle %}
+          {% endwith %}
+        {% else %}
+          {% include "components/layout/section_title.html" with title="Productos y servicios destacados" subtitle="Consulta nuestros productos y servicios." %}
+        {% endif %}
 
         <div class="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
           {% for product in products %}
             {% include "components/cards/product_card.html" with product=product %}
           {% empty %}
-            {% include "components/ui/empty_state.html" with title="Próximamente nuevos productos y servicios" message="Estamos preparando nuevas soluciones para ti." %}
+            {% include "components/ui/empty_state.html" with title="No hay productos o servicios publicados" message="Aún no hay productos o servicios publicados en esta sección." %}
           {% endfor %}
         </div>
       </div>

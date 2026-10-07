@@ -17,7 +17,7 @@
     <div class="mt-auto pt-6">
       {% if catalog_mode %}
         {% url 'catalog:business_list' business.slug as business_url %}
-        {% include "components/ui/button.html" with href=business_url label="Ver productos y servicios" %}
+        {% include "components/ui/button.html" with href=business_url label="Ver catálogo" %}
       {% else %}
         {% url 'businesses:detail' business.slug as business_url %}
         {% include "components/ui/button.html" with href=business_url label="Ver línea" %}

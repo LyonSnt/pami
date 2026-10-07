@@ -97,6 +97,13 @@ configuración inicial expone únicamente el catálogo.
 
 No existe `ProductCategory`. Solo deberá incorporarse una taxonomía adicional si una línea alcanza un volumen que necesite subdivisiones y filtros internos; no debe utilizarse para representar las líneas de negocio.
 
+`Business.featured_title` y `Business.catalog_intro` contienen textos editoriales
+opcionales para el título de destacados del Home y la introducción del catálogo
+de cada línea. Se administran por registro y tienen textos generales de respaldo.
+Las plantillas no deducen el tipo de oferta a partir del nombre o slug. Las
+migraciones `businesses.0003` y `0004` agregan los campos y completan los textos
+vacíos de las líneas conocidas sin crear registros ni modificar sus relaciones.
+
 Las antiguas rutas `/negocios/` se conservan únicamente como redirecciones
 permanentes hacia `/catalogo/`. De esta forma se mantienen enlaces históricos
 sin duplicar públicamente la presentación de líneas de negocio.

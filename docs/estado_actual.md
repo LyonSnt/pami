@@ -8,7 +8,7 @@ La arquitectura soporta múltiples líneas de negocio. El Home conserva Creacion
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 131 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 133 pruebas correctas.
 
 ## Infraestructura
 
@@ -163,6 +163,20 @@ El catálogo utiliza `Business` como línea de negocio y `Product` como producto
 
 El Home utiliza la línea destacada configurada en Django Admin para resolver los productos y los trabajos. La etiqueta breve del Hero se configura por separado y recurre al nombre de la línea solo cuando está vacía. La línea principal usa el nombre `Creaciones Hadasha` y el slug canónico `creaciones`. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
 
+El título de la sección de destacados utiliza `Business.featured_title`,
+administrable por línea y con respaldo `Productos y servicios destacados`.
+Creaciones Hadasha muestra `Prendas destacadas`. La sección presenta el subtítulo
+`Conoce lo que ofrece <nombre de la línea>.`, utilizando automáticamente la
+línea destacada. Si no hay una línea pública seleccionada, muestra
+`Consulta nuestros productos y servicios.`. Los textos de introducción del
+catálogo utilizan instrucciones directas para elegir una sección y consultar
+sus productos y servicios; los estados vacíos describen la ausencia de
+contenido publicado sin anunciar futuras publicaciones. La introducción del
+catálogo de cada línea utiliza `Business.catalog_intro`, con respaldo
+`Consulta los productos y servicios disponibles.`. Ambos campos se editan en
+`Líneas de negocio > Textos del catálogo y Home`. El catálogo general muestra
+`Explora nuestro catálogo` y las tarjetas enlazan mediante `Ver catálogo`.
+
 El comando `seed_demo` es idempotente para este contenido: actualiza la configuración demostrativa, publica Chaquetas y Buzos con orden explícito y despublica únicamente los registros demo anteriores conocidos sin eliminarlos. La base de desarrollo fue cargada con este estado.
 
 El mismo comando completa las imágenes demo aprobadas cuando los campos correspondientes están vacíos. Las imágenes reemplazadas posteriormente desde Django Admin se conservan. Los originales optimizados viven en `static/assets/demo/creaciones/` y el conjunto WebP ocupa menos de 450 KB.
@@ -225,7 +239,7 @@ conservan tamaños, colores y fondos consistentes con el Design System.
 
 ## Calidad
 
-- 131 pruebas ejecutadas correctamente.
+- 133 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Migración `site.0010_separate_hero_label` aplicada y validada en desarrollo.
@@ -247,7 +261,7 @@ Antes de desplegar se debe:
 
 El sistema se considera funcionalmente concluido como versión candidata estable
 `1.0.0`. El estado vigente corresponde al último commit disponible en `main` y
-está validado mediante 131 pruebas, sin migraciones pendientes y con revisión
+está validado mediante 133 pruebas, sin migraciones pendientes y con revisión
 visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas

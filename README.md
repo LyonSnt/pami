@@ -61,7 +61,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 131 pruebas.
+La suite estable contiene 133 pruebas.
 
 ## Roles administrativos
 

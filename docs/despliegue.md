@@ -204,6 +204,14 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+Las migraciones `businesses.0003_business_editorial_texts` y
+`businesses.0004_initialize_editorial_texts` agregan el título de destacados
+del Home y la introducción del catálogo por línea. Completan únicamente
+campos vacíos de registros existentes con slugs `creaciones`, `papeleria` y
+`soluciones-digitales`, sin crear líneas ni modificar productos. No requieren
+ejecutar `seed_demo` en producción. Después pueden editarse desde el
+administrador en `Líneas de negocio > Textos del catálogo y Home`.
+
 ### Descarga manual desde Django Admin
 
 Los superusuarios disponen de la sección `Auditoría > Respaldos de base de

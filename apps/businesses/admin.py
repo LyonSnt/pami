@@ -18,6 +18,9 @@ class BusinessAdmin(AuditModelAdminMixin, admin.ModelAdmin):
         ("Identidad visual", {
             "fields": ("image", "icon")
         }),
+        ("Textos del catálogo y Home", {
+            "fields": ("featured_title", "catalog_intro")
+        }),
         ("Publicación", {
             "fields": ("order", "is_active", "is_published")
         }),

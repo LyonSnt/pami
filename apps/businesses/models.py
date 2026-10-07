@@ -12,6 +12,16 @@ class Business(BaseModel):
     image_detail = responsive_image_spec(width=1200, height=675)
 
     name = models.CharField(max_length=120, verbose_name="Nombre")
+    featured_title = models.CharField(
+        max_length=120, blank=True, default="",
+        verbose_name="Título de destacados en el Home",
+        help_text="Si queda vacío, se muestra Productos y servicios destacados.",
+    )
+    catalog_intro = models.CharField(
+        max_length=255, blank=True, default="",
+        verbose_name="Introducción del catálogo",
+        help_text="Si queda vacía, se muestra Consulta los productos y servicios disponibles.",
+    )
     slug = models.SlugField(max_length=140, unique=True, verbose_name="Slug")
     short_description = models.CharField(max_length=255, blank=True, verbose_name="Descripción corta")
     description = models.TextField(blank=True, verbose_name="Descripción")

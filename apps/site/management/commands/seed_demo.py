@@ -108,6 +108,8 @@ class Command(BaseCommand):
         data = [
             {
                 "name": "Creaciones Hadasha",
+                "featured_title": "Prendas destacadas",
+                "catalog_intro": "Conoce nuestras prendas.",
                 "slug": "creaciones",
                 "short_description": "Creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
                 "description": "Creamos prendas cómodas y versátiles para acompañar tu estilo.",
@@ -115,6 +117,8 @@ class Command(BaseCommand):
             },
             {
                 "name": "Soluciones digitales",
+                "featured_title": "Sistemas y servicios destacados",
+                "catalog_intro": "Conoce nuestros sistemas y servicios digitales.",
                 "slug": "soluciones-digitales",
                 "short_description": "Sistemas web para apoyar la gestión de organizaciones y servicios.",
                 "description": "Desarrollamos soluciones digitales orientadas a centralizar información, facilitar procesos y mejorar el seguimiento operativo.",

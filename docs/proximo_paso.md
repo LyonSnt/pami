@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 131 pruebas correctas;
+- 133 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -57,6 +57,18 @@ La revisión visual del Home, el catálogo general y el administrador fue
 completada y aprobada por el usuario. El usuario autorizó el commit de estos
 cambios; el push y el despliegue permanecen a su cargo.
 
+## Textos por línea aprobados para cierre
+
+Los textos públicos del Home y catálogo se ajustaron al contexto de cada
+línea. `Business.featured_title` y `Business.catalog_intro` se administran en
+`Líneas de negocio > Textos del catálogo y Home`, con respaldos generales si
+se dejan vacíos. Hadasha muestra `Prendas destacadas` y `Conoce nuestras prendas.`.
+Las migraciones `businesses.0003` y `0004` están aplicadas en desarrollo; la
+segunda completa solo campos vacíos de las líneas conocidas. `seed_demo`
+incluye los textos de Hadasha y Soluciones digitales. Las 133 pruebas pasan y
+no hay cambios de modelos sin migración. El usuario aprobó el resultado y
+autorizó el commit; el push y el despliegue siguen a su cargo.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -89,7 +101,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 131 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 133 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente

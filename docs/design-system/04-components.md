@@ -91,7 +91,7 @@ Bloque reutilizable de beneficios mostrado actualmente dentro del Hero.
 
 Presenta mensajes generales de Pámi, independientes de la línea destacada:
 
-- **Cuidamos los detalles:** En cada producto y servicio.
+- **Cuidamos los detalles:** En todo lo que ofrecemos.
 - **Entrega confiable:** Acordamos tiempos contigo.
 - **Atención cercana:** Te ayudamos a elegir.
 
