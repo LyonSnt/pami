@@ -67,9 +67,15 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 155 pruebas.
+La suite estable contiene 160 pruebas.
 
 ## Roles administrativos
+
+Para elegir productos del Home, abrir `Catálogo > Productos` y marcar
+`Mostrar en destacados` en el bloque `Publicación`. El Home muestra hasta dos
+marcados de la línea destacada, activos y publicados, según Orden y Nombre.
+Desmarcar un producto no lo retira del catálogo. Los productos nuevos quedan
+sin marcar.
 
 Los grupos oficiales se crean o actualizan de forma idempotente:
 

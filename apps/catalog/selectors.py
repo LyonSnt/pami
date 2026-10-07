@@ -41,6 +41,12 @@ def get_published_products_by_business(business):
     )
 
 
+def get_featured_products_by_business(business):
+    return get_published_products_by_business(business).filter(
+        is_featured=True,
+    ).order_by("order", "name", "pk")
+
+
 def search_published_products(query):
     return get_published_products().filter(
         Q(name__icontains=query)

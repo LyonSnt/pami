@@ -90,6 +90,7 @@ class SeedDemoCommandTests(TestCase):
             slug__in=("chaquetas", "buzos"),
         )
         self.assertEqual(products.count(), 2)
+        self.assertEqual(products.filter(is_featured=True).count(), 2)
         self.assertEqual(products.get(slug="chaquetas").order, 1)
         self.assertEqual(products.get(slug="buzos").order, 2)
         self.assertTrue(products.get(slug="chaquetas").image)

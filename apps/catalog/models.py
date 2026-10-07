@@ -75,6 +75,14 @@ class Product(BaseModel):
     )
 
     order = models.PositiveIntegerField(default=0, verbose_name="Orden")
+    is_featured = models.BooleanField(
+        default=False,
+        verbose_name="Mostrar en destacados",
+        help_text=(
+            "Aparece en el Home si pertenece a la línea destacada y está activo y publicado. "
+            "Se muestran hasta dos marcados, según Orden y Nombre."
+        ),
+    )
     is_published = models.BooleanField(default=True, verbose_name="Publicado")
 
     seo_title = models.CharField(max_length=180, blank=True, verbose_name="Título SEO")
@@ -130,7 +138,6 @@ class ProductFeature(BaseModel):
         verbose_name="Descripción",
     )
     order = models.PositiveIntegerField(default=0, verbose_name="Orden")
-
     class Meta:
         verbose_name = "Característica del producto"
         verbose_name_plural = "Características del producto"

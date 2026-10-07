@@ -29,7 +29,7 @@
           {% for product in products %}
             {% include "components/cards/product_card.html" with product=product %}
           {% empty %}
-            {% include "components/ui/empty_state.html" with title="No hay productos o servicios publicados" message="Aún no hay productos o servicios publicados en esta sección." %}
+            {% include "components/ui/empty_state.html" with title="No hay destacados por el momento" message="Consulta nuestro catálogo para conocer lo que ofrecemos." %}
           {% endfor %}
         </div>
       </div>

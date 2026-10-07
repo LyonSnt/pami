@@ -31,6 +31,7 @@ class HomeViewTests(TestCase):
             business=self.public_business,
             name="Chaquetas",
             slug="chaquetas",
+            is_featured=True,
             order=1,
             is_active=True,
             is_published=True,
@@ -39,6 +40,7 @@ class HomeViewTests(TestCase):
             business=self.public_business,
             name="Buzos",
             slug="buzos",
+            is_featured=True,
             order=2,
             is_active=True,
             is_published=True,
@@ -47,6 +49,7 @@ class HomeViewTests(TestCase):
             business=self.public_business,
             name="Producto adicional",
             slug="producto-adicional",
+            is_featured=True,
             order=3,
             is_active=True,
             is_published=True,
@@ -55,6 +58,7 @@ class HomeViewTests(TestCase):
             business=self.hidden_business,
             name="Producto de otra línea",
             slug="producto-otra-linea",
+            is_featured=True,
             is_active=True,
             is_published=True,
         )
@@ -87,6 +91,47 @@ class HomeViewTests(TestCase):
         self.assertContains(response, "Donde encuentras todo para ti")
         self.assertContains(response, "Creaciones")
         self.assertContains(response, "Creaciones Hadasha")
+
+    def test_featured_checkbox_controls_home_without_changing_catalog(self):
+        first = Product.objects.create(
+            business=self.public_business, name="Primero en catálogo", slug="primero", order=1,
+        )
+        selected = Product.objects.create(
+            business=self.public_business, name="Elegido para Home", slug="elegido",
+            order=2, is_featured=True,
+        )
+        response = self.client.get(reverse("site:home"))
+        self.assertEqual(list(response.context["products"]), [selected])
+        catalog = self.client.get(reverse("catalog:business_list", args=[self.public_business.slug]))
+        self.assertEqual(list(catalog.context["products"]), [first, selected])
+        selected.is_featured = False
+        selected.save()
+        self.assertEqual(list(self.client.get(reverse("site:home")).context["products"]), [])
+        catalog = self.client.get(reverse("catalog:business_list", args=[self.public_business.slug]))
+        self.assertEqual(list(catalog.context["products"]), [first, selected])
+
+    def test_featured_products_still_require_publication_and_activity(self):
+        for name, active, published in (("Inactivo", False, True), ("Borrador", True, False)):
+            Product.objects.create(
+                business=self.public_business, name=name, slug=name.lower(),
+                is_featured=True, is_active=active, is_published=published,
+            )
+        self.assertEqual(list(self.client.get(reverse("site:home")).context["products"]), [])
+
+    def test_home_does_not_fall_back_to_unselected_products(self):
+        Product.objects.create(business=self.public_business, name="Solo catálogo", slug="solo-catalogo")
+        response = self.client.get(reverse("site:home"))
+        self.assertEqual(list(response.context["products"]), [])
+        self.assertNotContains(response, "Solo catálogo")
+
+    def test_switching_featured_business_uses_its_selected_products(self):
+        stationery = Product.objects.create(
+            business=self.hidden_business, name="Agenda destacada", slug="agenda", is_featured=True,
+        )
+        configuration = SiteConfiguration.objects.get()
+        configuration.featured_business = self.hidden_business
+        configuration.save()
+        self.assertEqual(list(self.client.get(reverse("site:home")).context["products"]), [stationery])
 
     def test_home_uses_editorial_title_for_any_featured_business(self):
         self.public_business.featured_title = "Prendas destacadas"
@@ -132,6 +177,7 @@ class HomeViewTests(TestCase):
             business=self.public_business,
             name="Chaquetas",
             slug="chaquetas",
+            is_featured=True,
             is_active=True,
             is_published=True,
         )

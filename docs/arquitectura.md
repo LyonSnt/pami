@@ -110,6 +110,14 @@ Las plantillas no deducen el tipo de oferta a partir del nombre o slug. Las
 migraciones `businesses.0003` y `0004` agregan los campos y completan los textos
 vacíos de las líneas conocidas sin crear registros ni modificar sus relaciones.
 
+`Product.is_featured` permite seleccionar los destacados independientemente de
+su presencia y orden en el catálogo. El Home utiliza el selector
+`get_featured_products_by_business` para obtener hasta dos productos marcados,
+activos y publicados de la línea destacada, ordenados por `order`, `name` y
+`pk`. No recurre a productos sin marcar. La migración `catalog.0006` marca
+inicialmente los dos primeros productos públicos de cada línea pública para
+conservar la selección previa; los productos nuevos quedan sin marcar.
+
 Las antiguas rutas `/negocios/` se conservan únicamente como redirecciones
 permanentes hacia `/catalogo/`. De esta forma se mantienen enlaces históricos
 sin duplicar públicamente la presentación de líneas de negocio.

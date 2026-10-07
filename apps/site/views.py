@@ -6,7 +6,7 @@ from apps.businesses.selectors import (
     search_published_businesses,
 )
 from apps.catalog.selectors import (
-    get_published_products_by_business,
+    get_featured_products_by_business,
     search_published_products,
 )
 from apps.portfolio.selectors import (
@@ -33,7 +33,7 @@ def home(request):
         else None
     )
     products = (
-        get_published_products_by_business(business)[:2]
+        get_featured_products_by_business(business)[:2]
         if business and request_module_is_enabled(request, "catalog")
         else []
     )

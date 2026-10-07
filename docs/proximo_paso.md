@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 155 pruebas correctas;
+- 160 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -105,6 +105,19 @@ continúa funcionando y las demás rutas inexistentes conservan su diagnóstico
 de desarrollo. Las 22 pruebas de ruta, errores y mantenimiento pasan. El usuario
 revisó el resultado y autorizó el commit; el push y el despliegue siguen a su cargo.
 
+## Selección de destacados aprobada para cierre
+
+`Product.is_featured` agrega la casilla `Mostrar en destacados` en
+`Catálogo > Productos > Publicación`, visible también como columna y filtro
+del listado. El Home muestra hasta dos marcados, activos y publicados de la
+línea destacada, por Orden y Nombre, sin modificar el catálogo. No utiliza
+productos sin marcar como respaldo. `catalog.0005` y `0006` están aplicadas en
+desarrollo; conservan inicialmente los dos productos públicos que se mostraban
+por cada línea. Los productos nuevos tienen la casilla desmarcada. `seed_demo`
+marca Chaquetas y Buzos. Las 160 pruebas pasan y no hay migraciones pendientes.
+El usuario revisó el resultado y autorizó el commit. El despliegue sigue
+a cargo del usuario y no requiere ejecutar `seed_demo` en producción.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -137,7 +150,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 155 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 160 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente

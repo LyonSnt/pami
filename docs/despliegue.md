@@ -204,6 +204,14 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+Las migraciones `catalog.0005_product_featured` y
+`catalog.0006_preserve_current_featured_products` agregan la casilla
+`Mostrar en destacados` y seleccionan inicialmente los dos primeros productos
+activos y publicados de cada línea pública para conservar el Home previo.
+Se aplican con el arranque normal; no requieren ejecutar `seed_demo` en
+producción. Después se puede marcar o desmarcar cualquier producto desde
+`Catálogo > Productos > Publicación`, conservando su contenido y orden en el catálogo.
+
 La protección del login administrativo requiere reconstruir la imagen para
 instalar `django-axes` y aplicar sus migraciones en el arranque. Los valores
 iniciales bloquean el nombre de usuario durante 15 minutos tras 5 fallos.

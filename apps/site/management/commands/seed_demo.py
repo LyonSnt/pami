@@ -176,6 +176,7 @@ class Command(BaseCommand):
                     "description": description,
                     "price": Decimal(price),
                     "show_price": True,
+                    "is_featured": True,
                     "order": order,
                     "is_published": True,
                     "seo_title": name,
