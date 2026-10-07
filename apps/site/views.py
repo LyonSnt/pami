@@ -33,7 +33,7 @@ def home(request):
         else None
     )
     products = (
-        get_featured_products_by_business(business)[:2]
+        get_featured_products_by_business(business)[:site_configuration.featured_products_limit]
         if business and request_module_is_enabled(request, "catalog")
         else []
     )

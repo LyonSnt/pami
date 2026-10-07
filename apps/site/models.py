@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.functional import cached_property
 
 from apps.common.images import responsive_image_spec
@@ -31,6 +32,12 @@ class SiteConfiguration(BaseModel):
         verbose_name="Línea destacada del Home",
     )
     site_name = models.CharField(max_length=120, default="Pámi", verbose_name="Nombre del sitio")
+    featured_products_limit = models.PositiveSmallIntegerField(
+        default=2,
+        validators=(MinValueValidator(1), MaxValueValidator(12)),
+        verbose_name="Cantidad de productos destacados",
+        help_text="De 1 a 12. Se muestran los productos marcados de la línea destacada, según Orden y Nombre.",
+    )
     slogan = models.CharField(max_length=180, default="Donde encuentras todo para ti", verbose_name="Eslogan")
     description = models.TextField(blank=True, verbose_name="Descripción")
 
@@ -138,6 +145,12 @@ class SiteConfiguration(BaseModel):
     class Meta:
         verbose_name = "Configuración del sitio"
         verbose_name_plural = "Configuración del sitio"
+        constraints = [
+            models.CheckConstraint(
+                condition=models.Q(featured_products_limit__gte=1, featured_products_limit__lte=12),
+                name="site_featured_products_limit_valid_range",
+            ),
+        ]
 
     def __str__(self):
         return self.site_name

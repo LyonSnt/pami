@@ -112,9 +112,11 @@ vacíos de las líneas conocidas sin crear registros ni modificar sus relaciones
 
 `Product.is_featured` permite seleccionar los destacados independientemente de
 su presencia y orden en el catálogo. El Home utiliza el selector
-`get_featured_products_by_business` para obtener hasta dos productos marcados,
+`get_featured_products_by_business` para obtener los productos marcados,
 activos y publicados de la línea destacada, ordenados por `order`, `name` y
-`pk`. No recurre a productos sin marcar. La migración `catalog.0006` marca
+`pk`, hasta `SiteConfiguration.featured_products_limit` (de 1 a 12, valor inicial 2).
+El límite se valida en formularios y mediante una restricción de base de datos.
+No recurre a productos sin marcar. La migración `catalog.0006` marca
 inicialmente los dos primeros productos públicos de cada línea pública para
 conservar la selección previa; los productos nuevos quedan sin marcar.
 

@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 160 pruebas correctas;
+- 163 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -118,6 +118,19 @@ marca Chaquetas y Buzos. Las 160 pruebas pasan y no hay migraciones pendientes.
 El usuario revisó el resultado y autorizó el commit. El despliegue sigue
 a cargo del usuario y no requiere ejecutar `seed_demo` en producción.
 
+## Cantidad de destacados configurable aprobada para cierre
+
+Se agregó `SiteConfiguration.featured_products_limit` en
+`Configuración del sitio > Destacados del Home`, con rango de 1 a 12 y valor
+inicial 2. El Home respeta la cantidad elegida y conserva la selección por
+casilla, línea destacada, actividad, publicación y orden. Si hay menos candidatos,
+muestra solo los disponibles. La cuadrícula mantiene una columna en móvil
+y dos desde `sm`, agregando filas según la cantidad. Se incluyeron validadores
+y una restricción de base de datos, y las migraciones `site.0011` y
+`catalog.0007`, aplicadas en desarrollo. Las 163 pruebas de la suite completa
+pasan y no hay migraciones pendientes. El usuario revisó el resultado y
+autorizó el commit; el push y el despliegue siguen a su cargo.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -150,7 +163,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 160 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 163 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente

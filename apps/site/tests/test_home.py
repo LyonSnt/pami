@@ -133,6 +133,22 @@ class HomeViewTests(TestCase):
         configuration.save()
         self.assertEqual(list(self.client.get(reverse("site:home")).context["products"]), [stationery])
 
+    def test_home_respects_configured_featured_limit(self):
+        products = [
+            Product.objects.create(
+                business=self.public_business, name=f"Destacado {order}",
+                slug=f"destacado-{order}", order=order, is_featured=True,
+            )
+            for order in range(1, 6)
+        ]
+        configuration = SiteConfiguration.objects.get()
+        for limit in (4, 1, 12):
+            with self.subTest(limit=limit):
+                configuration.featured_products_limit = limit
+                configuration.save()
+                response = self.client.get(reverse("site:home"))
+                self.assertEqual(list(response.context["products"]), products[:limit])
+
     def test_home_uses_editorial_title_for_any_featured_business(self):
         self.public_business.featured_title = "Prendas destacadas"
         self.public_business.save()

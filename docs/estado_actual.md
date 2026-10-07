@@ -8,7 +8,7 @@ La arquitectura soporta múltiples líneas de negocio. El Home conserva Creacion
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 160 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 163 pruebas correctas.
 
 ## Infraestructura
 
@@ -179,8 +179,10 @@ catálogo de cada línea utiliza `Business.catalog_intro`, con respaldo
 
 La selección de productos del Home utiliza la casilla `Mostrar en destacados`
 (`Product.is_featured`), disponible en `Catálogo > Productos > Publicación`.
-El Home muestra hasta dos productos marcados, activos y publicados de la línea
-destacada, con prioridad por Orden y Nombre. Esta casilla no modifica su orden
+El Home muestra productos marcados, activos y publicados de la línea
+destacada, con prioridad por Orden y Nombre. La cantidad se configura en
+`Configuración del sitio > Destacados del Home > Cantidad de productos destacados`,
+de 1 a 12, con valor inicial 2. Esta casilla no modifica su orden
 ni su publicación en el catálogo. Si no hay candidatos, se muestra
 `No hay destacados por el momento` con una invitación a consultar el catálogo.
 Las migraciones `catalog.0005` y `0006` agregan el campo y marcan los dos
@@ -276,7 +278,7 @@ El usuario ejecutó la suite completa en desarrollo y compartió el resultado:
 el push y el despliegue permanecen a su cargo.
 Detalles y recuperación en [Seguridad del administrador](seguridad_admin.md).
 
-- 160 pruebas ejecutadas correctamente.
+- 163 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Migración `site.0010_separate_hero_label` aplicada y validada en desarrollo.
@@ -298,7 +300,7 @@ Antes de desplegar se debe:
 
 El sistema se considera funcionalmente concluido como versión candidata estable
 `1.0.0`. El estado vigente corresponde al último commit disponible en `main` y
-está validado mediante 160 pruebas, sin migraciones pendientes y con revisión
+está validado mediante 163 pruebas, sin migraciones pendientes y con revisión
 visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas

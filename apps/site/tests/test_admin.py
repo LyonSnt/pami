@@ -46,6 +46,7 @@ class SiteConfigurationAdminTests(TestCase):
         self.assertTrue(
             {
                 "hero_label",
+                "featured_products_limit",
                 "show_catalog",
                 "show_portfolio",
                 "show_blog",

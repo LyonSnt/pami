@@ -204,6 +204,13 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+La migración `site.0011_configurable_featured_limit` agrega la cantidad de
+productos destacados con valor inicial 2 y rango válido de 1 a 12.
+`catalog.0007_configurable_featured_limit` actualiza la ayuda de la casilla
+de destacados. Se aplican mediante el arranque normal del servicio web,
+sin requerir `seed_demo`. Tras actualizar, la cantidad se administra en
+`Configuración del sitio > Destacados del Home`.
+
 Las migraciones `catalog.0005_product_featured` y
 `catalog.0006_preserve_current_featured_products` agregan la casilla
 `Mostrar en destacados` y seleccionan inicialmente los dos primeros productos

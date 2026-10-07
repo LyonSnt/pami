@@ -57,6 +57,9 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
         ("SEO", {
             "fields": ("seo_title", "seo_description")
         }),
+        ("Destacados del Home", {
+            "fields": ("featured_products_limit",)
+        }),
         ("Módulos públicos", {
             "fields": (
                 "show_catalog",

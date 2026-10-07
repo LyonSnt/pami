@@ -80,7 +80,7 @@ class Product(BaseModel):
         verbose_name="Mostrar en destacados",
         help_text=(
             "Aparece en el Home si pertenece a la línea destacada y está activo y publicado. "
-            "Se muestran hasta dos marcados, según Orden y Nombre."
+            "La cantidad se configura en Configuración del sitio; se priorizan Orden y Nombre."
         ),
     )
     is_published = models.BooleanField(default=True, verbose_name="Publicado")
