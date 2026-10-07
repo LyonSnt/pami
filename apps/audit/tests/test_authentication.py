@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.urls import reverse
 
 from apps.accounts.models import User
 from apps.audit.models import AuditLog
@@ -14,12 +15,11 @@ class AuthenticationAuditTests(TestCase):
         )
 
     def test_login_and_logout_are_audited(self):
-        self.assertTrue(
-            self.client.login(
-                username=self.user.username,
-                password="test-password",
-            )
+        response = self.client.post(
+            reverse("admin:login"),
+            {"username": self.user.username, "password": "test-password"},
         )
+        self.assertEqual(response.status_code, 302)
         self.client.logout()
 
         actions = list(

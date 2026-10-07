@@ -204,6 +204,12 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+La protección del login administrativo requiere reconstruir la imagen para
+instalar `django-axes` y aplicar sus migraciones en el arranque. Los valores
+iniciales bloquean el nombre de usuario durante 15 minutos tras 5 fallos.
+La configuración, las limitaciones detrás de un proxy y el procedimiento de
+desbloqueo están en [Seguridad del administrador](seguridad_admin.md).
+
 Las migraciones `businesses.0003_business_editorial_texts` y
 `businesses.0004_initialize_editorial_texts` agregan el título de destacados
 del Home y la introducción del catálogo por línea. Completan únicamente

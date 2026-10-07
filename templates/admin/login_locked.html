@@ -1,0 +1,15 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'admin/css/login.css' %}">{% endblock %}
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+{% block nav-global %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block usertools %}{% endblock %}
+{% block breadcrumbs %}{% endblock %}
+{% block content %}
+  <p role="alert">Se alcanzó el límite de intentos fallidos de inicio de sesión.</p>
+  <p>Espera {{ cooloff_minutes }} minutos desde el inicio del bloqueo antes de volver a intentarlo.</p>
+  <p>Si necesitas recuperar el acceso antes, contacta al responsable del sitio.</p>
+  <p><a href="{% url 'admin:login' %}">Volver al inicio de sesión</a></p>
+{% endblock %}

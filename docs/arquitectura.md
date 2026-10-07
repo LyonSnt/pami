@@ -165,6 +165,12 @@ Los puntos de entrada WSGI y ASGI utilizan configuración de producción por def
 
 ## Pruebas
 
+El login administrativo utiliza `django-axes` con contadores persistentes en
+PostgreSQL y bloqueo temporal por nombre de usuario. El backend de control
+precede a `ModelBackend` y el middleware de Axes procesa las respuestas de
+bloqueo. Los valores y la recuperación se describen en
+[Seguridad del administrador](seguridad_admin.md).
+
 La suite se ejecuta mediante Docker Compose y utiliza una base temporal independiente:
 
 ```bash

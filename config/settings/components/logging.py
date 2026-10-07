@@ -10,4 +10,10 @@ LOGGING = {
         "handlers": ["console"],
         "level": "INFO",
     },
+    "loggers": {
+        "axes": {
+            "level": "WARNING",
+            "propagate": True,
+        },
+    },
 }

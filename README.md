@@ -61,7 +61,7 @@ docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm web pyth
 docker compose -f docker-compose.yml -f docker-compose.dev.yml run --rm tailwind npm run tailwind
 ```
 
-La suite estable contiene 133 pruebas.
+La suite estable contiene 141 pruebas.
 
 ## Roles administrativos
 
@@ -89,6 +89,7 @@ Nunca se deben versionar `.env`, archivos media, copias de base de datos ni `dep
 - [Convenciones](docs/convenciones.md)
 - [Design System](docs/design-system/README.md)
 - [Despliegue](docs/despliegue.md)
+- [Seguridad del administrador](docs/seguridad_admin.md)
 
 ## Estado
 

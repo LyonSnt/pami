@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 133 pruebas correctas;
+- 141 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -69,6 +69,20 @@ incluye los textos de Hadasha y Soluciones digitales. Las 133 pruebas pasan y
 no hay cambios de modelos sin migración. El usuario aprobó el resultado y
 autorizó el commit; el push y el despliegue siguen a su cargo.
 
+## Protección del login validada y aprobada para cierre
+
+Se integra `django-axes==8.3.1`, backend y middleware con contadores en
+PostgreSQL. Tras 5 fallos se bloquea durante 15 minutos el nombre de usuario;
+otros usuarios y el portal público siguen disponibles. Se agregó respuesta
+HTTP 429 en español y documentación de desbloqueo en
+[Seguridad del administrador](seguridad_admin.md).
+
+Las migraciones `axes` están aplicadas en desarrollo. Se agregaron ocho pruebas
+y se adaptó la prueba de auditoría para usar el login HTTP real. El usuario
+ejecutó la suite completa y confirmó mediante captura el resultado:
+141 pruebas correctas en 19,206 segundos. El usuario autorizó el commit;
+el push y el despliegue del bloque siguen a su cargo.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -101,7 +115,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 133 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 141 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente
