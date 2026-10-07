@@ -8,7 +8,7 @@ La arquitectura soporta múltiples líneas de negocio. El Home conserva Creacion
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
-La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 163 pruebas correctas.
+La auditoría técnica y los nueve bloques de corrección fueron completados. La validación visual del portal público de Creaciones Hadasha también fue completada en móvil, tablet y escritorio. La fase de SEO técnico y contenido SEO esencial está implementada. El buscador real del portal está implementado y aprobado visualmente. Las imágenes de contenido del Home, tarjetas y páginas de detalle cuentan con ampliación accesible y variantes responsive WebP; los originales se reservan para el zoom. Los superusuarios pueden crear y descargar respaldos manuales PostgreSQL auditados desde el administrador. El catálogo genérico admite galerías, características, estado comercial, público objetivo, información adicional y demostraciones opcionales. Portafolio, Blog y Contacto se conservan administrables, pero están desactivados públicamente mientras Pámi se enfoca en el catálogo. La suite actual contiene 167 pruebas correctas.
 
 ## Infraestructura
 
@@ -252,6 +252,11 @@ conservan tamaños, colores y fondos consistentes con el Design System.
 
 ## Calidad
 
+Las variantes WebP corrigen la orientación EXIF antes de redimensionar y
+recortar. Esto incluye fotos ya cargadas: ImageKit utiliza nuevas rutas de
+caché por el cambio de procesador y conserva los originales. No se modificó
+la proporción de tarjetas ni el uso del original en la ampliación.
+
 El ajuste local de la antigua ruta administrativa muestra el 404 institucional
 para `/admin`, `/admin/` y sus subrutas cuando se configura otro nombre, incluso
 con `DEBUG=True` y durante mantenimiento. Se verificaron las 22 pruebas de
@@ -278,7 +283,7 @@ El usuario ejecutó la suite completa en desarrollo y compartió el resultado:
 el push y el despliegue permanecen a su cargo.
 Detalles y recuperación en [Seguridad del administrador](seguridad_admin.md).
 
-- 163 pruebas ejecutadas correctamente.
+- 167 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
 - Migración `site.0010_separate_hero_label` aplicada y validada en desarrollo.
@@ -300,7 +305,7 @@ Antes de desplegar se debe:
 
 El sistema se considera funcionalmente concluido como versión candidata estable
 `1.0.0`. El estado vigente corresponde al último commit disponible en `main` y
-está validado mediante 163 pruebas, sin migraciones pendientes y con revisión
+está validado mediante 167 pruebas, sin migraciones pendientes y con revisión
 visual completada.
 
 No existe desarrollo obligatorio pendiente. Paginación, filtros, pruebas

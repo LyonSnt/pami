@@ -174,6 +174,13 @@ Los puntos de entrada WSGI y ASGI utilizan configuración de producción por def
 
 ## Static y media
 
+Las variantes generadas por `responsive_image_spec` aplican primero
+`ImageOps.exif_transpose` de Pillow y después el recorte `ResizeToFill`.
+La orientación EXIF de cámara se convierte en píxeles correctamente orientados,
+sin alterar el original. El procesador adicional cambia el hash de ImageKit,
+por lo que las imágenes existentes utilizan nuevas rutas de caché generadas
+al acceder a ellas. Se conservan los tamaños, calidad y formato WebP.
+
 - `STATIC_URL = "/static/"`.
 - `MEDIA_URL = "/media/"`.
 - Django sirve media únicamente cuando `DEBUG=True`.

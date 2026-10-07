@@ -11,7 +11,7 @@ integración o infraestructura.
 
 ## Validación vigente
 
-- 163 pruebas correctas;
+- 167 pruebas correctas;
 - `python manage.py check` sin problemas;
 - `makemigrations --check --dry-run` sin cambios pendientes;
 - portal validado en móvil, tablet y escritorio;
@@ -131,6 +131,18 @@ y una restricción de base de datos, y las migraciones `site.0011` y
 pasan y no hay migraciones pendientes. El usuario revisó el resultado y
 autorizó el commit; el push y el despliegue siguen a su cargo.
 
+## Corrección de orientación de imágenes aprobada para cierre
+
+Se agregó un procesador de orientación EXIF mediante Pillow antes del recorte
+de las variantes WebP. Corrige orientaciones giradas y reflejadas y conserva
+las imágenes sin EXIF y los archivos originales. ImageKit cambia la ruta de
+caché de las variantes existentes, sin borrados ni necesidad de volver a subir
+las fotos. Las pruebas cubren las ocho orientaciones EXIF de JPEG, además de
+orientación en PNG y WebP,
+fotos sin metadatos y renovación de caché con conservación del original.
+Las 167 pruebas pasan y no hay cambios de modelos pendientes. El usuario
+revisó el resultado y autorizó el commit; el push y el despliegue siguen a su cargo.
+
 ## Mejoras futuras opcionales
 
 Estas mejoras no bloquean la versión actual:
@@ -163,7 +175,7 @@ Copiar el siguiente mensaje en una conversación nueva:
 Continuemos con Pámi desde el último commit disponible en main. Lee README.md,
 docs/estado_actual.md, docs/proximo_paso.md y la documentación relacionada con
 el cambio solicitado. El sistema está funcionalmente concluido como versión
-candidata 1.0.0, con 163 pruebas correctas. El despliegue lo manejo yo;
+candidata 1.0.0, con 167 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
 PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente

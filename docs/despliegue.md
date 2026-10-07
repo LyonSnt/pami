@@ -204,6 +204,14 @@ productos existentes y no requiere ejecutar `seed_demo` en producción.
 
 ## Copias de seguridad
 
+La corrección de orientación EXIF en las variantes WebP requiere actualizar
+la imagen de la aplicación, sin migraciones nuevas ni cambios de datos.
+Las fotos existentes utilizan automáticamente nuevas rutas de caché al
+acceder a ellas; no es necesario eliminar media ni volver a subir los
+originales. Los archivos originales y las variantes anteriores se conservan.
+La corrección depende de que el original conserve su orientación EXIF; no
+puede deducir automáticamente la orientación de una foto girada sin metadatos.
+
 La migración `site.0011_configurable_featured_limit` agrega la cantidad de
 productos destacados con valor inicial 2 y rango válido de 1 a 12.
 `catalog.0007_configurable_featured_limit` actualiza la ayuda de la casilla
