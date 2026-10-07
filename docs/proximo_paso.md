@@ -19,6 +19,7 @@ integración o infraestructura.
 - variantes responsive WebP para Hero, tarjetas y detalles;
 - respaldo manual PostgreSQL exclusivo para superusuarios y auditado;
 - documentación de instalación, operación, respaldo y despliegue actualizada.
+- separación implementada entre el nombre comercial `Creaciones Hadasha` y la etiqueta `Creaciones` del Hero.
 
 ## Alcance completado
 
@@ -36,6 +37,25 @@ integración o infraestructura.
 - Catálogo general organizado como selector de líneas, sin mezclar sus productos o servicios.
 - Línea Soluciones digitales y Sistema de gestión de agua bajo cotización.
 - Interruptores públicos para Catálogo, Portafolio, Blog y Contacto; únicamente Catálogo activo en la configuración inicial.
+- Etiqueta breve del Hero administrable mediante `SiteConfiguration.hero_label`, con respaldo automático en el nombre de la línea destacada.
+
+## Cambio aprobado para cierre
+
+Se encuentra implementada y validada la separación entre la identidad de la
+línea y su presentación en el Home:
+
+- el registro `Business` con slug `creaciones` se denomina `Creaciones Hadasha`;
+- el catálogo muestra el nombre comercial completo;
+- el Hero conserva `CREACIONES` como etiqueta y `HADASHA` como título;
+- el nuevo campo `Etiqueta del Hero` se administra desde `Configuración del sitio`;
+- si la etiqueta queda vacía, el componente utiliza el nombre de la línea destacada;
+- la migración conserva el slug, las URLs, los productos y demás relaciones;
+- `seed_demo`, pruebas y documentación fueron actualizados;
+- las 131 pruebas, `check` y la comprobación de migraciones finalizaron correctamente.
+
+La revisión visual del Home, el catálogo general y el administrador fue
+completada y aprobada por el usuario. El usuario autorizó el commit de estos
+cambios; el push y el despliegue permanecen a su cargo.
 
 ## Mejoras futuras opcionales
 
@@ -72,7 +92,8 @@ el cambio solicitado. El sistema está funcionalmente concluido como versión
 candidata 1.0.0, con 131 pruebas correctas. El despliegue lo manejo yo;
 trabajemos exclusivamente en desarrollo. Primero revisa el código y presenta
 hallazgos y propuesta, y espera mi aprobación antes de implementar. No uses
-PowerShell ni modifiques deploy-data/. El cambio que quiero realizar es:
+PowerShell ni modifiques deploy-data/. Conserva cualquier cambio local pendiente
+y revisa su estado antes de actuar. El cambio que quiero realizar es:
 [DESCRIBIR AQUÍ EL CAMBIO].
 ```
 

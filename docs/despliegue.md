@@ -196,6 +196,12 @@ sitio > Módulos públicos`. La configuración inicial mantiene Catálogo activo
 Portafolio, Blog y Contacto desactivados. Estos módulos pueden reactivarse sin
 restaurar datos ni ejecutar migraciones adicionales.
 
+La migración `site.0010_separate_hero_label` actualiza la línea con slug
+`creaciones` al nombre comercial `Creaciones Hadasha` y guarda `Creaciones` en
+la nueva etiqueta independiente del Hero. Se aplica automáticamente al iniciar
+el contenedor actualizado; no cambia el slug, las URLs ni las relaciones con
+productos existentes y no requiere ejecutar `seed_demo` en producción.
+
 ## Copias de seguridad
 
 ### Descarga manual desde Django Admin

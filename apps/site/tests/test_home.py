@@ -10,13 +10,14 @@ from apps.site.models import SiteConfiguration
 class HomeViewTests(TestCase):
     def setUp(self):
         self.public_business = Business.objects.create(
-            name="Creaciones",
+            name="Creaciones Hadasha",
             slug="creaciones",
             is_active=True,
             is_published=True,
         )
         SiteConfiguration.objects.create(
             featured_business=self.public_business,
+            hero_label="Creaciones",
         )
         self.hidden_business = Business.objects.create(
             name="Tecnología",
@@ -85,6 +86,7 @@ class HomeViewTests(TestCase):
         self.assertNotContains(response, "Producto de otra línea")
         self.assertContains(response, "Donde encuentras todo para ti")
         self.assertContains(response, "Creaciones")
+        self.assertContains(response, "Creaciones Hadasha")
 
     def test_home_contains_global_accessibility_navigation(self):
         response = self.client.get(reverse("site:home"))

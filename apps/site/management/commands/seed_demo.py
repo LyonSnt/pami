@@ -52,6 +52,7 @@ class Command(BaseCommand):
         configuration = SiteConfiguration.objects.first()
         data = {
             "featured_business": featured_business,
+            "hero_label": "Creaciones",
             "site_name": "Pámi",
             "slogan": "Donde encuentras todo para ti",
             "description": "Pámi reúne productos y servicios de sus diferentes líneas de negocio.",
@@ -106,9 +107,9 @@ class Command(BaseCommand):
     def create_businesses(self):
         data = [
             {
-                "name": "Creaciones",
+                "name": "Creaciones Hadasha",
                 "slug": "creaciones",
-                "short_description": "Hadasha: creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
+                "short_description": "Creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
                 "description": "Creamos prendas cómodas y versátiles para acompañar tu estilo.",
                 "order": 1,
             },

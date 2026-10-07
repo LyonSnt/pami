@@ -322,11 +322,11 @@ Incluye:
 
 El Home basado en componentes fue validado visualmente contra el diseño aprobado utilizando imágenes y contenido representativos.
 
-El enfoque editorial actual del Home es la línea `Creaciones`, que compone la marca `Creaciones Hadasha` en el Hero. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
+El enfoque editorial actual del Home es la línea `Creaciones Hadasha`, que se presenta como `CREACIONES / HADASHA` en el Hero. Presenta únicamente los productos administrables `Chaquetas` y `Buzos`, junto con proyectos publicados de esa misma línea. Papelería y Tecnología continúan siendo compatibles con la arquitectura, pero no son protagonistas del Home en esta etapa.
 
-La línea protagonista se selecciona mediante `SiteConfiguration.featured_business`. No se debe fijar un slug de negocio en el Home. El eslogan global se muestra junto al logo y el Hero utiliza el nombre de la línea destacada como etiqueta contextual.
+La línea protagonista se selecciona mediante `SiteConfiguration.featured_business`. No se debe fijar un slug de negocio en el Home. El eslogan global se muestra junto al logo y `SiteConfiguration.hero_label` permite definir una etiqueta contextual breve sin alterar el nombre comercial mostrado en el catálogo; si está vacía, utiliza el nombre de la línea destacada como respaldo.
 
-`Chaquetas`, `Buzos` y `Sistema de gestión de agua` son registros de `Product`. Creaciones y Soluciones digitales son registros de `Business`. No existe un modelo `ProductCategory`: las líneas separan el catálogo y cada producto puede administrar características y galería mediante `ProductFeature` y `ProductImage`.
+`Chaquetas`, `Buzos` y `Sistema de gestión de agua` son registros de `Product`. Creaciones Hadasha y Soluciones digitales son registros de `Business`. No existe un modelo `ProductCategory`: las líneas separan el catálogo y cada producto puede administrar características y galería mediante `ProductFeature` y `ProductImage`.
 
 El bloque de beneficios del Hero fue extraído a:
 

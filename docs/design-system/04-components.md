@@ -81,7 +81,7 @@ hero.html
 
 Cabecera principal.
 
-Muestra como etiqueta contextual la línea seleccionada en `SiteConfiguration.featured_business`. El eslogan global pertenece al bloque de marca del header y no se utiliza como etiqueta promocional del Hero.
+Muestra como etiqueta contextual `SiteConfiguration.hero_label`. Cuando ese campo está vacío, utiliza como respaldo el nombre de la línea seleccionada en `SiteConfiguration.featured_business`. Esta separación permite mostrar `Creaciones Hadasha` como nombre comercial en el catálogo y conservar la composición visual `CREACIONES / HADASHA` en el Home. El eslogan global pertenece al bloque de marca del header y no se utiliza como etiqueta promocional del Hero.
 
 ---
 

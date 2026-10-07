@@ -30,7 +30,7 @@ class SeedDemoCommandTests(TestCase):
             hero_title="Contenido anterior",
         )
         self.creations = Business.objects.create(
-            name="Creaciones",
+            name="Creaciones Hadasha",
             slug="creaciones",
         )
         self.stationery = Business.objects.create(
@@ -63,6 +63,7 @@ class SeedDemoCommandTests(TestCase):
             self.configuration.hero_title,
             "HADASHA",
         )
+        self.assertEqual(self.configuration.hero_label, "Creaciones")
         self.assertEqual(
             self.configuration.hero_primary_button_url,
             "/catalogo/creaciones/",
@@ -95,10 +96,10 @@ class SeedDemoCommandTests(TestCase):
         self.assertTrue(products.get(slug="buzos").image)
         self.assertTrue(self.configuration.hero_image)
         self.creations.refresh_from_db()
-        self.assertEqual(self.creations.name, "Creaciones")
+        self.assertEqual(self.creations.name, "Creaciones Hadasha")
         self.assertEqual(
             self.creations.short_description,
-            "Hadasha: creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
+            "Creamos tu estilo con chaquetas y buzos cómodos y versátiles.",
         )
         self.assertTrue(self.creations.image)
 

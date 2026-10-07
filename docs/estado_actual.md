@@ -4,7 +4,7 @@
 
 Pámi dispone de una base funcional de CMS y portal público construida con Django, PostgreSQL, Docker Compose y Tailwind CSS v4.
 
-La arquitectura soporta múltiples líneas de negocio. El Home conserva Creaciones como línea destacada y presenta la marca completa Creaciones Hadasha, mientras el catálogo general presenta también Soluciones digitales y queda preparado para Papelería, Calzado u otras líneas futuras.
+La arquitectura soporta múltiples líneas de negocio. El Home conserva Creaciones Hadasha como línea destacada y presenta la composición `CREACIONES / HADASHA`, mientras el catálogo general presenta el nombre comercial completo, Soluciones digitales y queda preparado para Papelería, Calzado u otras líneas futuras.
 
 El desarrollo se encuentra funcionalmente concluido como versión candidata estable `1.0.0`. El repositorio dispone de una guía principal de uso y excluye explícitamente datos locales o productivos mediante `.gitignore` y `.dockerignore`.
 
@@ -65,6 +65,7 @@ Estado funcional:
 - Productos con estado comercial, público objetivo, información adicional y enlace seguro de demostración.
 - Galerías y características ordenables y reutilizables para cualquier línea de negocio.
 - Interruptores administrativos independientes para Catálogo, Portafolio, Blog y Contacto.
+- Campo `hero_label` para separar la etiqueta promocional del Hero del nombre comercial de la línea destacada.
 
 ## Portal público
 
@@ -88,6 +89,7 @@ Características:
 - Resumen de línea limitado a dos registros por tipo y protegido mediante presupuesto de consultas.
 - Visor modal accesible para ampliar todas las imágenes públicas de contenido.
 - Hero administrable desde `SiteConfiguration`.
+- Etiqueta breve del Hero administrable de forma independiente al nombre comercial de la línea destacada.
 - Línea destacada del Home seleccionable desde `SiteConfiguration`.
 - Home modular.
 - Home enfocado en productos y trabajos publicados de Creaciones.
@@ -157,9 +159,9 @@ Componentes relevantes:
 
 Las cards utilizan imágenes administrables y el icono oficial como fallback decorativo.
 
-El catálogo utiliza `Business` como línea de negocio y `Product` como producto o servicio. No necesita categorías para incorporar Creaciones, Soluciones digitales, Papelería o Calzado. `ProductFeature` y `ProductImage` aportan características y galerías genéricas sin crear modelos exclusivos para cada sector.
+El catálogo utiliza `Business` como línea de negocio y `Product` como producto o servicio. No necesita categorías para incorporar Creaciones Hadasha, Soluciones digitales, Papelería o Calzado. `ProductFeature` y `ProductImage` aportan características y galerías genéricas sin crear modelos exclusivos para cada sector.
 
-El Home utiliza la línea destacada configurada en Django Admin para resolver la etiqueta del Hero, los productos y los trabajos. La línea principal usa el slug canónico `creaciones`. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
+El Home utiliza la línea destacada configurada en Django Admin para resolver los productos y los trabajos. La etiqueta breve del Hero se configura por separado y recurre al nombre de la línea solo cuando está vacía. La línea principal usa el nombre `Creaciones Hadasha` y el slug canónico `creaciones`. El eslogan oficial `Donde encuentras todo para ti` se presenta junto al logo y se repite en el footer para permanecer visible en móvil, siempre separado del mensaje comercial del Hero.
 
 El comando `seed_demo` es idempotente para este contenido: actualiza la configuración demostrativa, publica Chaquetas y Buzos con orden explícito y despublica únicamente los registros demo anteriores conocidos sin eliminarlos. La base de desarrollo fue cargada con este estado.
 
@@ -220,6 +222,7 @@ Los beneficios utilizan iconos SVG accesibles y no símbolos de texto provisiona
 - 131 pruebas ejecutadas correctamente.
 - `python manage.py check`: sin problemas.
 - `makemigrations --check --dry-run`: sin cambios detectados.
+- Migración `site.0010_separate_hero_label` aplicada y validada en desarrollo.
 - Los SVG de branding son XML válido.
 - Tailwind recompilado después de los cambios visuales.
 

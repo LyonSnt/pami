@@ -82,6 +82,13 @@ class SiteConfiguration(BaseModel):
         verbose_name="Mostrar contacto",
     )
 
+    hero_label = models.CharField(
+        max_length=80,
+        blank=True,
+        default="",
+        verbose_name="Etiqueta del Hero",
+    )
+
     hero_title = models.CharField(
         max_length=180,
         default="Todo lo que tu empresa necesita, en un solo lugar.",

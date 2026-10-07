@@ -1,10 +1,11 @@
 # Pámi
 
-Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. El Home destaca Creaciones Hadasha, con Chaquetas y Buzos, y el catálogo incorpora también Soluciones digitales, bajo el eslogan oficial **“Donde encuentras todo para ti”**.
+Portal público y CMS desarrollado con Django para administrar la marca Pámi y sus líneas de negocio. El Home destaca Creaciones Hadasha, con Chaquetas y Buzos, y el catálogo incorpora también Soluciones digitales, bajo el eslogan oficial **“Donde encuentras todo para ti”**. La presentación del Hero conserva la composición **“CREACIONES / HADASHA”** sin reducir el nombre comercial mostrado en el catálogo.
 
 ## Funcionalidades
 
 - Home administrable y responsive.
+- Nombre comercial de la línea y etiqueta breve del Hero administrables de forma independiente.
 - Líneas de negocio, catálogo, portafolio y Blog.
 - Catálogo multilínea con estados comerciales, características y galerías.
 - Módulos públicos activables desde Django Admin; la configuración inicial deja visible únicamente el catálogo.

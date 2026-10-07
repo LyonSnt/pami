@@ -28,6 +28,7 @@ class SiteConfigurationAdmin(AuditModelAdminMixin, admin.ModelAdmin):
             {
                 "fields": (
                     "featured_business",
+                    "hero_label",
                     "hero_title",
                     "hero_description",
                     "hero_primary_button_text",

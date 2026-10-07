@@ -45,6 +45,7 @@ class SiteConfigurationAdminTests(TestCase):
 
         self.assertTrue(
             {
+                "hero_label",
                 "show_catalog",
                 "show_portfolio",
                 "show_blog",
